@@ -15,6 +15,7 @@
   ];
 
   let selected;
+
   $: console.log(selected);
 
   let flowLoop = "this is flow loop";

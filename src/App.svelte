@@ -3,13 +3,14 @@
   import Input from "./Input.svelte";
   import Select from "./Select.svelte";
   import Pft from "./Pft.svelte";
+  import Test from "./Test.svelte";
 </script>
 
 <main>
   <div
     class="container max-w-4xl p-12 my-12 rounded-lg lg:p-24 lg:border-2 lg:border-solid lg:border-zinc-900 xl:max-w-6xl"
   >
-    <Pft />
+    <Test />
   </div>
 </main>
 
