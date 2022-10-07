@@ -36,7 +36,7 @@
       @apply text-lg font-bold uppercase mb-2;
     }
     p {
-      @apply text-zinc-800 text-xl font-serif;
+      @apply text-zinc-800 pb-4 font-serif;
     }
     ::selection {
       @apply bg-slate-200;

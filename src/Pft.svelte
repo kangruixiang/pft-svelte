@@ -5,10 +5,25 @@
   let formattedData = "";
   let FEV1, FVC, FEVFVC, TLC, RV, RVTLC, DLCOunc, DLCOcor;
 
+  let spirometries = [
+    { id: 1, text: `Where did you go to school?` },
+    { id: 2, text: `What is your mother's name?` },
+    {
+      id: 3,
+      text: `What is another personal fact that an attacker could easily find with Google?`,
+    },
+  ];
+
+  let selected;
+  $: console.log(selected);
+
+  let flowLoop = "this is flow loop";
+
   $: console.log(formattedData);
 
   function setVariables() {
-    formattedData = d3.tsvParse(data);
+    formattedData = data.replace(/^\s*\n/gm, "");
+    formattedData = d3.tsvParse(formattedData);
     FEV1 = formattedData.find((item) => item.Variable === "FEV1");
     FVC = formattedData.find((item) => item.Variable === "FVC");
     FEVFVC = formattedData.find((item) => item.Variable === "FEV1/FVC");
@@ -75,3 +90,36 @@
   FEV1: {TLC.LLN}, {TLC.Pre}, {TLC.Perc}
   FEV1: {RV.LLN}, {RV.Pre}, {RV.Perc}
 {/if}
+
+<label for="spirometry">Spirometry:</label>
+<select class=".select" name="spirometry" id="" bind:value={selected}>
+  {#each spirometries as question}
+    <option value={question}>{question.text}</option>
+  {/each}
+</select>
+
+<div class="border-2 p-4 mt-12 border-stone-800 rounded-md  ">
+  <p>
+    EFFORT: <br />
+    {#if selected}
+      {selected.text}
+    {/if}
+  </p>
+
+  <p>
+    SPIROMETRY: <br />
+    {#if selected}
+      {selected.text}
+    {/if}
+  </p>
+
+  <p>
+    FLOW LOOP: <br />
+    {flowLoop}
+  </p>
+
+  <p>
+    CONCLUSION: <br />
+    {flowLoop}
+  </p>
+</div>

@@ -36,6 +36,12 @@ var app = (function () {
     function detach(node) {
         node.parentNode.removeChild(node);
     }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
     function element(name) {
         return document.createElement(name);
     }
@@ -44,9 +50,6 @@ var app = (function () {
     }
     function space() {
         return text$1(' ');
-    }
-    function empty$3() {
-        return text$1('');
     }
     function listen(node, event, handler, options) {
         node.addEventListener(event, handler, options);
@@ -63,6 +66,20 @@ var app = (function () {
     }
     function set_input_value(input, value) {
         input.value = value == null ? '' : value;
+    }
+    function select_option(select, value) {
+        for (let i = 0; i < select.options.length; i += 1) {
+            const option = select.options[i];
+            if (option.__value === value) {
+                option.selected = true;
+                return;
+            }
+        }
+        select.selectedIndex = -1; // no option should be selected
+    }
+    function select_value(select) {
+        const selected_option = select.querySelector(':checked') || select.options[0];
+        return selected_option && selected_option.__value;
     }
     function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
         const e = document.createEvent('CustomEvent');
@@ -359,6 +376,15 @@ var app = (function () {
             return;
         dispatch_dev('SvelteDOMSetData', { node: text, data });
         text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
     }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
@@ -21248,52 +21274,58 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$1 = "src\\Pft.svelte";
 
-    // (71:0) {#if FEV1}
-    function create_if_block(ctx) {
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[16] = list[i];
+    	return child_ctx;
+    }
+
+    // (86:0) {#if FEV1}
+    function create_if_block_2(ctx) {
     	let t0;
-    	let t1_value = /*FEV1*/ ctx[1].LLN + "";
+    	let t1_value = /*FEV1*/ ctx[2].LLN + "";
     	let t1;
     	let t2;
-    	let t3_value = /*FEV1*/ ctx[1].Pre + "";
+    	let t3_value = /*FEV1*/ ctx[2].Pre + "";
     	let t3;
     	let t4;
-    	let t5_value = /*FEV1*/ ctx[1].Perc + "";
+    	let t5_value = /*FEV1*/ ctx[2].Perc + "";
     	let t5;
     	let t6;
-    	let t7_value = /*FVC*/ ctx[2].LLN + "";
+    	let t7_value = /*FVC*/ ctx[3].LLN + "";
     	let t7;
     	let t8;
-    	let t9_value = /*FVC*/ ctx[2].Pre + "";
+    	let t9_value = /*FVC*/ ctx[3].Pre + "";
     	let t9;
     	let t10;
-    	let t11_value = /*FVC*/ ctx[2].Perc + "";
+    	let t11_value = /*FVC*/ ctx[3].Perc + "";
     	let t11;
     	let t12;
-    	let t13_value = /*FEVFVC*/ ctx[3].LLN + "";
+    	let t13_value = /*FEVFVC*/ ctx[4].LLN + "";
     	let t13;
     	let t14;
-    	let t15_value = /*FEVFVC*/ ctx[3].Pre + "";
+    	let t15_value = /*FEVFVC*/ ctx[4].Pre + "";
     	let t15;
     	let t16;
-    	let t17_value = /*FEVFVC*/ ctx[3].Perc + "";
+    	let t17_value = /*FEVFVC*/ ctx[4].Perc + "";
     	let t17;
     	let t18;
-    	let t19_value = /*TLC*/ ctx[4].LLN + "";
+    	let t19_value = /*TLC*/ ctx[5].LLN + "";
     	let t19;
     	let t20;
-    	let t21_value = /*TLC*/ ctx[4].Pre + "";
+    	let t21_value = /*TLC*/ ctx[5].Pre + "";
     	let t21;
     	let t22;
-    	let t23_value = /*TLC*/ ctx[4].Perc + "";
+    	let t23_value = /*TLC*/ ctx[5].Perc + "";
     	let t23;
     	let t24;
-    	let t25_value = /*RV*/ ctx[5].LLN + "";
+    	let t25_value = /*RV*/ ctx[6].LLN + "";
     	let t25;
     	let t26;
-    	let t27_value = /*RV*/ ctx[5].Pre + "";
+    	let t27_value = /*RV*/ ctx[6].Pre + "";
     	let t27;
     	let t28;
-    	let t29_value = /*RV*/ ctx[5].Perc + "";
+    	let t29_value = /*RV*/ ctx[6].Perc + "";
     	let t29;
 
     	const block = {
@@ -21362,21 +21394,21 @@ var app = (function () {
     			insert_dev(target, t29, anchor);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*FEV1*/ 2 && t1_value !== (t1_value = /*FEV1*/ ctx[1].LLN + "")) set_data_dev(t1, t1_value);
-    			if (dirty & /*FEV1*/ 2 && t3_value !== (t3_value = /*FEV1*/ ctx[1].Pre + "")) set_data_dev(t3, t3_value);
-    			if (dirty & /*FEV1*/ 2 && t5_value !== (t5_value = /*FEV1*/ ctx[1].Perc + "")) set_data_dev(t5, t5_value);
-    			if (dirty & /*FVC*/ 4 && t7_value !== (t7_value = /*FVC*/ ctx[2].LLN + "")) set_data_dev(t7, t7_value);
-    			if (dirty & /*FVC*/ 4 && t9_value !== (t9_value = /*FVC*/ ctx[2].Pre + "")) set_data_dev(t9, t9_value);
-    			if (dirty & /*FVC*/ 4 && t11_value !== (t11_value = /*FVC*/ ctx[2].Perc + "")) set_data_dev(t11, t11_value);
-    			if (dirty & /*FEVFVC*/ 8 && t13_value !== (t13_value = /*FEVFVC*/ ctx[3].LLN + "")) set_data_dev(t13, t13_value);
-    			if (dirty & /*FEVFVC*/ 8 && t15_value !== (t15_value = /*FEVFVC*/ ctx[3].Pre + "")) set_data_dev(t15, t15_value);
-    			if (dirty & /*FEVFVC*/ 8 && t17_value !== (t17_value = /*FEVFVC*/ ctx[3].Perc + "")) set_data_dev(t17, t17_value);
-    			if (dirty & /*TLC*/ 16 && t19_value !== (t19_value = /*TLC*/ ctx[4].LLN + "")) set_data_dev(t19, t19_value);
-    			if (dirty & /*TLC*/ 16 && t21_value !== (t21_value = /*TLC*/ ctx[4].Pre + "")) set_data_dev(t21, t21_value);
-    			if (dirty & /*TLC*/ 16 && t23_value !== (t23_value = /*TLC*/ ctx[4].Perc + "")) set_data_dev(t23, t23_value);
-    			if (dirty & /*RV*/ 32 && t25_value !== (t25_value = /*RV*/ ctx[5].LLN + "")) set_data_dev(t25, t25_value);
-    			if (dirty & /*RV*/ 32 && t27_value !== (t27_value = /*RV*/ ctx[5].Pre + "")) set_data_dev(t27, t27_value);
-    			if (dirty & /*RV*/ 32 && t29_value !== (t29_value = /*RV*/ ctx[5].Perc + "")) set_data_dev(t29, t29_value);
+    			if (dirty & /*FEV1*/ 4 && t1_value !== (t1_value = /*FEV1*/ ctx[2].LLN + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*FEV1*/ 4 && t3_value !== (t3_value = /*FEV1*/ ctx[2].Pre + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*FEV1*/ 4 && t5_value !== (t5_value = /*FEV1*/ ctx[2].Perc + "")) set_data_dev(t5, t5_value);
+    			if (dirty & /*FVC*/ 8 && t7_value !== (t7_value = /*FVC*/ ctx[3].LLN + "")) set_data_dev(t7, t7_value);
+    			if (dirty & /*FVC*/ 8 && t9_value !== (t9_value = /*FVC*/ ctx[3].Pre + "")) set_data_dev(t9, t9_value);
+    			if (dirty & /*FVC*/ 8 && t11_value !== (t11_value = /*FVC*/ ctx[3].Perc + "")) set_data_dev(t11, t11_value);
+    			if (dirty & /*FEVFVC*/ 16 && t13_value !== (t13_value = /*FEVFVC*/ ctx[4].LLN + "")) set_data_dev(t13, t13_value);
+    			if (dirty & /*FEVFVC*/ 16 && t15_value !== (t15_value = /*FEVFVC*/ ctx[4].Pre + "")) set_data_dev(t15, t15_value);
+    			if (dirty & /*FEVFVC*/ 16 && t17_value !== (t17_value = /*FEVFVC*/ ctx[4].Perc + "")) set_data_dev(t17, t17_value);
+    			if (dirty & /*TLC*/ 32 && t19_value !== (t19_value = /*TLC*/ ctx[5].LLN + "")) set_data_dev(t19, t19_value);
+    			if (dirty & /*TLC*/ 32 && t21_value !== (t21_value = /*TLC*/ ctx[5].Pre + "")) set_data_dev(t21, t21_value);
+    			if (dirty & /*TLC*/ 32 && t23_value !== (t23_value = /*TLC*/ ctx[5].Perc + "")) set_data_dev(t23, t23_value);
+    			if (dirty & /*RV*/ 64 && t25_value !== (t25_value = /*RV*/ ctx[6].LLN + "")) set_data_dev(t25, t25_value);
+    			if (dirty & /*RV*/ 64 && t27_value !== (t27_value = /*RV*/ ctx[6].Pre + "")) set_data_dev(t27, t27_value);
+    			if (dirty & /*RV*/ 64 && t29_value !== (t29_value = /*RV*/ ctx[6].Perc + "")) set_data_dev(t29, t29_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(t0);
@@ -21414,9 +21446,106 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(86:0) {#if FEV1}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (96:2) {#each spirometries as question}
+    function create_each_block(ctx) {
+    	let option;
+    	let t_value = /*question*/ ctx[16].text + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			option = element("option");
+    			t = text$1(t_value);
+    			option.__value = /*question*/ ctx[16];
+    			option.value = option.__value;
+    			add_location(option, file$1, 96, 4, 2865);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, option, anchor);
+    			append_dev(option, t);
+    		},
+    		p: noop$4,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(option);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(96:2) {#each spirometries as question}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (104:4) {#if selected}
+    function create_if_block_1(ctx) {
+    	let t_value = /*selected*/ ctx[0].text + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text$1(t_value);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*selected*/ 1 && t_value !== (t_value = /*selected*/ ctx[0].text + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(104:4) {#if selected}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (111:4) {#if selected}
+    function create_if_block(ctx) {
+    	let t_value = /*selected*/ ctx[0].text + "";
+    	let t;
+
+    	const block = {
+    		c: function create() {
+    			t = text$1(t_value);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, t, anchor);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*selected*/ 1 && t_value !== (t_value = /*selected*/ ctx[0].text + "")) set_data_dev(t, t_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(t);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(71:0) {#if FEV1}",
+    		source: "(111:4) {#if selected}",
     		ctx
     	});
 
@@ -21425,66 +21554,250 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let textarea;
-    	let t;
-    	let if_block_anchor;
+    	let t0;
+    	let t1;
+    	let label;
+    	let t3;
+    	let select;
+    	let t4;
+    	let div;
+    	let p0;
+    	let t5;
+    	let br0;
+    	let t6;
+    	let t7;
+    	let p1;
+    	let t8;
+    	let br1;
+    	let t9;
+    	let t10;
+    	let p2;
+    	let t11;
+    	let br2;
+    	let t12;
+    	let t13;
+    	let t14;
+    	let p3;
+    	let t15;
+    	let br3;
+    	let t16;
+    	let t17;
     	let mounted;
     	let dispose;
-    	let if_block = /*FEV1*/ ctx[1] && create_if_block(ctx);
+    	let if_block0 = /*FEV1*/ ctx[2] && create_if_block_2(ctx);
+    	let each_value = /*spirometries*/ ctx[7];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	let if_block1 = /*selected*/ ctx[0] && create_if_block_1(ctx);
+    	let if_block2 = /*selected*/ ctx[0] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
     			textarea = element("textarea");
-    			t = space();
-    			if (if_block) if_block.c();
-    			if_block_anchor = empty$3();
+    			t0 = space();
+    			if (if_block0) if_block0.c();
+    			t1 = space();
+    			label = element("label");
+    			label.textContent = "Spirometry:";
+    			t3 = space();
+    			select = element("select");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t4 = space();
+    			div = element("div");
+    			p0 = element("p");
+    			t5 = text$1("EFFORT: ");
+    			br0 = element("br");
+    			t6 = space();
+    			if (if_block1) if_block1.c();
+    			t7 = space();
+    			p1 = element("p");
+    			t8 = text$1("SPIROMETRY: ");
+    			br1 = element("br");
+    			t9 = space();
+    			if (if_block2) if_block2.c();
+    			t10 = space();
+    			p2 = element("p");
+    			t11 = text$1("FLOW LOOP: ");
+    			br2 = element("br");
+    			t12 = space();
+    			t13 = text$1(/*flowLoop*/ ctx[8]);
+    			t14 = space();
+    			p3 = element("p");
+    			t15 = text$1("CONCLUSION: ");
+    			br3 = element("br");
+    			t16 = space();
+    			t17 = text$1(/*flowLoop*/ ctx[8]);
     			attr_dev(textarea, "class", "w-full h-80");
     			attr_dev(textarea, "type", "text");
-    			add_location(textarea, file$1, 63, 0, 1954);
+    			add_location(textarea, file$1, 78, 0, 2364);
+    			attr_dev(label, "for", "spirometry");
+    			add_location(label, file$1, 93, 0, 2708);
+    			attr_dev(select, "class", ".select");
+    			attr_dev(select, "name", "spirometry");
+    			attr_dev(select, "id", "");
+    			if (/*selected*/ ctx[0] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[12].call(select));
+    			add_location(select, file$1, 94, 0, 2753);
+    			add_location(br0, file$1, 102, 12, 3023);
+    			add_location(p0, file$1, 101, 2, 3006);
+    			add_location(br1, file$1, 109, 16, 3118);
+    			add_location(p1, file$1, 108, 2, 3097);
+    			add_location(br2, file$1, 116, 15, 3212);
+    			add_location(p2, file$1, 115, 2, 3192);
+    			add_location(br3, file$1, 121, 16, 3269);
+    			add_location(p3, file$1, 120, 2, 3248);
+    			attr_dev(div, "class", "border-2 p-4 mt-12 border-stone-800 rounded-md ");
+    			add_location(div, file$1, 100, 0, 2940);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, textarea, anchor);
-    			set_input_value(textarea, /*data*/ ctx[0]);
-    			insert_dev(target, t, anchor);
-    			if (if_block) if_block.m(target, anchor);
-    			insert_dev(target, if_block_anchor, anchor);
+    			set_input_value(textarea, /*data*/ ctx[1]);
+    			insert_dev(target, t0, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, label, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, select, anchor);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(select, null);
+    			}
+
+    			select_option(select, /*selected*/ ctx[0]);
+    			insert_dev(target, t4, anchor);
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p0);
+    			append_dev(p0, t5);
+    			append_dev(p0, br0);
+    			append_dev(p0, t6);
+    			if (if_block1) if_block1.m(p0, null);
+    			append_dev(div, t7);
+    			append_dev(div, p1);
+    			append_dev(p1, t8);
+    			append_dev(p1, br1);
+    			append_dev(p1, t9);
+    			if (if_block2) if_block2.m(p1, null);
+    			append_dev(div, t10);
+    			append_dev(div, p2);
+    			append_dev(p2, t11);
+    			append_dev(p2, br2);
+    			append_dev(p2, t12);
+    			append_dev(p2, t13);
+    			append_dev(div, t14);
+    			append_dev(div, p3);
+    			append_dev(p3, t15);
+    			append_dev(p3, br3);
+    			append_dev(p3, t16);
+    			append_dev(p3, t17);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(textarea, "change", /*setVariables*/ ctx[6], false, false, false),
-    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[8])
+    					listen_dev(textarea, "change", /*setVariables*/ ctx[9], false, false, false),
+    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[11]),
+    					listen_dev(select, "change", /*select_change_handler*/ ctx[12])
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*data*/ 1) {
-    				set_input_value(textarea, /*data*/ ctx[0]);
+    			if (dirty & /*data*/ 2) {
+    				set_input_value(textarea, /*data*/ ctx[1]);
     			}
 
-    			if (/*FEV1*/ ctx[1]) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    			if (/*FEV1*/ ctx[2]) {
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block(ctx);
-    					if_block.c();
-    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    					if_block0 = create_if_block_2(ctx);
+    					if_block0.c();
+    					if_block0.m(t1.parentNode, t1);
     				}
-    			} else if (if_block) {
-    				if_block.d(1);
-    				if_block = null;
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty & /*spirometries*/ 128) {
+    				each_value = /*spirometries*/ ctx[7];
+    				validate_each_argument(each_value);
+    				let i;
+
+    				for (i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(select, null);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value.length;
+    			}
+
+    			if (dirty & /*selected, spirometries*/ 129) {
+    				select_option(select, /*selected*/ ctx[0]);
+    			}
+
+    			if (/*selected*/ ctx[0]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_1(ctx);
+    					if_block1.c();
+    					if_block1.m(p0, null);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (/*selected*/ ctx[0]) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+    				} else {
+    					if_block2 = create_if_block(ctx);
+    					if_block2.c();
+    					if_block2.m(p1, null);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
     			}
     		},
     		i: noop$4,
     		o: noop$4,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(textarea);
-    			if (detaching) detach_dev(t);
-    			if (if_block) if_block.d(detaching);
-    			if (detaching) detach_dev(if_block_anchor);
+    			if (detaching) detach_dev(t0);
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(label);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(select);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(t4);
+    			if (detaching) detach_dev(div);
+    			if (if_block1) if_block1.d();
+    			if (if_block2) if_block2.d();
     			mounted = false;
     			run_all(dispose);
     		}
@@ -21508,42 +21821,61 @@ var app = (function () {
     	let formattedData = "";
     	let FEV1, FVC, FEVFVC, TLC, RV, RVTLC, DLCOunc, DLCOcor;
 
+    	let spirometries = [
+    		{
+    			id: 1,
+    			text: `Where did you go to school?`
+    		},
+    		{
+    			id: 2,
+    			text: `What is your mother's name?`
+    		},
+    		{
+    			id: 3,
+    			text: `What is another personal fact that an attacker could easily find with Google?`
+    		}
+    	];
+
+    	let selected;
+    	let flowLoop = "this is flow loop";
+
     	function setVariables() {
-    		$$invalidate(7, formattedData = tsvParse(data));
-    		$$invalidate(1, FEV1 = formattedData.find(item => item.Variable === "FEV1"));
-    		$$invalidate(2, FVC = formattedData.find(item => item.Variable === "FVC"));
-    		$$invalidate(3, FEVFVC = formattedData.find(item => item.Variable === "FEV1/FVC"));
-    		$$invalidate(4, TLC = formattedData.find(item => item.Variable === "TLC (Pleth)"));
-    		$$invalidate(5, RV = formattedData.find(item => item.Variable === "RV (Pleth)"));
+    		$$invalidate(10, formattedData = data.replace(/^\s*\n/gm, ""));
+    		$$invalidate(10, formattedData = tsvParse(formattedData));
+    		$$invalidate(2, FEV1 = formattedData.find(item => item.Variable === "FEV1"));
+    		$$invalidate(3, FVC = formattedData.find(item => item.Variable === "FVC"));
+    		$$invalidate(4, FEVFVC = formattedData.find(item => item.Variable === "FEV1/FVC"));
+    		$$invalidate(5, TLC = formattedData.find(item => item.Variable === "TLC (Pleth)"));
+    		$$invalidate(6, RV = formattedData.find(item => item.Variable === "RV (Pleth)"));
     		RVTLC = formattedData.find(item => item.Variable === "RV/TLC (Pleth)");
     		DLCOunc = formattedData.find(item => item.Variable === "DLCOunc");
     		DLCOcor = formattedData.find(item => item.Variable === "DLCOcor");
 
-    		$$invalidate(1, FEV1 = {
+    		$$invalidate(2, FEV1 = {
     			Pre: parseFloat(FEV1.Pre),
     			LLN: parseFloat(FEV1.LLN),
     			Perc: parseFloat(FEV1["% Pred-Pre"])
     		});
 
-    		$$invalidate(2, FVC = {
+    		$$invalidate(3, FVC = {
     			Pre: parseFloat(FVC.Pre),
     			LLN: parseFloat(FVC.LLN),
     			Perc: parseFloat(FVC["% Pred-Pre"])
     		});
 
-    		$$invalidate(3, FEVFVC = {
+    		$$invalidate(4, FEVFVC = {
     			Pre: parseFloat(FEVFVC.Pre),
     			LLN: parseFloat(FEVFVC.LLN),
     			Perc: parseFloat(FEVFVC["% Pred-Pre"])
     		});
 
-    		$$invalidate(4, TLC = {
+    		$$invalidate(5, TLC = {
     			Pre: parseFloat(TLC.Pre),
     			LLN: parseFloat(TLC.LLN),
     			Perc: parseFloat(TLC["% Pred-Pre"])
     		});
 
-    		$$invalidate(5, RV = {
+    		$$invalidate(6, RV = {
     			Pre: parseFloat(RV.Pre),
     			LLN: parseFloat(RV.LLN),
     			Perc: parseFloat(RV["% Pred-Pre"])
@@ -21576,7 +21908,13 @@ var app = (function () {
 
     	function textarea_input_handler() {
     		data = this.value;
-    		$$invalidate(0, data);
+    		$$invalidate(1, data);
+    	}
+
+    	function select_change_handler() {
+    		selected = select_value(this);
+    		$$invalidate(0, selected);
+    		$$invalidate(7, spirometries);
     	}
 
     	$$self.$capture_state = () => ({
@@ -21591,20 +21929,26 @@ var app = (function () {
     		RVTLC,
     		DLCOunc,
     		DLCOcor,
+    		spirometries,
+    		selected,
+    		flowLoop,
     		setVariables
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('data' in $$props) $$invalidate(0, data = $$props.data);
-    		if ('formattedData' in $$props) $$invalidate(7, formattedData = $$props.formattedData);
-    		if ('FEV1' in $$props) $$invalidate(1, FEV1 = $$props.FEV1);
-    		if ('FVC' in $$props) $$invalidate(2, FVC = $$props.FVC);
-    		if ('FEVFVC' in $$props) $$invalidate(3, FEVFVC = $$props.FEVFVC);
-    		if ('TLC' in $$props) $$invalidate(4, TLC = $$props.TLC);
-    		if ('RV' in $$props) $$invalidate(5, RV = $$props.RV);
+    		if ('data' in $$props) $$invalidate(1, data = $$props.data);
+    		if ('formattedData' in $$props) $$invalidate(10, formattedData = $$props.formattedData);
+    		if ('FEV1' in $$props) $$invalidate(2, FEV1 = $$props.FEV1);
+    		if ('FVC' in $$props) $$invalidate(3, FVC = $$props.FVC);
+    		if ('FEVFVC' in $$props) $$invalidate(4, FEVFVC = $$props.FEVFVC);
+    		if ('TLC' in $$props) $$invalidate(5, TLC = $$props.TLC);
+    		if ('RV' in $$props) $$invalidate(6, RV = $$props.RV);
     		if ('RVTLC' in $$props) RVTLC = $$props.RVTLC;
     		if ('DLCOunc' in $$props) DLCOunc = $$props.DLCOunc;
     		if ('DLCOcor' in $$props) DLCOcor = $$props.DLCOcor;
+    		if ('spirometries' in $$props) $$invalidate(7, spirometries = $$props.spirometries);
+    		if ('selected' in $$props) $$invalidate(0, selected = $$props.selected);
+    		if ('flowLoop' in $$props) $$invalidate(8, flowLoop = $$props.flowLoop);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -21612,21 +21956,29 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*formattedData*/ 128) {
+    		if ($$self.$$.dirty & /*selected*/ 1) {
+    			console.log(selected);
+    		}
+
+    		if ($$self.$$.dirty & /*formattedData*/ 1024) {
     			console.log(formattedData);
     		}
     	};
 
     	return [
+    		selected,
     		data,
     		FEV1,
     		FVC,
     		FEVFVC,
     		TLC,
     		RV,
+    		spirometries,
+    		flowLoop,
     		setVariables,
     		formattedData,
-    		textarea_input_handler
+    		textarea_input_handler,
+    		select_change_handler
     	];
     }
 
