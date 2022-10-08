@@ -279,6 +279,7 @@
     type="text"
     on:change={setVariables}
     bind:value={inputText}
+    placeholder="Copy and paste PFT data from Breeze here, including the header row"
   />
 
   <div class="flex space-x-2">
