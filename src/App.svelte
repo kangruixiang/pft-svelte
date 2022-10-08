@@ -1,16 +1,11 @@
 <script>
-  import Button from "./Button.svelte";
-  import Input from "./Input.svelte";
-  import Select from "./Select.svelte";
   import Pft from "./Pft.svelte";
   import Test from "./Test.svelte";
 </script>
 
 <main>
-  <div
-    class="container max-w-4xl p-12 my-12 rounded-lg lg:p-24 lg:border-2 lg:border-solid lg:border-zinc-900 xl:max-w-6xl"
-  >
-    <Test />
+  <div class="container max-w-6xl p-12 my-12 rounded-lg lg:p-12 xl:max-w-6xl">
+    <Pft />
   </div>
 </main>
 
@@ -52,11 +47,11 @@
     .btn-disabled {
       @apply disabled:text-zinc-500 disabled:hover:text-zinc-500 disabled:bg-zinc-50 disabled:hover:bg-zinc-50 disabled:border-zinc-500 disabled:hover:border-zinc-500;
     }
-    .select {
-      @apply font-semibold focus:outline-none focus:bg-white focus:border-zinc-800 border-zinc-800 border-2 border-solid bg-zinc-50 text-zinc-800 rounded-md   outline-none focus:ring-0;
+    .selection-box {
+      @apply focus:outline-none focus:bg-white w-full block  focus:border-zinc-800 border-zinc-600 border-2 border-solid bg-zinc-50 text-zinc-800 rounded-md   outline-none focus:ring-0;
     }
     .label {
-      @apply my-2 font-semibold;
+      @apply my-2 inline-block;
     }
     .input-text {
       @apply px-2  focus:bg-white focus:ring-0 w-full  focus:border-zinc-800  py-2 rounded-md bg-zinc-50 border-2 border-solid border-zinc-800 font-semibold;
