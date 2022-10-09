@@ -274,6 +274,16 @@
 </script>
 
 <div class="flex flex-col space-y-4">
+  <details>
+    <summary class="text-lg"> How to copy PFT data </summary>
+    <p>
+      Click on the first row and first column ("Variable") and drag across to
+      the last column ("%Pred-Pre"). This will select all of the rows for the
+      selected columns. Then use Ctrl+C to copy the data.
+    </p>
+    <img src="https://i.imgur.com/zIdElIT.png" alt="" />
+  </details>
+
   <textarea
     class="w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800"
     type="text"
