@@ -272,10 +272,12 @@
     flow = flowPrompt[0];
   }
 
+  let result;
+
   async function copy() {
-    let testElement;
+    console.log(result.innerText);
     await navigator.clipboard.writeText(
-      document.getElementById("testing").innerHTML
+      result.innerText.replace(/\n\n\n/g, "")
     );
   }
 </script>
@@ -305,7 +307,7 @@
     <button class="w-full btn" on:click={copy}>Copy</button>
   </div>
   <div
-    name="testing"
+    bind:this={result}
     class="w-full p-4 border-2 border-dashed rounded-md bg-zinc-100 border-zinc-800"
   >
     <p>

@@ -15303,7 +15303,7 @@ var app = (function () {
       };
     }
 
-    function copy$2(source, target) {
+    function copy$1(source, target) {
       return target
           .domain(source.domain())
           .range(source.range())
@@ -15459,7 +15459,7 @@ var app = (function () {
       var scale = continuous();
 
       scale.copy = function() {
-        return copy$2(scale, linear());
+        return copy$1(scale, linear());
       };
 
       initRange.apply(scale, arguments);
@@ -15642,7 +15642,7 @@ var app = (function () {
 
     function log() {
       const scale = loggish(transformer$2()).domain([1, 10]);
-      scale.copy = () => copy$2(scale, log()).base(scale.base());
+      scale.copy = () => copy$1(scale, log()).base(scale.base());
       initRange.apply(scale, arguments);
       return scale;
     }
@@ -15673,7 +15673,7 @@ var app = (function () {
       var scale = symlogish(transformer$2());
 
       scale.copy = function() {
-        return copy$2(scale, symlog()).constant(scale.constant());
+        return copy$1(scale, symlog()).constant(scale.constant());
       };
 
       return initRange.apply(scale, arguments);
@@ -15714,7 +15714,7 @@ var app = (function () {
       var scale = powish(transformer$2());
 
       scale.copy = function() {
-        return copy$2(scale, pow()).exponent(scale.exponent());
+        return copy$1(scale, pow()).exponent(scale.exponent());
       };
 
       initRange.apply(scale, arguments);
@@ -17090,7 +17090,7 @@ var app = (function () {
       };
 
       scale.copy = function() {
-        return copy$2(scale, calendar(ticks, tickInterval, year, month, week, day, hour, minute, second, format));
+        return copy$1(scale, calendar(ticks, tickInterval, year, month, week, day, hour, minute, second, format));
       };
 
       return scale;
@@ -17152,7 +17152,7 @@ var app = (function () {
       };
     }
 
-    function copy$1(source, target) {
+    function copy(source, target) {
       return target
           .domain(source.domain())
           .interpolator(source.interpolator())
@@ -17164,7 +17164,7 @@ var app = (function () {
       var scale = linearish(transformer$1()(identity$3));
 
       scale.copy = function() {
-        return copy$1(scale, sequential());
+        return copy(scale, sequential());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17174,7 +17174,7 @@ var app = (function () {
       var scale = loggish(transformer$1()).domain([1, 10]);
 
       scale.copy = function() {
-        return copy$1(scale, sequentialLog()).base(scale.base());
+        return copy(scale, sequentialLog()).base(scale.base());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17184,7 +17184,7 @@ var app = (function () {
       var scale = symlogish(transformer$1());
 
       scale.copy = function() {
-        return copy$1(scale, sequentialSymlog()).constant(scale.constant());
+        return copy(scale, sequentialSymlog()).constant(scale.constant());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17194,7 +17194,7 @@ var app = (function () {
       var scale = powish(transformer$1());
 
       scale.copy = function() {
-        return copy$1(scale, sequentialPow()).exponent(scale.exponent());
+        return copy(scale, sequentialPow()).exponent(scale.exponent());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17295,7 +17295,7 @@ var app = (function () {
       var scale = linearish(transformer()(identity$3));
 
       scale.copy = function() {
-        return copy$1(scale, diverging$1());
+        return copy(scale, diverging$1());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17305,7 +17305,7 @@ var app = (function () {
       var scale = loggish(transformer()).domain([0.1, 1, 10]);
 
       scale.copy = function() {
-        return copy$1(scale, divergingLog()).base(scale.base());
+        return copy(scale, divergingLog()).base(scale.base());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17315,7 +17315,7 @@ var app = (function () {
       var scale = symlogish(transformer());
 
       scale.copy = function() {
-        return copy$1(scale, divergingSymlog()).constant(scale.constant());
+        return copy(scale, divergingSymlog()).constant(scale.constant());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -17325,7 +17325,7 @@ var app = (function () {
       var scale = powish(transformer());
 
       scale.copy = function() {
-        return copy$1(scale, divergingPow()).exponent(scale.exponent());
+        return copy(scale, divergingPow()).exponent(scale.exponent());
       };
 
       return initInterpolator.apply(scale, arguments);
@@ -20905,53 +20905,53 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_2$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_4$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_5$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_6$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_7(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[40] = list[i];
+    	child_ctx[43] = list[i];
     	return child_ctx;
     }
 
-    // (324:4) {#if TLC}
+    // (326:4) {#if TLC}
     function create_if_block_3(ctx) {
     	let if_block_anchor;
     	let if_block = /*TLC*/ ctx[0].Pre && create_if_block_4(ctx);
@@ -20989,14 +20989,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(324:4) {#if TLC}",
+    		source: "(326:4) {#if TLC}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (325:6) {#if TLC.Pre}
+    // (327:6) {#if TLC.Pre}
     function create_if_block_4(ctx) {
     	let p;
     	let t0;
@@ -21020,9 +21020,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(t5_value);
-    			add_location(br0, file$2, 326, 24, 11254);
-    			add_location(br1, file$2, 327, 19, 11281);
-    			add_location(p, file$2, 325, 8, 11225);
+    			add_location(br0, file$2, 328, 24, 11284);
+    			add_location(br1, file$2, 329, 19, 11311);
+    			add_location(p, file$2, 327, 8, 11255);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21048,14 +21048,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(325:6) {#if TLC.Pre}",
+    		source: "(327:6) {#if TLC.Pre}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (333:4) {#if DLCOunc}
+    // (335:4) {#if DLCOunc}
     function create_if_block_1(ctx) {
     	let if_block_anchor;
     	let if_block = /*DLCOunc*/ ctx[1].Pre && create_if_block_2(ctx);
@@ -21093,14 +21093,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(333:4) {#if DLCOunc}",
+    		source: "(335:4) {#if DLCOunc}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (334:6) {#if DLCOunc.Pre}
+    // (336:6) {#if DLCOunc.Pre}
     function create_if_block_2(ctx) {
     	let p;
     	let t0;
@@ -21121,9 +21121,9 @@ var app = (function () {
     			br1 = element("br");
     			t3 = space();
     			t4 = text$1(/*diffusing*/ ctx[7]);
-    			add_location(br0, file$2, 335, 30, 11439);
-    			add_location(br1, file$2, 336, 28, 11475);
-    			add_location(p, file$2, 334, 8, 11404);
+    			add_location(br0, file$2, 337, 30, 11469);
+    			add_location(br1, file$2, 338, 28, 11505);
+    			add_location(p, file$2, 336, 8, 11434);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21148,14 +21148,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(334:6) {#if DLCOunc.Pre}",
+    		source: "(336:6) {#if DLCOunc.Pre}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (342:4) {#if conclusion}
+    // (344:4) {#if conclusion}
     function create_if_block(ctx) {
     	let p;
     	let t0;
@@ -21178,9 +21178,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(/*bronch*/ ctx[4]);
-    			add_location(br0, file$2, 343, 20, 11597);
-    			add_location(br1, file$2, 344, 21, 11626);
-    			add_location(p, file$2, 342, 6, 11572);
+    			add_location(br0, file$2, 345, 20, 11627);
+    			add_location(br1, file$2, 346, 21, 11656);
+    			add_location(p, file$2, 344, 6, 11602);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21206,26 +21206,26 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(342:4) {#if conclusion}",
+    		source: "(344:4) {#if conclusion}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (355:8) {#each effortPrompt as item}
+    // (357:8) {#each effortPrompt as item}
     function create_each_block_7(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 355, 10, 11907);
+    			add_location(option, file$2, 357, 10, 11937);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21241,26 +21241,26 @@ var app = (function () {
     		block,
     		id: create_each_block_7.name,
     		type: "each",
-    		source: "(355:8) {#each effortPrompt as item}",
+    		source: "(357:8) {#each effortPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (363:8) {#each spirometryPrompt as item}
+    // (365:8) {#each spirometryPrompt as item}
     function create_each_block_6$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 363, 10, 12169);
+    			add_location(option, file$2, 365, 10, 12199);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21276,26 +21276,26 @@ var app = (function () {
     		block,
     		id: create_each_block_6$1.name,
     		type: "each",
-    		source: "(363:8) {#each spirometryPrompt as item}",
+    		source: "(365:8) {#each spirometryPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (372:8) {#each bronchPrompt as item}
+    // (374:8) {#each bronchPrompt as item}
     function create_each_block_5$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 372, 10, 12442);
+    			add_location(option, file$2, 374, 10, 12472);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21311,26 +21311,26 @@ var app = (function () {
     		block,
     		id: create_each_block_5$1.name,
     		type: "each",
-    		source: "(372:8) {#each bronchPrompt as item}",
+    		source: "(374:8) {#each bronchPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (381:8) {#each diffusingPrompt as item}
+    // (383:8) {#each diffusingPrompt as item}
     function create_each_block_4$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 381, 10, 12720);
+    			add_location(option, file$2, 383, 10, 12750);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21346,26 +21346,26 @@ var app = (function () {
     		block,
     		id: create_each_block_4$1.name,
     		type: "each",
-    		source: "(381:8) {#each diffusingPrompt as item}",
+    		source: "(383:8) {#each diffusingPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (390:8) {#each diffusingCorrectPrompt as item}
+    // (392:8) {#each diffusingCorrectPrompt as item}
     function create_each_block_3$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 390, 10, 13005);
+    			add_location(option, file$2, 392, 10, 13035);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21381,26 +21381,26 @@ var app = (function () {
     		block,
     		id: create_each_block_3$1.name,
     		type: "each",
-    		source: "(390:8) {#each diffusingCorrectPrompt as item}",
+    		source: "(392:8) {#each diffusingCorrectPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (399:8) {#each flowPrompt as item}
+    // (401:8) {#each flowPrompt as item}
     function create_each_block_2$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 399, 10, 13262);
+    			add_location(option, file$2, 401, 10, 13292);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21416,26 +21416,26 @@ var app = (function () {
     		block,
     		id: create_each_block_2$1.name,
     		type: "each",
-    		source: "(399:8) {#each flowPrompt as item}",
+    		source: "(401:8) {#each flowPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (408:8) {#each volumePrompt as item}
+    // (410:8) {#each volumePrompt as item}
     function create_each_block_1$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 408, 10, 13515);
+    			add_location(option, file$2, 410, 10, 13545);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21451,26 +21451,26 @@ var app = (function () {
     		block,
     		id: create_each_block_1$1.name,
     		type: "each",
-    		source: "(408:8) {#each volumePrompt as item}",
+    		source: "(410:8) {#each volumePrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (417:8) {#each hyperPrompt as item}
+    // (419:8) {#each hyperPrompt as item}
     function create_each_block$1(ctx) {
     	let option;
-    	let t_value = /*item*/ ctx[40] + "";
+    	let t_value = /*item*/ ctx[43] + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			option = element("option");
     			t = text$1(t_value);
-    			option.__value = /*item*/ ctx[40];
+    			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 417, 10, 13768);
+    			add_location(option, file$2, 419, 10, 13798);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21486,7 +21486,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(417:8) {#each hyperPrompt as item}",
+    		source: "(419:8) {#each hyperPrompt as item}",
     		ctx
     	});
 
@@ -21575,7 +21575,7 @@ var app = (function () {
     	let if_block0 = /*TLC*/ ctx[0] && create_if_block_3(ctx);
     	let if_block1 = /*DLCOunc*/ ctx[1] && create_if_block_1(ctx);
     	let if_block2 = /*conclusion*/ ctx[9] && create_if_block(ctx);
-    	let each_value_7 = /*effortPrompt*/ ctx[12];
+    	let each_value_7 = /*effortPrompt*/ ctx[13];
     	validate_each_argument(each_value_7);
     	let each_blocks_7 = [];
 
@@ -21583,7 +21583,7 @@ var app = (function () {
     		each_blocks_7[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
     	}
 
-    	let each_value_6 = /*spirometryPrompt*/ ctx[13];
+    	let each_value_6 = /*spirometryPrompt*/ ctx[14];
     	validate_each_argument(each_value_6);
     	let each_blocks_6 = [];
 
@@ -21591,7 +21591,7 @@ var app = (function () {
     		each_blocks_6[i] = create_each_block_6$1(get_each_context_6$1(ctx, each_value_6, i));
     	}
 
-    	let each_value_5 = /*bronchPrompt*/ ctx[14];
+    	let each_value_5 = /*bronchPrompt*/ ctx[15];
     	validate_each_argument(each_value_5);
     	let each_blocks_5 = [];
 
@@ -21599,7 +21599,7 @@ var app = (function () {
     		each_blocks_5[i] = create_each_block_5$1(get_each_context_5$1(ctx, each_value_5, i));
     	}
 
-    	let each_value_4 = /*diffusingPrompt*/ ctx[18];
+    	let each_value_4 = /*diffusingPrompt*/ ctx[19];
     	validate_each_argument(each_value_4);
     	let each_blocks_4 = [];
 
@@ -21607,7 +21607,7 @@ var app = (function () {
     		each_blocks_4[i] = create_each_block_4$1(get_each_context_4$1(ctx, each_value_4, i));
     	}
 
-    	let each_value_3 = /*diffusingCorrectPrompt*/ ctx[19];
+    	let each_value_3 = /*diffusingCorrectPrompt*/ ctx[20];
     	validate_each_argument(each_value_3);
     	let each_blocks_3 = [];
 
@@ -21615,7 +21615,7 @@ var app = (function () {
     		each_blocks_3[i] = create_each_block_3$1(get_each_context_3$1(ctx, each_value_3, i));
     	}
 
-    	let each_value_2 = /*flowPrompt*/ ctx[15];
+    	let each_value_2 = /*flowPrompt*/ ctx[16];
     	validate_each_argument(each_value_2);
     	let each_blocks_2 = [];
 
@@ -21623,7 +21623,7 @@ var app = (function () {
     		each_blocks_2[i] = create_each_block_2$1(get_each_context_2$1(ctx, each_value_2, i));
     	}
 
-    	let each_value_1 = /*volumePrompt*/ ctx[16];
+    	let each_value_1 = /*volumePrompt*/ ctx[17];
     	validate_each_argument(each_value_1);
     	let each_blocks_1 = [];
 
@@ -21631,7 +21631,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
     	}
 
-    	let each_value = /*hyperPrompt*/ ctx[17];
+    	let each_value = /*hyperPrompt*/ ctx[18];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -21765,86 +21765,85 @@ var app = (function () {
     			}
 
     			attr_dev(summary, "class", "text-lg");
-    			add_location(summary, file$2, 284, 4, 9933);
-    			add_location(p0, file$2, 285, 4, 9996);
+    			add_location(summary, file$2, 286, 4, 9959);
+    			add_location(p0, file$2, 287, 4, 10022);
     			if (!src_url_equal(img.src, img_src_value = "https://i.imgur.com/zIdElIT.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 290, 4, 10232);
-    			add_location(details, file$2, 283, 2, 9918);
+    			add_location(img, file$2, 292, 4, 10258);
+    			add_location(details, file$2, 285, 2, 9944);
     			attr_dev(textarea, "class", "w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800");
     			attr_dev(textarea, "type", "text");
     			attr_dev(textarea, "placeholder", "Copy and paste PFT data from Breeze here, including the header row");
-    			add_location(textarea, file$2, 293, 2, 10304);
+    			add_location(textarea, file$2, 295, 2, 10330);
     			attr_dev(button0, "class", "w-full btn btn-dark");
-    			add_location(button0, file$2, 302, 4, 10635);
+    			add_location(button0, file$2, 304, 4, 10661);
     			attr_dev(button1, "class", "w-full btn");
-    			add_location(button1, file$2, 303, 4, 10715);
+    			add_location(button1, file$2, 305, 4, 10741);
     			attr_dev(button2, "class", "w-full btn");
-    			add_location(button2, file$2, 304, 4, 10783);
+    			add_location(button2, file$2, 306, 4, 10809);
     			attr_dev(div0, "class", "flex space-x-2");
-    			add_location(div0, file$2, 301, 2, 10601);
-    			add_location(br0, file$2, 311, 14, 10993);
-    			add_location(p1, file$2, 310, 4, 10974);
-    			add_location(br1, file$2, 315, 18, 11054);
-    			add_location(br2, file$2, 316, 19, 11081);
-    			add_location(p2, file$2, 314, 4, 11031);
-    			add_location(br3, file$2, 320, 25, 11149);
-    			add_location(p3, file$2, 319, 4, 11119);
-    			attr_dev(div1, "name", "testing");
+    			add_location(div0, file$2, 303, 2, 10627);
+    			add_location(br0, file$2, 313, 14, 11023);
+    			add_location(p1, file$2, 312, 4, 11004);
+    			add_location(br1, file$2, 317, 18, 11084);
+    			add_location(br2, file$2, 318, 19, 11111);
+    			add_location(p2, file$2, 316, 4, 11061);
+    			add_location(br3, file$2, 322, 25, 11179);
+    			add_location(p3, file$2, 321, 4, 11149);
     			attr_dev(div1, "class", "w-full p-4 border-2 border-dashed rounded-md bg-zinc-100 border-zinc-800");
-    			add_location(div1, file$2, 306, 2, 10853);
+    			add_location(div1, file$2, 308, 2, 10879);
     			attr_dev(select0, "class", "selection-box");
-    			if (/*effort*/ ctx[2] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[23].call(select0));
-    			add_location(select0, file$2, 353, 6, 11807);
+    			if (/*effort*/ ctx[2] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[26].call(select0));
+    			add_location(select0, file$2, 355, 6, 11837);
     			attr_dev(label0, "for", "effort");
     			attr_dev(label0, "class", "label");
-    			add_location(label0, file$2, 351, 4, 11751);
+    			add_location(label0, file$2, 353, 4, 11781);
     			attr_dev(select1, "class", "selection-box");
-    			if (/*spirometry*/ ctx[3] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[24].call(select1));
-    			add_location(select1, file$2, 361, 6, 12061);
+    			if (/*spirometry*/ ctx[3] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[27].call(select1));
+    			add_location(select1, file$2, 363, 6, 12091);
     			attr_dev(label1, "for", "spirometry");
     			attr_dev(label1, "class", "label");
-    			add_location(label1, file$2, 359, 4, 11997);
+    			add_location(label1, file$2, 361, 4, 12027);
     			attr_dev(select2, "class", "selection-box");
-    			if (/*bronch*/ ctx[4] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[25].call(select2));
-    			add_location(select2, file$2, 370, 6, 12342);
+    			if (/*bronch*/ ctx[4] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[28].call(select2));
+    			add_location(select2, file$2, 372, 6, 12372);
     			attr_dev(label2, "for", "bronchodilator");
     			attr_dev(label2, "class", "label");
-    			add_location(label2, file$2, 368, 4, 12261);
+    			add_location(label2, file$2, 370, 4, 12291);
     			attr_dev(select3, "class", "selection-box");
-    			if (/*diffusing*/ ctx[7] === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[26].call(select3));
-    			add_location(select3, file$2, 379, 6, 12614);
+    			if (/*diffusing*/ ctx[7] === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[29].call(select3));
+    			add_location(select3, file$2, 381, 6, 12644);
     			attr_dev(label3, "for", "difussing capacity");
     			attr_dev(label3, "class", "label");
-    			add_location(label3, file$2, 377, 4, 12534);
+    			add_location(label3, file$2, 379, 4, 12564);
     			attr_dev(select4, "class", "selection-box");
-    			if (/*diffusingCorrect*/ ctx[8] === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[27].call(select4));
-    			add_location(select4, file$2, 388, 6, 12885);
+    			if (/*diffusingCorrect*/ ctx[8] === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[30].call(select4));
+    			add_location(select4, file$2, 390, 6, 12915);
     			attr_dev(label4, "for", "diffusing");
     			attr_dev(label4, "class", "label");
-    			add_location(label4, file$2, 386, 4, 12812);
+    			add_location(label4, file$2, 388, 4, 12842);
     			attr_dev(select5, "class", "selection-box");
-    			if (/*flow*/ ctx[5] === void 0) add_render_callback(() => /*select5_change_handler*/ ctx[28].call(select5));
-    			add_location(select5, file$2, 397, 6, 13166);
+    			if (/*flow*/ ctx[5] === void 0) add_render_callback(() => /*select5_change_handler*/ ctx[31].call(select5));
+    			add_location(select5, file$2, 399, 6, 13196);
     			attr_dev(label5, "for", "flow loop");
     			attr_dev(label5, "class", "label");
-    			add_location(label5, file$2, 395, 4, 13097);
+    			add_location(label5, file$2, 397, 4, 13127);
     			attr_dev(select6, "class", "selection-box");
-    			if (/*volume*/ ctx[6] === void 0) add_render_callback(() => /*select6_change_handler*/ ctx[29].call(select6));
-    			add_location(select6, file$2, 406, 6, 13415);
+    			if (/*volume*/ ctx[6] === void 0) add_render_callback(() => /*select6_change_handler*/ ctx[32].call(select6));
+    			add_location(select6, file$2, 408, 6, 13445);
     			attr_dev(label6, "for", "volume");
     			attr_dev(label6, "class", "label");
-    			add_location(label6, file$2, 404, 4, 13354);
+    			add_location(label6, file$2, 406, 4, 13384);
     			attr_dev(select7, "class", "selection-box");
-    			if (/*hyper*/ ctx[10] === void 0) add_render_callback(() => /*select7_change_handler*/ ctx[30].call(select7));
-    			add_location(select7, file$2, 415, 6, 13670);
+    			if (/*hyper*/ ctx[10] === void 0) add_render_callback(() => /*select7_change_handler*/ ctx[33].call(select7));
+    			add_location(select7, file$2, 417, 6, 13700);
     			attr_dev(label7, "for", "hyper");
     			attr_dev(label7, "class", "label");
-    			add_location(label7, file$2, 413, 4, 13607);
+    			add_location(label7, file$2, 415, 4, 13637);
     			attr_dev(div2, "class", "grid w-full grid-cols-2 rounded-md gap-x-4");
-    			add_location(div2, file$2, 350, 2, 11689);
+    			add_location(div2, file$2, 352, 2, 11719);
     			attr_dev(div3, "class", "flex flex-col space-y-4");
-    			add_location(div3, file$2, 282, 0, 9877);
+    			add_location(div3, file$2, 284, 0, 9903);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -21896,6 +21895,7 @@ var app = (function () {
     			if (if_block1) if_block1.m(div1, null);
     			append_dev(div1, t28);
     			if (if_block2) if_block2.m(div1, null);
+    			/*div1_binding*/ ctx[25](div1);
     			append_dev(div3, t29);
     			append_dev(div3, div2);
     			append_dev(div2, label0);
@@ -21980,19 +21980,19 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(textarea, "change", /*setVariables*/ ctx[20], false, false, false),
-    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[22]),
-    					listen_dev(button0, "click", /*setVariables*/ ctx[20], false, false, false),
-    					listen_dev(button1, "click", /*clearData*/ ctx[21], false, false, false),
-    					listen_dev(button2, "click", copy, false, false, false),
-    					listen_dev(select0, "change", /*select0_change_handler*/ ctx[23]),
-    					listen_dev(select1, "change", /*select1_change_handler*/ ctx[24]),
-    					listen_dev(select2, "change", /*select2_change_handler*/ ctx[25]),
-    					listen_dev(select3, "change", /*select3_change_handler*/ ctx[26]),
-    					listen_dev(select4, "change", /*select4_change_handler*/ ctx[27]),
-    					listen_dev(select5, "change", /*select5_change_handler*/ ctx[28]),
-    					listen_dev(select6, "change", /*select6_change_handler*/ ctx[29]),
-    					listen_dev(select7, "change", /*select7_change_handler*/ ctx[30])
+    					listen_dev(textarea, "change", /*setVariables*/ ctx[21], false, false, false),
+    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[24]),
+    					listen_dev(button0, "click", /*setVariables*/ ctx[21], false, false, false),
+    					listen_dev(button1, "click", /*clearData*/ ctx[22], false, false, false),
+    					listen_dev(button2, "click", /*copy*/ ctx[23], false, false, false),
+    					listen_dev(select0, "change", /*select0_change_handler*/ ctx[26]),
+    					listen_dev(select1, "change", /*select1_change_handler*/ ctx[27]),
+    					listen_dev(select2, "change", /*select2_change_handler*/ ctx[28]),
+    					listen_dev(select3, "change", /*select3_change_handler*/ ctx[29]),
+    					listen_dev(select4, "change", /*select4_change_handler*/ ctx[30]),
+    					listen_dev(select5, "change", /*select5_change_handler*/ ctx[31]),
+    					listen_dev(select6, "change", /*select6_change_handler*/ ctx[32]),
+    					listen_dev(select7, "change", /*select7_change_handler*/ ctx[33])
     				];
 
     				mounted = true;
@@ -22047,8 +22047,8 @@ var app = (function () {
     				if_block2 = null;
     			}
 
-    			if (dirty[0] & /*effortPrompt*/ 4096) {
-    				each_value_7 = /*effortPrompt*/ ctx[12];
+    			if (dirty[0] & /*effortPrompt*/ 8192) {
+    				each_value_7 = /*effortPrompt*/ ctx[13];
     				validate_each_argument(each_value_7);
     				let i;
 
@@ -22071,12 +22071,12 @@ var app = (function () {
     				each_blocks_7.length = each_value_7.length;
     			}
 
-    			if (dirty[0] & /*effort, effortPrompt*/ 4100) {
+    			if (dirty[0] & /*effort, effortPrompt*/ 8196) {
     				select_option(select0, /*effort*/ ctx[2]);
     			}
 
-    			if (dirty[0] & /*spirometryPrompt*/ 8192) {
-    				each_value_6 = /*spirometryPrompt*/ ctx[13];
+    			if (dirty[0] & /*spirometryPrompt*/ 16384) {
+    				each_value_6 = /*spirometryPrompt*/ ctx[14];
     				validate_each_argument(each_value_6);
     				let i;
 
@@ -22099,12 +22099,12 @@ var app = (function () {
     				each_blocks_6.length = each_value_6.length;
     			}
 
-    			if (dirty[0] & /*spirometry, spirometryPrompt*/ 8200) {
+    			if (dirty[0] & /*spirometry, spirometryPrompt*/ 16392) {
     				select_option(select1, /*spirometry*/ ctx[3]);
     			}
 
-    			if (dirty[0] & /*bronchPrompt*/ 16384) {
-    				each_value_5 = /*bronchPrompt*/ ctx[14];
+    			if (dirty[0] & /*bronchPrompt*/ 32768) {
+    				each_value_5 = /*bronchPrompt*/ ctx[15];
     				validate_each_argument(each_value_5);
     				let i;
 
@@ -22127,12 +22127,12 @@ var app = (function () {
     				each_blocks_5.length = each_value_5.length;
     			}
 
-    			if (dirty[0] & /*bronch, bronchPrompt*/ 16400) {
+    			if (dirty[0] & /*bronch, bronchPrompt*/ 32784) {
     				select_option(select2, /*bronch*/ ctx[4]);
     			}
 
-    			if (dirty[0] & /*diffusingPrompt*/ 262144) {
-    				each_value_4 = /*diffusingPrompt*/ ctx[18];
+    			if (dirty[0] & /*diffusingPrompt*/ 524288) {
+    				each_value_4 = /*diffusingPrompt*/ ctx[19];
     				validate_each_argument(each_value_4);
     				let i;
 
@@ -22155,12 +22155,12 @@ var app = (function () {
     				each_blocks_4.length = each_value_4.length;
     			}
 
-    			if (dirty[0] & /*diffusing, diffusingPrompt*/ 262272) {
+    			if (dirty[0] & /*diffusing, diffusingPrompt*/ 524416) {
     				select_option(select3, /*diffusing*/ ctx[7]);
     			}
 
-    			if (dirty[0] & /*diffusingCorrectPrompt*/ 524288) {
-    				each_value_3 = /*diffusingCorrectPrompt*/ ctx[19];
+    			if (dirty[0] & /*diffusingCorrectPrompt*/ 1048576) {
+    				each_value_3 = /*diffusingCorrectPrompt*/ ctx[20];
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -22183,12 +22183,12 @@ var app = (function () {
     				each_blocks_3.length = each_value_3.length;
     			}
 
-    			if (dirty[0] & /*diffusingCorrect, diffusingCorrectPrompt*/ 524544) {
+    			if (dirty[0] & /*diffusingCorrect, diffusingCorrectPrompt*/ 1048832) {
     				select_option(select4, /*diffusingCorrect*/ ctx[8]);
     			}
 
-    			if (dirty[0] & /*flowPrompt*/ 32768) {
-    				each_value_2 = /*flowPrompt*/ ctx[15];
+    			if (dirty[0] & /*flowPrompt*/ 65536) {
+    				each_value_2 = /*flowPrompt*/ ctx[16];
     				validate_each_argument(each_value_2);
     				let i;
 
@@ -22211,12 +22211,12 @@ var app = (function () {
     				each_blocks_2.length = each_value_2.length;
     			}
 
-    			if (dirty[0] & /*flow, flowPrompt*/ 32800) {
+    			if (dirty[0] & /*flow, flowPrompt*/ 65568) {
     				select_option(select5, /*flow*/ ctx[5]);
     			}
 
-    			if (dirty[0] & /*volumePrompt*/ 65536) {
-    				each_value_1 = /*volumePrompt*/ ctx[16];
+    			if (dirty[0] & /*volumePrompt*/ 131072) {
+    				each_value_1 = /*volumePrompt*/ ctx[17];
     				validate_each_argument(each_value_1);
     				let i;
 
@@ -22239,12 +22239,12 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty[0] & /*volume, volumePrompt*/ 65600) {
+    			if (dirty[0] & /*volume, volumePrompt*/ 131136) {
     				select_option(select6, /*volume*/ ctx[6]);
     			}
 
-    			if (dirty[0] & /*hyperPrompt*/ 131072) {
-    				each_value = /*hyperPrompt*/ ctx[17];
+    			if (dirty[0] & /*hyperPrompt*/ 262144) {
+    				each_value = /*hyperPrompt*/ ctx[18];
     				validate_each_argument(each_value);
     				let i;
 
@@ -22267,7 +22267,7 @@ var app = (function () {
     				each_blocks.length = each_value.length;
     			}
 
-    			if (dirty[0] & /*hyper, hyperPrompt*/ 132096) {
+    			if (dirty[0] & /*hyper, hyperPrompt*/ 263168) {
     				select_option(select7, /*hyper*/ ctx[10]);
     			}
     		},
@@ -22278,6 +22278,7 @@ var app = (function () {
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
     			if (if_block2) if_block2.d();
+    			/*div1_binding*/ ctx[25](null);
     			destroy_each(each_blocks_7, detaching);
     			destroy_each(each_blocks_6, detaching);
     			destroy_each(each_blocks_5, detaching);
@@ -22300,10 +22301,6 @@ var app = (function () {
     	});
 
     	return block;
-    }
-
-    async function copy() {
-    	await navigator.clipboard.writeText(document.getElementById("testing").innerHTML);
     }
 
     function instance$2($$self, $$props, $$invalidate) {
@@ -22592,6 +22589,13 @@ var app = (function () {
     		$$invalidate(5, flow = flowPrompt[0]);
     	}
 
+    	let result;
+
+    	async function copy() {
+    		console.log(result.innerText);
+    		await navigator.clipboard.writeText(result.innerText.replace(/\n\n\n/g, ""));
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -22603,52 +22607,59 @@ var app = (function () {
     		$$invalidate(11, inputText);
     	}
 
+    	function div1_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			result = $$value;
+    			$$invalidate(12, result);
+    		});
+    	}
+
     	function select0_change_handler() {
     		effort = select_value(this);
     		$$invalidate(2, effort);
-    		$$invalidate(12, effortPrompt);
+    		$$invalidate(13, effortPrompt);
     	}
 
     	function select1_change_handler() {
     		spirometry = select_value(this);
     		$$invalidate(3, spirometry);
-    		$$invalidate(13, spirometryPrompt);
+    		$$invalidate(14, spirometryPrompt);
     	}
 
     	function select2_change_handler() {
     		bronch = select_value(this);
     		$$invalidate(4, bronch);
-    		$$invalidate(14, bronchPrompt);
+    		$$invalidate(15, bronchPrompt);
     	}
 
     	function select3_change_handler() {
     		diffusing = select_value(this);
     		$$invalidate(7, diffusing);
-    		$$invalidate(18, diffusingPrompt);
+    		$$invalidate(19, diffusingPrompt);
     	}
 
     	function select4_change_handler() {
     		diffusingCorrect = select_value(this);
     		$$invalidate(8, diffusingCorrect);
-    		$$invalidate(19, diffusingCorrectPrompt);
+    		$$invalidate(20, diffusingCorrectPrompt);
     	}
 
     	function select5_change_handler() {
     		flow = select_value(this);
     		$$invalidate(5, flow);
-    		$$invalidate(15, flowPrompt);
+    		$$invalidate(16, flowPrompt);
     	}
 
     	function select6_change_handler() {
     		volume = select_value(this);
     		$$invalidate(6, volume);
-    		$$invalidate(16, volumePrompt);
+    		$$invalidate(17, volumePrompt);
     	}
 
     	function select7_change_handler() {
     		hyper = select_value(this);
     		$$invalidate(10, hyper);
-    		$$invalidate(17, hyperPrompt);
+    		$$invalidate(18, hyperPrompt);
     	}
 
     	$$self.$capture_state = () => ({
@@ -22684,6 +22695,7 @@ var app = (function () {
     		setVariables,
     		checkData,
     		clearData,
+    		result,
     		copy
     	});
 
@@ -22707,6 +22719,7 @@ var app = (function () {
     		if ('hyper' in $$props) $$invalidate(10, hyper = $$props.hyper);
     		if ('inputText' in $$props) $$invalidate(11, inputText = $$props.inputText);
     		if ('formattedData' in $$props) formattedData = $$props.formattedData;
+    		if ('result' in $$props) $$invalidate(12, result = $$props.result);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -22726,6 +22739,7 @@ var app = (function () {
     		conclusion,
     		hyper,
     		inputText,
+    		result,
     		effortPrompt,
     		spirometryPrompt,
     		bronchPrompt,
@@ -22736,7 +22750,9 @@ var app = (function () {
     		diffusingCorrectPrompt,
     		setVariables,
     		clearData,
+    		copy,
     		textarea_input_handler,
+    		div1_binding,
     		select0_change_handler,
     		select1_change_handler,
     		select2_change_handler,
