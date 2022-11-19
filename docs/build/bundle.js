@@ -21020,9 +21020,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(t5_value);
-    			add_location(br0, file$2, 328, 24, 11284);
-    			add_location(br1, file$2, 329, 19, 11311);
-    			add_location(p, file$2, 327, 8, 11255);
+    			add_location(br0, file$2, 328, 24, 11314);
+    			add_location(br1, file$2, 329, 19, 11341);
+    			add_location(p, file$2, 327, 8, 11285);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21121,9 +21121,9 @@ var app = (function () {
     			br1 = element("br");
     			t3 = space();
     			t4 = text$1(/*diffusing*/ ctx[7]);
-    			add_location(br0, file$2, 337, 30, 11469);
-    			add_location(br1, file$2, 338, 28, 11505);
-    			add_location(p, file$2, 336, 8, 11434);
+    			add_location(br0, file$2, 337, 30, 11499);
+    			add_location(br1, file$2, 338, 28, 11535);
+    			add_location(p, file$2, 336, 8, 11464);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21178,9 +21178,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(/*bronch*/ ctx[4]);
-    			add_location(br0, file$2, 345, 20, 11627);
-    			add_location(br1, file$2, 346, 21, 11656);
-    			add_location(p, file$2, 344, 6, 11602);
+    			add_location(br0, file$2, 345, 20, 11657);
+    			add_location(br1, file$2, 346, 21, 11686);
+    			add_location(p, file$2, 344, 6, 11632);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21225,7 +21225,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 357, 10, 11937);
+    			add_location(option, file$2, 357, 10, 11967);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21260,7 +21260,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 365, 10, 12199);
+    			add_location(option, file$2, 365, 10, 12229);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21295,7 +21295,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 374, 10, 12472);
+    			add_location(option, file$2, 374, 10, 12502);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21330,7 +21330,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 383, 10, 12750);
+    			add_location(option, file$2, 383, 10, 12780);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21365,7 +21365,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 392, 10, 13035);
+    			add_location(option, file$2, 392, 10, 13065);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21400,7 +21400,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 401, 10, 13292);
+    			add_location(option, file$2, 401, 10, 13322);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21435,7 +21435,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 410, 10, 13545);
+    			add_location(option, file$2, 410, 10, 13575);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21470,7 +21470,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[43];
     			option.value = option.__value;
-    			add_location(option, file$2, 419, 10, 13798);
+    			add_location(option, file$2, 419, 10, 13828);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21765,85 +21765,85 @@ var app = (function () {
     			}
 
     			attr_dev(summary, "class", "text-lg");
-    			add_location(summary, file$2, 286, 4, 9959);
-    			add_location(p0, file$2, 287, 4, 10022);
+    			add_location(summary, file$2, 286, 4, 9989);
+    			add_location(p0, file$2, 287, 4, 10052);
     			if (!src_url_equal(img.src, img_src_value = "https://i.imgur.com/zIdElIT.png")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			add_location(img, file$2, 292, 4, 10258);
-    			add_location(details, file$2, 285, 2, 9944);
+    			add_location(img, file$2, 292, 4, 10288);
+    			add_location(details, file$2, 285, 2, 9974);
     			attr_dev(textarea, "class", "w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800");
     			attr_dev(textarea, "type", "text");
     			attr_dev(textarea, "placeholder", "Copy and paste PFT data from Breeze here, including the header row");
-    			add_location(textarea, file$2, 295, 2, 10330);
+    			add_location(textarea, file$2, 295, 2, 10360);
     			attr_dev(button0, "class", "w-full btn btn-dark");
-    			add_location(button0, file$2, 304, 4, 10661);
+    			add_location(button0, file$2, 304, 4, 10691);
     			attr_dev(button1, "class", "w-full btn");
-    			add_location(button1, file$2, 305, 4, 10741);
+    			add_location(button1, file$2, 305, 4, 10771);
     			attr_dev(button2, "class", "w-full btn");
-    			add_location(button2, file$2, 306, 4, 10809);
+    			add_location(button2, file$2, 306, 4, 10839);
     			attr_dev(div0, "class", "flex space-x-2");
-    			add_location(div0, file$2, 303, 2, 10627);
-    			add_location(br0, file$2, 313, 14, 11023);
-    			add_location(p1, file$2, 312, 4, 11004);
-    			add_location(br1, file$2, 317, 18, 11084);
-    			add_location(br2, file$2, 318, 19, 11111);
-    			add_location(p2, file$2, 316, 4, 11061);
-    			add_location(br3, file$2, 322, 25, 11179);
-    			add_location(p3, file$2, 321, 4, 11149);
+    			add_location(div0, file$2, 303, 2, 10657);
+    			add_location(br0, file$2, 313, 14, 11053);
+    			add_location(p1, file$2, 312, 4, 11034);
+    			add_location(br1, file$2, 317, 18, 11114);
+    			add_location(br2, file$2, 318, 19, 11141);
+    			add_location(p2, file$2, 316, 4, 11091);
+    			add_location(br3, file$2, 322, 25, 11209);
+    			add_location(p3, file$2, 321, 4, 11179);
     			attr_dev(div1, "class", "w-full p-4 border-2 border-dashed rounded-md bg-zinc-100 border-zinc-800");
-    			add_location(div1, file$2, 308, 2, 10879);
+    			add_location(div1, file$2, 308, 2, 10909);
     			attr_dev(select0, "class", "selection-box");
     			if (/*effort*/ ctx[2] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[26].call(select0));
-    			add_location(select0, file$2, 355, 6, 11837);
+    			add_location(select0, file$2, 355, 6, 11867);
     			attr_dev(label0, "for", "effort");
     			attr_dev(label0, "class", "label");
-    			add_location(label0, file$2, 353, 4, 11781);
+    			add_location(label0, file$2, 353, 4, 11811);
     			attr_dev(select1, "class", "selection-box");
     			if (/*spirometry*/ ctx[3] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[27].call(select1));
-    			add_location(select1, file$2, 363, 6, 12091);
+    			add_location(select1, file$2, 363, 6, 12121);
     			attr_dev(label1, "for", "spirometry");
     			attr_dev(label1, "class", "label");
-    			add_location(label1, file$2, 361, 4, 12027);
+    			add_location(label1, file$2, 361, 4, 12057);
     			attr_dev(select2, "class", "selection-box");
     			if (/*bronch*/ ctx[4] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[28].call(select2));
-    			add_location(select2, file$2, 372, 6, 12372);
+    			add_location(select2, file$2, 372, 6, 12402);
     			attr_dev(label2, "for", "bronchodilator");
     			attr_dev(label2, "class", "label");
-    			add_location(label2, file$2, 370, 4, 12291);
+    			add_location(label2, file$2, 370, 4, 12321);
     			attr_dev(select3, "class", "selection-box");
     			if (/*diffusing*/ ctx[7] === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[29].call(select3));
-    			add_location(select3, file$2, 381, 6, 12644);
+    			add_location(select3, file$2, 381, 6, 12674);
     			attr_dev(label3, "for", "difussing capacity");
     			attr_dev(label3, "class", "label");
-    			add_location(label3, file$2, 379, 4, 12564);
+    			add_location(label3, file$2, 379, 4, 12594);
     			attr_dev(select4, "class", "selection-box");
     			if (/*diffusingCorrect*/ ctx[8] === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[30].call(select4));
-    			add_location(select4, file$2, 390, 6, 12915);
+    			add_location(select4, file$2, 390, 6, 12945);
     			attr_dev(label4, "for", "diffusing");
     			attr_dev(label4, "class", "label");
-    			add_location(label4, file$2, 388, 4, 12842);
+    			add_location(label4, file$2, 388, 4, 12872);
     			attr_dev(select5, "class", "selection-box");
     			if (/*flow*/ ctx[5] === void 0) add_render_callback(() => /*select5_change_handler*/ ctx[31].call(select5));
-    			add_location(select5, file$2, 399, 6, 13196);
+    			add_location(select5, file$2, 399, 6, 13226);
     			attr_dev(label5, "for", "flow loop");
     			attr_dev(label5, "class", "label");
-    			add_location(label5, file$2, 397, 4, 13127);
+    			add_location(label5, file$2, 397, 4, 13157);
     			attr_dev(select6, "class", "selection-box");
     			if (/*volume*/ ctx[6] === void 0) add_render_callback(() => /*select6_change_handler*/ ctx[32].call(select6));
-    			add_location(select6, file$2, 408, 6, 13445);
+    			add_location(select6, file$2, 408, 6, 13475);
     			attr_dev(label6, "for", "volume");
     			attr_dev(label6, "class", "label");
-    			add_location(label6, file$2, 406, 4, 13384);
+    			add_location(label6, file$2, 406, 4, 13414);
     			attr_dev(select7, "class", "selection-box");
     			if (/*hyper*/ ctx[10] === void 0) add_render_callback(() => /*select7_change_handler*/ ctx[33].call(select7));
-    			add_location(select7, file$2, 417, 6, 13700);
+    			add_location(select7, file$2, 417, 6, 13730);
     			attr_dev(label7, "for", "hyper");
     			attr_dev(label7, "class", "label");
-    			add_location(label7, file$2, 415, 4, 13637);
+    			add_location(label7, file$2, 415, 4, 13667);
     			attr_dev(div2, "class", "grid w-full grid-cols-2 rounded-md gap-x-4");
-    			add_location(div2, file$2, 352, 2, 11719);
+    			add_location(div2, file$2, 352, 2, 11749);
     			attr_dev(div3, "class", "flex flex-col space-y-4");
-    			add_location(div3, file$2, 284, 0, 9903);
+    			add_location(div3, file$2, 284, 0, 9933);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -22592,8 +22592,8 @@ var app = (function () {
     	let result;
 
     	async function copy() {
-    		console.log(result.innerText);
-    		await navigator.clipboard.writeText(result.innerText.replace(/\n\n\n/g, ""));
+    		// console.log(result.innerText);
+    		await navigator.clipboard.writeText(result.innerText.replace(/\n\n\n/g, "\n\n").replace(/\n/g, "\r\n"));
     	}
 
     	const writable_props = [];

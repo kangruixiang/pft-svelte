@@ -275,9 +275,9 @@
   let result;
 
   async function copy() {
-    console.log(result.innerText);
+    // console.log(result.innerText);
     await navigator.clipboard.writeText(
-      result.innerText.replace(/\n\n\n/g, "")
+      result.innerText.replace(/\n\n\n/g, "\n\n").replace(/\n/g, "\r\n")
     );
   }
 </script>
