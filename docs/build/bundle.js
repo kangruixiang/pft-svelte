@@ -20951,7 +20951,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (323:4) {#if TLC}
+    // (324:4) {#if TLC}
     function create_if_block_3(ctx) {
     	let if_block_anchor;
     	let if_block = /*TLC*/ ctx[0].Pre && create_if_block_4(ctx);
@@ -20989,14 +20989,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(323:4) {#if TLC}",
+    		source: "(324:4) {#if TLC}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (324:6) {#if TLC.Pre}
+    // (325:6) {#if TLC.Pre}
     function create_if_block_4(ctx) {
     	let p;
     	let t0;
@@ -21020,9 +21020,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(t5_value);
-    			add_location(br0, file$2, 325, 24, 11168);
-    			add_location(br1, file$2, 326, 19, 11195);
-    			add_location(p, file$2, 324, 8, 11139);
+    			add_location(br0, file$2, 326, 24, 11254);
+    			add_location(br1, file$2, 327, 19, 11281);
+    			add_location(p, file$2, 325, 8, 11225);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21048,14 +21048,14 @@ var app = (function () {
     		block,
     		id: create_if_block_4.name,
     		type: "if",
-    		source: "(324:6) {#if TLC.Pre}",
+    		source: "(325:6) {#if TLC.Pre}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (332:4) {#if DLCOunc}
+    // (333:4) {#if DLCOunc}
     function create_if_block_1(ctx) {
     	let if_block_anchor;
     	let if_block = /*DLCOunc*/ ctx[1].Pre && create_if_block_2(ctx);
@@ -21093,14 +21093,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(332:4) {#if DLCOunc}",
+    		source: "(333:4) {#if DLCOunc}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (333:6) {#if DLCOunc.Pre}
+    // (334:6) {#if DLCOunc.Pre}
     function create_if_block_2(ctx) {
     	let p;
     	let t0;
@@ -21121,9 +21121,9 @@ var app = (function () {
     			br1 = element("br");
     			t3 = space();
     			t4 = text$1(/*diffusing*/ ctx[7]);
-    			add_location(br0, file$2, 334, 30, 11353);
-    			add_location(br1, file$2, 335, 28, 11389);
-    			add_location(p, file$2, 333, 8, 11318);
+    			add_location(br0, file$2, 335, 30, 11439);
+    			add_location(br1, file$2, 336, 28, 11475);
+    			add_location(p, file$2, 334, 8, 11404);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21148,14 +21148,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(333:6) {#if DLCOunc.Pre}",
+    		source: "(334:6) {#if DLCOunc.Pre}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (341:4) {#if conclusion}
+    // (342:4) {#if conclusion}
     function create_if_block(ctx) {
     	let p;
     	let t0;
@@ -21178,9 +21178,9 @@ var app = (function () {
     			br1 = element("br");
     			t4 = space();
     			t5 = text$1(/*bronch*/ ctx[4]);
-    			add_location(br0, file$2, 342, 20, 11511);
-    			add_location(br1, file$2, 343, 21, 11540);
-    			add_location(p, file$2, 341, 6, 11486);
+    			add_location(br0, file$2, 343, 20, 11597);
+    			add_location(br1, file$2, 344, 21, 11626);
+    			add_location(p, file$2, 342, 6, 11572);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -21206,14 +21206,14 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(341:4) {#if conclusion}",
+    		source: "(342:4) {#if conclusion}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (354:8) {#each effortPrompt as item}
+    // (355:8) {#each effortPrompt as item}
     function create_each_block_7(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21225,7 +21225,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 354, 10, 11821);
+    			add_location(option, file$2, 355, 10, 11907);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21241,14 +21241,14 @@ var app = (function () {
     		block,
     		id: create_each_block_7.name,
     		type: "each",
-    		source: "(354:8) {#each effortPrompt as item}",
+    		source: "(355:8) {#each effortPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (362:8) {#each spirometryPrompt as item}
+    // (363:8) {#each spirometryPrompt as item}
     function create_each_block_6$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21260,7 +21260,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 362, 10, 12083);
+    			add_location(option, file$2, 363, 10, 12169);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21276,14 +21276,14 @@ var app = (function () {
     		block,
     		id: create_each_block_6$1.name,
     		type: "each",
-    		source: "(362:8) {#each spirometryPrompt as item}",
+    		source: "(363:8) {#each spirometryPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (371:8) {#each bronchPrompt as item}
+    // (372:8) {#each bronchPrompt as item}
     function create_each_block_5$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21295,7 +21295,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 371, 10, 12356);
+    			add_location(option, file$2, 372, 10, 12442);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21311,14 +21311,14 @@ var app = (function () {
     		block,
     		id: create_each_block_5$1.name,
     		type: "each",
-    		source: "(371:8) {#each bronchPrompt as item}",
+    		source: "(372:8) {#each bronchPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (380:8) {#each diffusingPrompt as item}
+    // (381:8) {#each diffusingPrompt as item}
     function create_each_block_4$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21330,7 +21330,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 380, 10, 12634);
+    			add_location(option, file$2, 381, 10, 12720);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21346,14 +21346,14 @@ var app = (function () {
     		block,
     		id: create_each_block_4$1.name,
     		type: "each",
-    		source: "(380:8) {#each diffusingPrompt as item}",
+    		source: "(381:8) {#each diffusingPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (389:8) {#each diffusingCorrectPrompt as item}
+    // (390:8) {#each diffusingCorrectPrompt as item}
     function create_each_block_3$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21365,7 +21365,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 389, 10, 12919);
+    			add_location(option, file$2, 390, 10, 13005);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21381,14 +21381,14 @@ var app = (function () {
     		block,
     		id: create_each_block_3$1.name,
     		type: "each",
-    		source: "(389:8) {#each diffusingCorrectPrompt as item}",
+    		source: "(390:8) {#each diffusingCorrectPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (398:8) {#each flowPrompt as item}
+    // (399:8) {#each flowPrompt as item}
     function create_each_block_2$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21400,7 +21400,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 398, 10, 13176);
+    			add_location(option, file$2, 399, 10, 13262);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21416,14 +21416,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2$1.name,
     		type: "each",
-    		source: "(398:8) {#each flowPrompt as item}",
+    		source: "(399:8) {#each flowPrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (407:8) {#each volumePrompt as item}
+    // (408:8) {#each volumePrompt as item}
     function create_each_block_1$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21435,7 +21435,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 407, 10, 13429);
+    			add_location(option, file$2, 408, 10, 13515);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21451,14 +21451,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1$1.name,
     		type: "each",
-    		source: "(407:8) {#each volumePrompt as item}",
+    		source: "(408:8) {#each volumePrompt as item}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (416:8) {#each hyperPrompt as item}
+    // (417:8) {#each hyperPrompt as item}
     function create_each_block$1(ctx) {
     	let option;
     	let t_value = /*item*/ ctx[40] + "";
@@ -21470,7 +21470,7 @@ var app = (function () {
     			t = text$1(t_value);
     			option.__value = /*item*/ ctx[40];
     			option.value = option.__value;
-    			add_location(option, file$2, 416, 10, 13682);
+    			add_location(option, file$2, 417, 10, 13768);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -21486,7 +21486,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(416:8) {#each hyperPrompt as item}",
+    		source: "(417:8) {#each hyperPrompt as item}",
     		ctx
     	});
 
@@ -21773,75 +21773,76 @@ var app = (function () {
     			add_location(details, file$2, 283, 2, 9918);
     			attr_dev(textarea, "class", "w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800");
     			attr_dev(textarea, "type", "text");
+    			attr_dev(textarea, "placeholder", "Copy and paste PFT data from Breeze here, including the header row");
     			add_location(textarea, file$2, 293, 2, 10304);
     			attr_dev(button0, "class", "w-full btn btn-dark");
-    			add_location(button0, file$2, 301, 4, 10549);
+    			add_location(button0, file$2, 302, 4, 10635);
     			attr_dev(button1, "class", "w-full btn");
-    			add_location(button1, file$2, 302, 4, 10629);
+    			add_location(button1, file$2, 303, 4, 10715);
     			attr_dev(button2, "class", "w-full btn");
-    			add_location(button2, file$2, 303, 4, 10697);
+    			add_location(button2, file$2, 304, 4, 10783);
     			attr_dev(div0, "class", "flex space-x-2");
-    			add_location(div0, file$2, 300, 2, 10515);
-    			add_location(br0, file$2, 310, 14, 10907);
-    			add_location(p1, file$2, 309, 4, 10888);
-    			add_location(br1, file$2, 314, 18, 10968);
-    			add_location(br2, file$2, 315, 19, 10995);
-    			add_location(p2, file$2, 313, 4, 10945);
-    			add_location(br3, file$2, 319, 25, 11063);
-    			add_location(p3, file$2, 318, 4, 11033);
+    			add_location(div0, file$2, 301, 2, 10601);
+    			add_location(br0, file$2, 311, 14, 10993);
+    			add_location(p1, file$2, 310, 4, 10974);
+    			add_location(br1, file$2, 315, 18, 11054);
+    			add_location(br2, file$2, 316, 19, 11081);
+    			add_location(p2, file$2, 314, 4, 11031);
+    			add_location(br3, file$2, 320, 25, 11149);
+    			add_location(p3, file$2, 319, 4, 11119);
     			attr_dev(div1, "name", "testing");
     			attr_dev(div1, "class", "w-full p-4 border-2 border-dashed rounded-md bg-zinc-100 border-zinc-800");
-    			add_location(div1, file$2, 305, 2, 10767);
+    			add_location(div1, file$2, 306, 2, 10853);
     			attr_dev(select0, "class", "selection-box");
     			if (/*effort*/ ctx[2] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[23].call(select0));
-    			add_location(select0, file$2, 352, 6, 11721);
+    			add_location(select0, file$2, 353, 6, 11807);
     			attr_dev(label0, "for", "effort");
     			attr_dev(label0, "class", "label");
-    			add_location(label0, file$2, 350, 4, 11665);
+    			add_location(label0, file$2, 351, 4, 11751);
     			attr_dev(select1, "class", "selection-box");
     			if (/*spirometry*/ ctx[3] === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[24].call(select1));
-    			add_location(select1, file$2, 360, 6, 11975);
+    			add_location(select1, file$2, 361, 6, 12061);
     			attr_dev(label1, "for", "spirometry");
     			attr_dev(label1, "class", "label");
-    			add_location(label1, file$2, 358, 4, 11911);
+    			add_location(label1, file$2, 359, 4, 11997);
     			attr_dev(select2, "class", "selection-box");
     			if (/*bronch*/ ctx[4] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[25].call(select2));
-    			add_location(select2, file$2, 369, 6, 12256);
+    			add_location(select2, file$2, 370, 6, 12342);
     			attr_dev(label2, "for", "bronchodilator");
     			attr_dev(label2, "class", "label");
-    			add_location(label2, file$2, 367, 4, 12175);
+    			add_location(label2, file$2, 368, 4, 12261);
     			attr_dev(select3, "class", "selection-box");
     			if (/*diffusing*/ ctx[7] === void 0) add_render_callback(() => /*select3_change_handler*/ ctx[26].call(select3));
-    			add_location(select3, file$2, 378, 6, 12528);
+    			add_location(select3, file$2, 379, 6, 12614);
     			attr_dev(label3, "for", "difussing capacity");
     			attr_dev(label3, "class", "label");
-    			add_location(label3, file$2, 376, 4, 12448);
+    			add_location(label3, file$2, 377, 4, 12534);
     			attr_dev(select4, "class", "selection-box");
     			if (/*diffusingCorrect*/ ctx[8] === void 0) add_render_callback(() => /*select4_change_handler*/ ctx[27].call(select4));
-    			add_location(select4, file$2, 387, 6, 12799);
+    			add_location(select4, file$2, 388, 6, 12885);
     			attr_dev(label4, "for", "diffusing");
     			attr_dev(label4, "class", "label");
-    			add_location(label4, file$2, 385, 4, 12726);
+    			add_location(label4, file$2, 386, 4, 12812);
     			attr_dev(select5, "class", "selection-box");
     			if (/*flow*/ ctx[5] === void 0) add_render_callback(() => /*select5_change_handler*/ ctx[28].call(select5));
-    			add_location(select5, file$2, 396, 6, 13080);
+    			add_location(select5, file$2, 397, 6, 13166);
     			attr_dev(label5, "for", "flow loop");
     			attr_dev(label5, "class", "label");
-    			add_location(label5, file$2, 394, 4, 13011);
+    			add_location(label5, file$2, 395, 4, 13097);
     			attr_dev(select6, "class", "selection-box");
     			if (/*volume*/ ctx[6] === void 0) add_render_callback(() => /*select6_change_handler*/ ctx[29].call(select6));
-    			add_location(select6, file$2, 405, 6, 13329);
+    			add_location(select6, file$2, 406, 6, 13415);
     			attr_dev(label6, "for", "volume");
     			attr_dev(label6, "class", "label");
-    			add_location(label6, file$2, 403, 4, 13268);
+    			add_location(label6, file$2, 404, 4, 13354);
     			attr_dev(select7, "class", "selection-box");
     			if (/*hyper*/ ctx[10] === void 0) add_render_callback(() => /*select7_change_handler*/ ctx[30].call(select7));
-    			add_location(select7, file$2, 414, 6, 13584);
+    			add_location(select7, file$2, 415, 6, 13670);
     			attr_dev(label7, "for", "hyper");
     			attr_dev(label7, "class", "label");
-    			add_location(label7, file$2, 412, 4, 13521);
+    			add_location(label7, file$2, 413, 4, 13607);
     			attr_dev(div2, "class", "grid w-full grid-cols-2 rounded-md gap-x-4");
-    			add_location(div2, file$2, 349, 2, 11603);
+    			add_location(div2, file$2, 350, 2, 11689);
     			attr_dev(div3, "class", "flex flex-col space-y-4");
     			add_location(div3, file$2, 282, 0, 9877);
     		},
@@ -23894,6 +23895,8 @@ var app = (function () {
     function create_fragment(ctx) {
     	let main;
     	let div;
+    	let h1;
+    	let t1;
     	let pft;
     	let current;
     	pft = new Pft({ $$inline: true });
@@ -23902,7 +23905,11 @@ var app = (function () {
     		c: function create() {
     			main = element("main");
     			div = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "Smart PFT";
+    			t1 = space();
     			create_component(pft.$$.fragment);
+    			add_location(h1, file, 7, 4, 187);
     			attr_dev(div, "class", "container max-w-6xl p-12 my-12 rounded-lg lg:p-12 xl:max-w-6xl");
     			add_location(div, file, 6, 2, 105);
     			add_location(main, file, 5, 0, 95);
@@ -23913,6 +23920,8 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
     			append_dev(main, div);
+    			append_dev(div, h1);
+    			append_dev(div, t1);
     			mount_component(pft, div, null);
     			current = true;
     		},
