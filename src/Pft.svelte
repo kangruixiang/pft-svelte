@@ -271,9 +271,26 @@
     effort = effortPrompt[0];
     flow = flowPrompt[0];
   }
+
+  async function copy() {
+    let testElement;
+    await navigator.clipboard.writeText(
+      document.getElementById("testing").innerHTML
+    );
+  }
 </script>
 
 <div class="flex flex-col space-y-4">
+  <details>
+    <summary class="text-lg"> How to copy PFT data </summary>
+    <p>
+      Click on the first row and first column ("Variable") and drag across to
+      the last column ("%Pred-Pre"). This will select all of the rows for the
+      selected columns. Then use Ctrl+C to copy the data.
+    </p>
+    <img src="https://i.imgur.com/zIdElIT.png" alt="" />
+  </details>
+
   <textarea
     class="w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800"
     type="text"
@@ -284,8 +301,10 @@
   <div class="flex space-x-2">
     <button class="w-full btn btn-dark" on:click={setVariables}>Check</button>
     <button class="w-full btn" on:click={clearData}>Clear</button>
+    <button class="w-full btn" on:click={copy}>Copy</button>
   </div>
   <div
+    name="testing"
     class="w-full p-4 border-2 border-dashed rounded-md bg-zinc-100 border-zinc-800"
   >
     <p>
