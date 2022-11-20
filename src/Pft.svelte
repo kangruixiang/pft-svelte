@@ -10,7 +10,8 @@
     diffusing,
     diffusingCorrect,
     conclusion,
-    hyper;
+    hyper,
+    signature;
   let inputText, formattedData;
 
   const effortPrompt = [
@@ -348,6 +349,16 @@
         {bronch}
       </p>
     {/if}
+    <p>
+      Initial review by {signature || ""}
+    </p>
+  </div>
+
+  <div>
+    <label for="initial" class="label">
+      Initial review by
+      <input type="text" class="w-full input-text" bind:value={signature} />
+    </label>
   </div>
 
   <div class="grid w-full grid-cols-2 rounded-md gap-x-4">

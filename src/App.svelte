@@ -55,7 +55,7 @@
       @apply my-2 inline-block;
     }
     .input-text {
-      @apply px-2  focus:bg-white focus:ring-0 w-full  focus:border-zinc-800  py-2 rounded-md bg-zinc-50 border-2 border-solid border-zinc-800 font-semibold;
+      @apply px-2  focus:bg-white focus:ring-0 w-full  focus:border-zinc-800  py-2 rounded-md bg-zinc-50 border-2 border-solid border-zinc-800;
     }
     .input-checkbox {
       @apply rounded-sm border-2 border-solid w-4 h-4 focus:ring-0  text-zinc-800 border-zinc-800;
