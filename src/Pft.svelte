@@ -291,7 +291,7 @@
       the last column ("%Pred-Pre"). This will select all of the rows for the
       selected columns. Then use Ctrl+C to copy the data.
     </p>
-    <img src="https://i.imgur.com/zIdElIT.png" alt="" />
+    <img src="./src/assets/example.png" alt="" />
   </details>
 
   <textarea
