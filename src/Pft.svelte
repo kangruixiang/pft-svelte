@@ -1,5 +1,5 @@
-<script>
-  import * as d3 from "d3";
+<script lang="ts">
+  import { tsvParse } from "d3";
   import {
     effortPrompt,
     spirometryPrompt,
@@ -11,23 +11,32 @@
     diffusingCorrectPrompt,
     conclusionPrompt,
   } from "./lib/prompts";
+  import {
+    checkVolume,
+    checkHyperinflation,
+    checkBronchodilator,
+    checkDLCO,
+    checkSpirometry,
+    checkConclusion,
+  } from "./lib/check";
 
   let FEV1, FVC, FEVFVC, TLC, RV, RVTLC, DLCOunc, DLCOcor;
-  let effort,
-    spirometry,
-    bronch,
-    flow,
-    volume,
-    diffusing,
-    diffusingCorrect,
-    conclusion,
-    hyper,
-    signature;
+  let effort = effortPrompt.adequate;
+  let flow = flowPrompt.normal;
+  let spirometry = spirometryPrompt.default;
+  let bronch = bronchPrompt.default;
+  let volume = volumePrompt.default;
+  let diffusing = diffusingPrompt.default;
+  let diffusingCorrect = diffusingCorrectPrompt.default;
+  let hyper = hyperPrompt.default;
+  let conclusion = conclusionPrompt.default;
+  let signature = "";
+
   let inputText, formattedData;
 
   function setVariables() {
     formattedData = inputText.replace(/^\s*\n/gm, "");
-    formattedData = d3.tsvParse(formattedData);
+    formattedData = tsvParse(formattedData);
     FEV1 = formattedData.find((item) => item.Variable === "FEV1");
     FVC = formattedData.find((item) => item.Variable === "FVC");
     FEVFVC = formattedData.find((item) => item.Variable === "FEV1/FVC");
@@ -96,129 +105,42 @@
   }
 
   function checkData() {
-    flow = flowPrompt[1];
-    effort = effortPrompt[1];
+    effort = effortPrompt.adequate;
+    flow = flowPrompt.normal;
+    // checks different parameters
+    volume = checkVolume(TLC, volumePrompt);
+    hyper = checkHyperinflation(RVTLC, FEVFVC, hyperPrompt);
+    bronch = checkBronchodilator(FEV1, FVC, bronchPrompt);
 
-    // checks total lung volumes
-    if (TLC.Pre < TLC.LLN) {
-      TLC.Perc > 70
-        ? (volume = volumePrompt[2])
-        : TLC.Perc > 60
-        ? (volume = volumePrompt[3])
-        : TLC.Perc > 50
-        ? (volume = volumePrompt[4])
-        : TLC.Perc > 35
-        ? (volume = volumePrompt[5])
-        : (volume = volumePrompt[6]);
-    } else {
-      volume = volumePrompt[1];
-    }
-
-    // checks hyperinflation
-    if (RVTLC.Perc >= 120) {
-      hyper = hyperPrompt[2];
-    } else {
-      hyper = hyperPrompt[0];
-    }
-
-    // checks bronchodilator response
-    if (FEV1.PostVol) {
-      console.log(FEV1);
-      if (FEV1.PostVol >= 0.2 && FEV1.PostPerc >= 12) {
-        bronch = bronchPrompt[1];
-      } else if (FVC.PostVol >= 0.2 && FVC.PostPerc >= 12) {
-        bronch = bronchPrompt[1];
-      } else {
-        bronch = bronchPrompt[2];
-      }
-    } else {
-      bronch = "";
-    }
-
-    // checks DLCO
     if (DLCOcor.Pre) {
-      diffusingCorrect = diffusingCorrectPrompt[1];
-      DLCOcor.Perc > 110
-        ? (diffusing = diffusingPrompt[5])
-        : DLCOcor.Pre > DLCOcor.LLN
-        ? (diffusing = diffusingPrompt[1])
-        : DLCOcor.Perc > 60
-        ? (diffusing = diffusingPrompt[2])
-        : DLCOcor.Perc > 40
-        ? (diffusing = diffusingPrompt[3])
-        : (diffusing = diffusingPrompt[4]);
+      diffusingCorrect = diffusingCorrectPrompt.corrected;
+      diffusing = checkDLCO(DLCOcor, diffusingPrompt);
     } else if (DLCOunc.Pre) {
-      diffusingCorrect = diffusingCorrectPrompt[2];
-      DLCOunc.Perc > 110
-        ? (diffusing = diffusingPrompt[5])
-        : DLCOunc.Pre > DLCOunc.LLN
-        ? (diffusing = diffusingPrompt[1])
-        : DLCOunc.Perc > 60
-        ? (diffusing = diffusingPrompt[2])
-        : DLCOunc.Perc > 40
-        ? (diffusing = diffusingPrompt[3])
-        : (diffusing = diffusingPrompt[4]);
-    } else {
-      console.log("no dlco");
+      console.log(DLCOunc);
+      diffusingCorrect = diffusingCorrectPrompt.uncorrected;
+      diffusing = checkDLCO(DLCOunc, diffusingPrompt);
     }
 
-    if (FEVFVC.Pre >= FEVFVC.LLN) {
-      if (FVC.Pre >= FVC.LLN) {
-        TLC.Pre
-          ? (conclusion = conclusionPrompt[1])
-          : (conclusion = conclusionPrompt[8]);
-        spirometry = spirometryPrompt[1];
-      } else {
-        if (TLC.Pre >= TLC.LLN) {
-          spirometry = spirometryPrompt[9];
-          conclusion = conclusionPrompt[5];
-        } else if (TLC.Pre < TLC.LLN) {
-          spirometry = spirometryPrompt[9];
-          conclusion = conclusionPrompt[3];
-        } else {
-          spirometry = spirometryPrompt[7];
-          conclusion = conclusionPrompt[6];
-        }
-      }
-    } else {
-      FEV1.Perc > 70
-        ? (spirometry = spirometryPrompt[2])
-        : FEV1.Perc > 60
-        ? (spirometry = spirometryPrompt[3])
-        : FEV1.Perc > 50
-        ? (spirometry = spirometryPrompt[4])
-        : FEV1.Perc > 35
-        ? (spirometry = spirometryPrompt[5])
-        : (spirometry = spirometryPrompt[6]);
-      if (FVC.Pre >= FVC.LLN) {
-        conclusion = conclusionPrompt[2];
-      } else if (TLC.Pre >= TLC.LLN) {
-        conclusion = conclusionPrompt[2];
-      } else if (TLC.Pre < TLC.LLN) {
-        conclusion = conclusionPrompt[4];
-      } else {
-        conclusion = conclusionPrompt[2] + " " + conclusionPrompt[6];
-      }
-    }
+    spirometry = checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt);
+    conclusion = checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt);
   }
 
   function clearData() {
     inputText = "";
-    spirometry = spirometryPrompt[0];
-    bronch = bronchPrompt[0];
-    volume = volumePrompt[0];
-    diffusing = diffusingPrompt[0];
-    diffusingCorrect = diffusingCorrectPrompt[0];
-    conclusion = conclusionPrompt[0];
-    hyper = hyperPrompt[0];
-    effort = effortPrompt[0];
-    flow = flowPrompt[0];
+    spirometry = spirometryPrompt.default;
+    bronch = bronchPrompt.default;
+    volume = volumePrompt.default;
+    diffusing = diffusingPrompt.default;
+    diffusingCorrect = diffusingCorrectPrompt.default;
+    conclusion = conclusionPrompt.default;
+    hyper = hyperPrompt.default;
+    effort = effortPrompt.default;
+    flow = flowPrompt.default;
   }
 
   let result;
 
   async function copy() {
-    // console.log(result.innerText);
     await navigator.clipboard.writeText(
       result.innerText.replace(/\n\n\n/g, "\n\n").replace(/\n/g, "\r\n")
     );
@@ -238,7 +160,6 @@
 
   <textarea
     class="w-full border-2 rounded-md focus:border-zinc-800 focus:outline-none focus:ring-0 h-80 border-zinc-800"
-    type="text"
     on:change={setVariables}
     bind:value={inputText}
     placeholder="Copy and paste PFT data from Breeze here, including the header row"
@@ -284,6 +205,7 @@
         </p>
       {/if}
     {/if}
+
     {#if conclusion}
       <p>
         CONCLUSION: <br />
@@ -307,12 +229,22 @@
     <label for="effort" class="label"
       >Effort
       <select bind:value={effort} class="selection-box">
-        {#each effortPrompt as item}
+        {#each Object.entries(effortPrompt) as [key, item]}
           <option value={item}>{item}</option>
         {/each}
       </select>
     </label>
-    <label for="spirometry" class="label"
+
+    <label for="flow loop" class="label"
+      >Flow volume loop
+      <select bind:value={flow} class="selection-box">
+        {#each Object.entries(flowPrompt) as [key, item]}
+          <option value={item}>{item}</option>
+        {/each}
+      </select>
+    </label>
+
+    <!-- <label for="spirometry" class="label"
       >Spirometry
       <select bind:value={spirometry} class="selection-box">
         {#each spirometryPrompt as item}
@@ -348,15 +280,7 @@
       </select>
     </label>
 
-    <label for="flow loop" class="label"
-      >Flow volume loop
-      <select bind:value={flow} class="selection-box">
-        {#each flowPrompt as item}
-          <option value={item}>{item}</option>
-        {/each}
-      </select>
-    </label>
-
+   
     <label for="volume" class="label"
       >Lung volume
       <select bind:value={volume} class="selection-box">
@@ -373,6 +297,6 @@
           <option value={item}>{item}</option>
         {/each}
       </select>
-    </label>
+    </label> -->
   </div>
 </div>
