@@ -40,23 +40,23 @@ export function checkBronchodilator(FEV1, FVC, bronchPrompt) {
     return bronchPrompt.default;
   }
 
-  if (FVC.PostVol < 0.17 || FVC.PostPerc < 11) {
-    return bronchPrompt.nonSignificant;
+  if (FEV1.PostVol >= 0.2 && FEV1.PostPerc >= 12) {
+    return bronchPrompt.significant;
   }
 
-  if (FEV1.PostVol < 0.17 || FEV1.PostPerc < 11) {
-    return bronchPrompt.nonSignificant;
+  if (FVC.PostVol >= 0.2 && FVC.PostPerc >= 12) {
+    return bronchPrompt.significant;
   }
 
-  if (FEV1.PostVol < 0.2 || FEV1.PostPerc < 12) {
+  if (FVC.PostVol > 0.17 || FVC.PostPerc > 11) {
     return bronchPrompt.borderline;
   }
 
-  if (FVC.PostVol < 0.2 || FVC.PostPerc < 12) {
+  if (FEV1.PostVol > 0.17 || FEV1.PostPerc > 11) {
     return bronchPrompt.borderline;
   }
 
-  return bronchPrompt.significant;
+  return bronchPrompt.nonSignificant;
 }
 
 export function checkDLCO(DLCO, diffusingPrompt) {
@@ -115,7 +115,7 @@ export function checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt) {
     if (!TLC.Pre) {
       // decreased FVC, needs lung volume
       if (FVC.Pre < FVC.LLN) {
-        return conclusionPrompt.VCReducedTLCNeeded;
+        return conclusionPrompt.restrictiveNeedLungVolume;
       }
 
       return conclusionPrompt.normalSpirometry
@@ -139,9 +139,9 @@ export function checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt) {
   if (!TLC.Pre) {
     // decreased FVC, needs lung volumes
     if (FVC.Pre < FVC.LLN) {
-      return conclusionPrompt.obstructive + " " + conclusionPrompt.VCReducedTLCNeeded
+      return conclusionPrompt.obstructiveSpirometry + " " + conclusionPrompt.FVCLow
     }
-    return conclusionPrompt.obstructive
+    return conclusionPrompt.obstructiveSpirometry
   }
 
   // restrictive disease with obstructive disease

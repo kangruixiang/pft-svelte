@@ -73,6 +73,7 @@ export const conclusionPrompt = {
   normal: "Normal PFTs.",
   normalSpirometry: "Normal spirometry.",
   obstructive: "Obstructive defect is indicated on this PFT.",
+  obstructiveSpirometry: "Obstructive defect is indicated on this spirometry.",
   restrictive: "Restrictive defect is indicated on this PFT.",
   combined:
     "Combined obstructive and restrictive defect is indicated on this PFT.",
