@@ -1,5 +1,5 @@
 
-export function checkVolume(TLC, volumePrompt) {
+export function checkVolume(TLC, volumePrompt): string {
   // checks total lung volumes
   if (TLC.Perc > 120) {
     return volumePrompt.highTLC
@@ -21,7 +21,7 @@ export function checkVolume(TLC, volumePrompt) {
 
 }
 
-export function checkHyperinflation(RVTLC, FEVFVC, hyperPrompt) {
+export function checkHyperinflation(RVTLC, FEVFVC, hyperPrompt): string {
   if (RVTLC.Perc < 120) {
     return hyperPrompt.default;
   }
@@ -35,7 +35,7 @@ export function checkHyperinflation(RVTLC, FEVFVC, hyperPrompt) {
 
 }
 
-export function checkBronchodilator(FEV1, FVC, bronchPrompt) {
+export function checkBronchodilator(FEV1, FVC, bronchPrompt): string {
   if (!FEV1.PostVol) {
     return bronchPrompt.default;
   }
@@ -48,18 +48,18 @@ export function checkBronchodilator(FEV1, FVC, bronchPrompt) {
     return bronchPrompt.significant;
   }
 
-  if (FVC.PostVol > 0.17 || FVC.PostPerc > 11) {
+  if (FVC.PostVol > 0.17 && FVC.PostPerc > 11) {
     return bronchPrompt.borderline;
   }
 
-  if (FEV1.PostVol > 0.17 || FEV1.PostPerc > 11) {
+  if (FEV1.PostVol > 0.17 && FEV1.PostPerc > 11) {
     return bronchPrompt.borderline;
   }
 
   return bronchPrompt.nonSignificant;
 }
 
-export function checkDLCO(DLCO, diffusingPrompt) {
+export function checkDLCO(DLCO, diffusingPrompt): string {
   return DLCO.Perc > 110
     ? diffusingPrompt.high
     : DLCO.Pre > DLCO.LLN
@@ -71,7 +71,7 @@ export function checkDLCO(DLCO, diffusingPrompt) {
           : diffusingPrompt.severe
 }
 
-export function checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt) {
+export function checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt): string {
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
 
@@ -106,7 +106,7 @@ export function checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt) {
           : spirometryPrompt.verySevere
 }
 
-export function checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt) {
+export function checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt): string {
 
   // No obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
