@@ -1,5 +1,17 @@
+interface Volume {
+  Perc: number;
+  Pre: number;
+  LLN: number;
+  PostVol: number;
+  PostPerc: number
+}
 
-export function checkVolume(TLC, volumePrompt): string {
+interface Prompt {
+  [key: string]: string
+}
+
+
+export function checkVolume(TLC: Volume, FEV1: Volume, volumePrompt: Prompt) {
   // checks total lung volumes
   if (TLC.Perc > 120) {
     return volumePrompt.highTLC
@@ -9,19 +21,19 @@ export function checkVolume(TLC, volumePrompt): string {
     return volumePrompt.normal;
   }
 
-  return TLC.Perc > 70
+  return FEV1.Perc > 70
     ? volumePrompt.mild
-    : TLC.Perc > 60
+    : FEV1.Perc > 60
       ? volumePrompt.moderate
-      : TLC.Perc > 50
+      : FEV1.Perc > 50
         ? volumePrompt.modSevere
-        : TLC.Perc > 35
+        : FEV1.Perc > 35
           ? volumePrompt.severe
           : volumePrompt.verySevere
 
 }
 
-export function checkHyperinflation(RVTLC, FEVFVC, hyperPrompt): string {
+export function checkHyperinflation(RVTLC: Volume, FEVFVC: Volume, hyperPrompt: Prompt) {
   if (RVTLC.Perc < 120) {
     return hyperPrompt.default;
   }
@@ -35,7 +47,7 @@ export function checkHyperinflation(RVTLC, FEVFVC, hyperPrompt): string {
 
 }
 
-export function checkBronchodilator(FEV1, FVC, bronchPrompt): string {
+export function checkBronchodilator(FEV1: Volume, FVC: Volume, bronchPrompt: Prompt) {
   if (!FEV1.PostVol) {
     return bronchPrompt.default;
   }
@@ -59,7 +71,7 @@ export function checkBronchodilator(FEV1, FVC, bronchPrompt): string {
   return bronchPrompt.nonSignificant;
 }
 
-export function checkDLCO(DLCO, diffusingPrompt): string {
+export function checkDLCO(DLCO: Volume, diffusingPrompt: Prompt) {
   return DLCO.Perc > 110
     ? diffusingPrompt.high
     : DLCO.Pre > DLCO.LLN
@@ -71,7 +83,7 @@ export function checkDLCO(DLCO, diffusingPrompt): string {
           : diffusingPrompt.severe
 }
 
-export function checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt): string {
+export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometryPrompt: Prompt) {
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
 
@@ -106,7 +118,7 @@ export function checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt): strin
           : spirometryPrompt.verySevere
 }
 
-export function checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt): string {
+export function checkConclusion(FEVFVC: Volume, FVC: Volume, TLC: Volume, conclusionPrompt: Prompt) {
 
   // No obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {

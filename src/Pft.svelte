@@ -28,6 +28,7 @@
   let volume = volumePrompt.default;
   let diffusing = diffusingPrompt.default;
   let diffusingCorrect = diffusingCorrectPrompt.default;
+  let diffusingConclusion = "";
   let hyper = hyperPrompt.default;
   let conclusion = conclusionPrompt.default;
   let signature = "";
@@ -108,7 +109,7 @@
     effort = effortPrompt.adequate;
     flow = flowPrompt.normal;
     // checks different parameters
-    volume = checkVolume(TLC, volumePrompt);
+    volume = checkVolume(TLC, FEV1, volumePrompt);
     hyper = checkHyperinflation(RVTLC, FEVFVC, hyperPrompt);
     bronch = checkBronchodilator(FEV1, FVC, bronchPrompt);
 
@@ -122,7 +123,17 @@
     }
 
     spirometry = checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometryPrompt);
-    conclusion = checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt);
+    diffusing.startsWith("Normal")
+      ? (diffusingConclusion = "")
+      : diffusing.startsWith("Diffusing")
+      ? (diffusingConclusion = "")
+      : (diffusingConclusion = diffusing);
+    conclusion =
+      checkConclusion(FEVFVC, FVC, TLC, conclusionPrompt) +
+      " " +
+      diffusingConclusion +
+      " " +
+      bronch;
   }
 
   function clearData() {
@@ -209,8 +220,7 @@
     {#if conclusion}
       <p>
         CONCLUSION: <br />
-        {conclusion} <br />
-        {bronch}
+        {conclusion}
       </p>
     {/if}
     <p>
