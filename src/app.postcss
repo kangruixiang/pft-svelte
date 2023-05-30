@@ -1,49 +1,59 @@
-@tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Flex:opsz,wdth,wght,GRAD,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,66.8,435,-133,87,804,-294,691,476,681;8..144,100,400,0,79,750,-203,738,514,712&display=swap");
 
-  @font-face {
-    font-family: "Concourse";
-    src: url("assets/fonts/concourse_3_regular.woff2") format("woff2");
-    font-style: normal;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Equity";
+  src: url("assets/fonts/equity_a_regular.woff2") format("woff2");
+  font-style: normal;
+}
+@layer components {
+  body {
+    @apply bg-zinc-900 
   }
-  @font-face {
-    font-family: "Equity";
-    src: url("assets/fonts/equity_a_regular.woff2") format("woff2");
-    font-style: normal;
+  h1 {
+    @apply text-xl font-bold uppercase mb-4;
   }
-  @layer components {
-    h1 {
-      @apply text-xl font-bold uppercase mb-4;
-    }
-    h2 {
-      @apply text-lg font-bold uppercase mb-2;
-    }
-    p {
-      @apply text-zinc-800 pb-4 font-serif;
-    }
-    ::selection {
-      @apply bg-slate-200;
-    }
-    .btn {
-      @apply btn-disabled p-3 shadow font-semibold rounded-lg border-2 border-solid border-zinc-800 bg-zinc-50 active:scale-[.98] active:bg-zinc-100 font-sans hover:bg-white text-zinc-800 hover:text-black;
-    }
-    .btn-dark {
-      @apply btn border-0 bg-zinc-900 text-zinc-50 hover:bg-zinc-800 hover:text-white active:bg-zinc-800;
-    }
-    .btn-disabled {
-      @apply disabled:text-zinc-500 disabled:hover:text-zinc-500 disabled:bg-zinc-50 disabled:hover:bg-zinc-50 disabled:border-zinc-500 disabled:hover:border-zinc-500;
-    }
-    .selection-box {
-      @apply focus:outline-none focus:bg-white w-full block  focus:border-zinc-800 border-zinc-600 border-2 border-solid bg-zinc-50 text-zinc-800 rounded-md  py-3 px-2 outline-none focus:ring-0;
-    }
-    .label {
-      @apply my-2 inline-block;
-    }
-    .input-text {
-      @apply px-2  focus:bg-white focus:ring-0 w-full  focus:border-zinc-800  py-2 rounded-md bg-zinc-50 border-2 border-solid border-zinc-800;
-    }
-    .input-checkbox {
-      @apply rounded-sm border-2 border-solid w-4 h-4 focus:ring-0  text-zinc-800 border-zinc-800;
-    }
+  h2 {
+    @apply text-lg font-bold uppercase mb-2;
   }
+  p {
+    @apply text-zinc-800 pb-4 ;
+  }
+  ::selection {
+    @apply bg-[#f5cb42];
+  }
+  .btn {
+    @apply px-6 py-3 rounded border-2 border-black  active:scale-[0.99] h-14 tracking-wider font-semibold;
+  }
+  .btn-primary {
+    @apply bg-amber-300 active:bg-[#ffce2e] shadow-[0px_2px_0px_0px_black,inset_0px_1px_0px_0px_#f9f5ea] active:shadow-[inset_0px_1px_0px_0px_black];
+  }
+  .btn-dark {
+    @apply btn border-0 bg-zinc-900 text-zinc-50 hover:bg-zinc-800 hover:text-white active:bg-zinc-800;
+  }
+  .btn-disabled {
+    @apply disabled:text-zinc-500 disabled:hover:text-zinc-500 disabled:bg-zinc-50 disabled:hover:bg-zinc-50 disabled:border-zinc-500 disabled:hover:border-zinc-500;
+  }
+  .selection-box {
+    @apply focus:outline-none focus:bg-white w-full block  focus:border-zinc-800 border-zinc-500 border-2 border-solid bg-zinc-50 text-zinc-800 rounded-md  py-3 px-2 outline-none focus:ring-0;
+  }
+  .label {
+    @apply my-2 inline-block;
+  }
+  .input-text {
+    @apply px-2 py-3 focus:outline-none border-2 border-zinc-500 focus:border-[#7c5f00] rounded-sm;
+  }
+  .input-checkbox {
+    @apply rounded-sm border-2 border-solid w-4 h-4 focus:ring-0  text-zinc-800 border-zinc-800;
+  }
+}

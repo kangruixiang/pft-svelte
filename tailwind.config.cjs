@@ -8,11 +8,11 @@ module.exports = {
     container: {
       center: true,
     },
-    fontFamily: {
-      sans: ["Concourse", "ui-sans-serif", "system-ui"],
-      serif: ["Equity", "ui-serif"],
+    extend: {
+      fontFamily: {
+        roboto: ["Roboto"],
+      },
     },
-    extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
 };

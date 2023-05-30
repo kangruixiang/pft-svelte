@@ -2,165 +2,216 @@ interface Volume {
   Perc: number;
   Pre: number;
   LLN: number;
+  ULN: number;
   PostVol: number;
-  PostPerc: number
+  PostPerc: number;
+  Z: number;
+  ZPost: number;
 }
 
 interface Prompt {
-  [key: string]: string
+  [key: string]: string;
 }
 
+export function resetPrompt(prompt: Prompt) {
+  prompt.result = prompt.default
+  prompt.summary = prompt.default
+}
 
-export function checkVolume(TLC: Volume, FEV1: Volume, volumePrompt: Prompt) {
+function checkSeverity(checkVariable: number, prompt: Prompt) {
+  if (checkVariable < -4.1) {
+    prompt.summary = prompt.severeSum
+    return prompt.severe
+  }
+
+  if (checkVariable < -2.51) {
+    prompt.summary = prompt.moderateSum
+    return prompt.moderate
+  }
+
+  prompt.summary = prompt.mildSum
+  return prompt.mild
+}
+
+export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt) {
+
+  const { hyper, large, normal, largeSum } = volume
+
+  if (!TLC.Pre) {
+    return
+  }
+
   // checks total lung volumes
-  if (TLC.Perc > 120) {
-    return volumePrompt.highTLC
+  if (TLC.Pre >= TLC.ULN) {
+    if (RVTLC.Perc >= RVTLC.ULN) {
+      return hyper
+    }
+
+    volume.summary = largeSum
+    return large
   }
 
   if (TLC.Pre >= TLC.LLN) {
-    return volumePrompt.normal;
+    volume.summary = volume.normal
+    return normal;
   }
 
-  return FEV1.Perc > 70
-    ? volumePrompt.mild
-    : FEV1.Perc > 60
-      ? volumePrompt.moderate
-      : FEV1.Perc > 50
-        ? volumePrompt.modSevere
-        : FEV1.Perc > 35
-          ? volumePrompt.severe
-          : volumePrompt.verySevere
+  if (FEV1.ZPost) {
+    return checkSeverity(FEV1.ZPost, volume)
+  }
+
+  return checkSeverity(FEV1.Z, volume)
+}
+
+export function checkTrapping(RVTLC: Volume, airTrapping: Prompt) {
+
+  if (RVTLC.Pre > RVTLC.ULN) {
+    airTrapping.summary = airTrapping.trappingSum
+    return airTrapping.trapping;
+  }
+
+  return airTrapping.default;
 
 }
 
-export function checkHyperinflation(RVTLC: Volume, FEVFVC: Volume, hyperPrompt: Prompt) {
-  if (RVTLC.Perc < 120) {
-    return hyperPrompt.default;
-  }
+export function checkBronchodilator(FEV1: Volume, FVC: Volume, bronch: Prompt) {
 
-  if (FEVFVC.Pre >= FEVFVC.LLN) {
-    // no hyperinflation in restrictive disease
-    return hyperPrompt.default;
-  }
+  const { significant, borderline, nonSignificant, significantSum, nonSignificantSum, borderlineSum } = bronch
 
-  return hyperPrompt.airtrapping;
-
-}
-
-export function checkBronchodilator(FEV1: Volume, FVC: Volume, bronchPrompt: Prompt) {
   if (!FEV1.PostVol) {
-    return bronchPrompt.default;
+    return bronch.default;
   }
 
-  if (FEV1.PostVol >= 0.2 && FEV1.PostPerc >= 12) {
-    return bronchPrompt.significant;
+  if (FEV1.PostPerc >= 10 || FVC.PostPerc >= 10) {
+    bronch.summary = significantSum
+    return significant;
   }
 
-  if (FVC.PostVol >= 0.2 && FVC.PostPerc >= 12) {
-    return bronchPrompt.significant;
+  if (FEV1.PostVol > 9 || FVC.PostPerc > 9) {
+    bronch.summary = borderlineSum
+    return borderline;
   }
 
-  if (FVC.PostVol > 0.17 && FVC.PostPerc > 11) {
-    return bronchPrompt.borderline;
-  }
-
-  if (FEV1.PostVol > 0.17 && FEV1.PostPerc > 11) {
-    return bronchPrompt.borderline;
-  }
-
-  return bronchPrompt.nonSignificant;
+  bronch.summary = nonSignificantSum
+  return nonSignificant;
 }
 
-export function checkDLCO(DLCO: Volume, diffusingPrompt: Prompt) {
-  return DLCO.Perc > 110
-    ? diffusingPrompt.high
-    : DLCO.Pre > DLCO.LLN
-      ? diffusingPrompt.normal
-      : DLCO.Perc > 60
-        ? diffusingPrompt.mild
-        : DLCO.Perc > 40
-          ? diffusingPrompt.moderate
-          : diffusingPrompt.severe
+export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Prompt) {
+
+  const { high, normal, normalVA, highSum, highKCO } = diffusing
+
+  if (DLCO.Pre > DLCO.ULN) {
+    diffusing.summary = highSum
+    return high
+  }
+
+  if (DLCO.Pre >= DLCO.LLN) {
+    diffusing.summary = diffusing.default
+    return normal
+  }
+
+  if (VA.Pre >= VA.LLN) {
+    diffusing.summary = normal
+    return normalVA
+  }
+
+  if (DLVA.Perc > DLVA.ULN) {
+    return highKCO
+  }
+
+  return checkSeverity(DLCO.Z, diffusing)
 }
 
-export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometryPrompt: Prompt) {
+export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt) {
+
+  const { normal, restrictedMaybe, nonspecific, restricted, obstructionNonspecific, mixed, mildSum, moderateSum, severeSum, mixedSum } = spirometry
+
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
 
     // normal FVC and normal spirometry
-    if (FVC.Pre >= FVC.LLN) {
-      return spirometryPrompt.normal;
+    if (FVC.Pre > FVC.LLN) {
+      spirometry.summary = normal
+      return normal;
     }
 
     // Decreased FVC, needs lung volume
     if (!TLC.Pre) {
-      return spirometryPrompt.VCReducedTLCNeeded;
+      spirometry.summary = restrictedMaybe
+      return restrictedMaybe;
     }
 
     // Decreased FVC, low lung volume
     if (TLC.Pre >= TLC.LLN) {
-      return spirometryPrompt.VCReduced;
+      spirometry.summary = normal
+      return nonspecific;
     }
 
-    return spirometryPrompt.VCReduced
+    return restricted
+  }
+
+  // possible mixed obstruction/restriction
+  if (FVC.Perc < FVC.LLN) {
+    if (TLC.Perc < TLC.LLN) {
+      return obstructionNonspecific
+    }
+
+    spirometry.summary = mixedSum
+    return mixed
   }
 
 
   // obstructive disease
-  return FEV1.Perc > 70
-    ? spirometryPrompt.mild
-    : FEV1.Perc > 60
-      ? spirometryPrompt.moderate
-      : FEV1.Perc > 50
-        ? spirometryPrompt.modSevere
-        : FEV1.Perc > 35
-          ? spirometryPrompt.severe
-          : spirometryPrompt.verySevere
+  if (FEV1.ZPost) {
+    return checkSeverity(FEV1.ZPost, spirometry)
+  }
+
+  return checkSeverity(FEV1.Z, spirometry)
 }
 
-export function checkConclusion(FEVFVC: Volume, FVC: Volume, TLC: Volume, conclusionPrompt: Prompt) {
+// export function checkConclusion(FEVFVC: Volume, FVC: Volume, TLC: Volume, conclusionPrompt: Prompt) {
 
-  // No obstruction
-  if (FEVFVC.Pre >= FEVFVC.LLN) {
+//   // No obstruction
+//   if (FEVFVC.Pre >= FEVFVC.LLN) {
 
-    // no lung volume
-    if (!TLC.Pre) {
-      // decreased FVC, needs lung volume
-      if (FVC.Pre < FVC.LLN) {
-        return conclusionPrompt.restrictiveNeedLungVolume;
-      }
+//     // no lung volume
+//     if (!TLC.Pre) {
+//       // decreased FVC, needs lung volume
+//       if (FVC.Pre < FVC.LLN) {
+//         return conclusionPrompt.restrictiveNeedLungVolume;
+//       }
 
-      return conclusionPrompt.normalSpirometry
-    }
+//       return conclusionPrompt.normalSpirometry
+//     }
 
-    // restrictive disease with decreased lung volume
-    if (TLC.Pre < TLC.LLN) {
-      return conclusionPrompt.restrictive;
-    }
+//     // restrictive disease with decreased lung volume
+//     if (TLC.Pre < TLC.LLN) {
+//       return conclusionPrompt.restrictive;
+//     }
 
-    // Normal lung volumes, decreased FVC, non specific
-    if (FVC.Pre < FVC.LLN) {
-      return conclusionPrompt.nonspecific;
-    }
+//     // Normal lung volumes, decreased FVC, non specific
+//     if (FVC.Pre < FVC.LLN) {
+//       return conclusionPrompt.nonspecific;
+//     }
 
-    return conclusionPrompt.normal
-  }
+//     return conclusionPrompt.normal
+//   }
 
-  // has obstruction
-  // no lung volume
-  if (!TLC.Pre) {
-    // decreased FVC, needs lung volumes
-    if (FVC.Pre < FVC.LLN) {
-      return conclusionPrompt.obstructiveSpirometry + " " + conclusionPrompt.FVCLow
-    }
-    return conclusionPrompt.obstructiveSpirometry
-  }
+//   // has obstruction
+//   // no lung volume
+//   if (!TLC.Pre) {
+//     // decreased FVC, needs lung volumes
+//     if (FVC.Pre < FVC.LLN) {
+//       return conclusionPrompt.obstructiveSpirometry + " " + conclusionPrompt.FVCLow
+//     }
+//     return conclusionPrompt.obstructiveSpirometry
+//   }
 
-  // restrictive disease with obstructive disease
-  if (TLC.Pre < TLC.LLN) {
-    return conclusionPrompt.combined;
-  }
+//   // restrictive disease with obstructive disease
+//   if (TLC.Pre < TLC.LLN) {
+//     return conclusionPrompt.combined;
+//   }
 
-  return conclusionPrompt.obstructive
+//   return conclusionPrompt.obstructive
 
-}
+// }

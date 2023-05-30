@@ -1,82 +1,127 @@
-export const effortPrompt = {
+
+export const qualityPrompt = {
   default: "",
+  AE: "Grade A-E.",
+  U: "Grade-U (Usable, but not acceptable).",
   adequate: "Adequate effort, results reproducible.",
   inadequate: "Inadequate effort, results are not reproducible.",
   short: "FVC maneuver did not extend beyond 6 seconds.",
+  notTrue: "Results may not reflect the true lung function."
 };
 
-export const spirometryPrompt = {
+export const flowPrompt = {
+  default: "",
+  normal: "Normal flow-volume loop.",
+  restriction: "Flow-volume loop suggests restriction.",
+  mixed: "Flow-volume loop suggests a mixed disorder.",
+  intrathoracic:
+    "Flow-volume loop suggests variable intrathoracic obstruction.",
+  extrathoracic:
+    "Flow-volume loop suggests variable extra thoracic obstruction.",
+  fixed:
+    "Flow-volume loop suggests fixed large/central airway obstruction.",
+  unilateral:
+    "Flow-volume loop suggests unilateral main stem bronchial obstruction.",
+};
+
+export const spirometry = {
   default: "",
   normal: "Normal spirometry.",
-  mild: "Mild obstructive defect based on FEV1.",
-  moderate: "Moderate obstructive defect based on FEV1.",
-  modSevere: "Moderately severe obstructive defect based on FEV1.",
-  severe: "Severe obstructive defect based on FEV1.",
-  verySevere: "Very severe obstructive defect based on FEV1.",
-  VCReducedTLCNeeded:
-    "Vital capacity is reduced. This may be due to submaximal effort, air trapping, a restrictive ventilatory defect, or a nonspecific defect. Consider measurement of total lung capacity and postbronchodilator spirometry if clinically indicated.",
+  mild: "Mild obstructive defect based on FEV1 (Z-score -2.5 or higher).",
+  moderate: "Moderate obstructive defect based on FEV1 (Z-score -2.5 to -4).",
+  severe: "Severe obstructive defect based on FEV1 (Z-score less than -4).",
+  restrictedMaybe:
+    "Possible restriction or non-specific pattern is present (PRISM). Consider measurement of lung volumes.",
+  nonspecific: "Non-specific pattern is seen (FEV1 and FVC reduced. Normal FEV1/FVC ratio and TLC).",
   restricted:
-    "Restrictive lung defect suggested on spirometry.",
-  VCReduced:
-    "Vital capacity is reduced. This may be due to submaximal effort, air trapping, a restrictive ventilatory defect, or a nonspecific defect.",
+    "Restrictive lung defect suggested on spirometry based on lung volumes.",
+  mixed: "Possible mixed obstruction and restriction is present. (Lung volumes needed to assess).",
+  obstructionNonspecific: "Airflow obstruction with nonspecific reduction in vital capacity.",
+  mildSum: "Mild obstructive defect.",
+  moderateSum: "Moderate obstructive defect.",
+  severeSum: "Severe obstructive defect.",
+  mixedSum: "Possible mixed obstruction and restriction is present. (Lung volumes needed to assess).",
+  result: "",
+  summary: "",
 };
-export const bronchPrompt = {
+export const bronch = {
   default: "",
   significant:
-    "There is a significant response to bronchodilator inhalation based on FEV1 and FVC.",
+    "There is a significant response to bronchodilator inhalation (More than 10% increase in percent predicted FEV1 or FVC).",
   nonSignificant:
     "There is no significant response to bronchodilator inhalation; however, this does not preclude benefit from use of a bronchodilator.",
   borderline:
     "There is borderline response to bronchodilator inhalation based on FEV1 and FVC.",
+  significantSum:
+    "There is significant bronchodilator response.",
+  nonSignificantSum:
+    "There is no significant bronchodilator response.",
+  borderlineSum:
+    "There is borderline bronchodilator response.",
+  result: "",
+  summary: "",
 };
-export const flowPrompt = {
-  default: "",
-  normal: "Flow-volume loop does not suggest any fixed airway obstruction.",
-  intrathoracic:
-    "Flow-volume loop is suggestive of a variable intrathoracic  obstruction. Consider direct airway inspection if clinically appropriate.",
-  extrathoracic:
-    "Flow-volume loop is suggestive of a  variable extrathoracic  obstruction. Consider direct airway inspection if clinically appropriate.",
-  fixed:
-    "Flow-volume loop is suggestive of a  fixed obstruction. Consider direct airway inspection if clinically appropriate.",
-};
-export const volumePrompt = {
+
+export const volume = {
   default: "",
   normal: "Normal lung volumes.",
-  mild: "Mild restrictive defect based on reduced TLC and FEV1.",
-  moderate: "Moderate restrictive defect based on reduced TLC and FEV1.",
-  modSevere:
-    "Moderately severe restrictive defect based on reduced TLC and FEV1.",
-  severe: "Severe restrictive defect based on reduced TLC and FEV1.",
-  verySevere: "Very severe restrictive defect based on reduced TLC and FEV1.",
+  mild: "Mild restrictive defect based on reduced TLC and FEV1 (Z-score -1.65 to -2.5).",
+  moderate: "Moderate restrictive defect based on reduced TLC and FEV1 (Z-score -2.5 to -4).",
+  severe: "Severe restrictive defect based on reduced TLC and FEV1 (Z-score less than -4).",
   highTLC: "Increased TLC indicates hyperinflation.",
+  large: "Large lungs (elevated TLC, FRC, RV and normal FRC/TLC, RV/TLC).",
+  hyper: "Hyperinflation is present (elevated TLC or FRC/TLC).",
+  simpleRestrict: "Simple restriction is present (low TLC, FRC, RV and Normal FRC/TLC, RV/TLC).",
+  complexRestrict: "Complex restriction is present (low TLC, FRC and elevated RV/TLC. RV normal/elevated).",
+  mixed: "Mixed obstruction and restriction.",
+  largeSum: "Large lung volumes.",
+  mildSum: "Mild restrictive defect.",
+  moderateSum: "Moderate restrictive defect.",
+  severeSum: "Severe restrictive defect.",
+  mixedSum: "Mixed obstruction and restriction are present.",
+  result: "",
+  summary: "",
 };
-export const hyperPrompt = {
+export const airTrapping = {
   default: "",
-  highTLC: "Increased TLC indicates hyperinflation.",
-  airtrapping: "Increased RV and RV/TLC indicates air trapping.",
+  trapping: "Air trapping is present (RV/TLC elevated).",
+  trappingSum: "Air trapping is present.",
+  result: "",
+  summary: "",
 };
-export const diffusingPrompt = {
+export const diffusing = {
   default: "",
   normal: "Normal diffusing capacity.",
-  mild: "Mild reduction in diffusing capacity.",
-  moderate: "Moderate reduction in diffusing capacity.",
-  severe: "Severe reduction in diffusing capacity.",
-  high: "Diffusing capacity is elevated.",
+  mild: "Mild reduction in diffusing capacity (Z-score -1.65 to -2.5).",
+  moderate: "Moderate reduction in diffusing capacity (Z-score -2.5 to -4).",
+  severe: "Severe reduction in diffusing capacity (Z-score less than -4).",
+  high: "Abnormally high. May be seen with asthma, obesity, alveolar hemorrhage, erythrocytosis, or left to right shunting.",
+  normalVA: "Reduced DLCO with normal VA. May be seen with pulmonary hypertension, pulmonary embolism, vasculitis, emphysema with preserved lung volumes, or anemia.",
+  normalKCO: "Reduced DLCO, reduced VA, with low/normal DLCO/VA (KCO). May be seen with interstitial lung disease or emphysema.",
+  highKCO: "Reduced DLCO, reduced VA, with high DLCO/VA (KCO). May be seen with submaximal effort, neuromuscular dysfunction, or after pneumonectomy.",
+  mildSum: "Mild reduction in diffusing capacity.",
+  moderateSum: "Moderate reduction in diffusing capacity.",
+  severeSum: "Severe reduction in diffusing capacity.",
+  highSum: "Abnormally high diffusing capacity.",
+  result: "",
+  summary: "",
 };
-export const diffusingCorrectPrompt = {
+export const diffusingCorrect = {
   default: "",
   corrected: "The diffusing capacity is corrected using hemoglobin.",
   uncorrected: "The diffusing capacity is uncorrected.",
+  result: "",
 };
-export const conclusionPrompt = {
+
+export const summaryPrompt = {
   default: "",
   normal: "Normal PFTs.",
   normalSpirometry: "Normal spirometry.",
   obstructive: "Obstructive defect is indicated on this PFT.",
   obstructiveSpirometry: "Obstructive defect is indicated on this spirometry.",
   restrictive: "Restrictive defect is indicated on this PFT.",
-  combined:
-    "Combined obstructive and restrictive defect is indicated on this PFT.",
+  mixed:
+    "Mixed obstructive and restrictive defect is indicated on this PFT.",
   nonspecific:
     "No evidence of airflow obstruction or restrictive disease. Reduced FEV1 and FVC with normal lung volumes represent a non-specific pattern.",
   restrictiveNeedLungVolume:
@@ -84,4 +129,5 @@ export const conclusionPrompt = {
   FVCLow:
     "Vital capacity decreased. Recommend lung volume studies to evaluate for restrictive disease.",
   clinical: "Clinical correlation suggested.",
+  PRISM: "Preserved Ratio Impaired Spirometry (PRISM) is present (Reduced FEV1, FVC, and normal FEV1/FVC). Recommend lung volumes to assess."
 };
