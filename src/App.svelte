@@ -155,12 +155,12 @@
     checkData();
   }
 
-  let effort = qualityPrompt.adequate;
+  let effort = qualityPrompt.AE;
   let flow = flowPrompt.normal;
   let signature = "";
 
   function checkData() {
-    effort = qualityPrompt.adequate;
+    effort = qualityPrompt.AE;
     flow = flowPrompt.normal;
 
     // checks different parameters
