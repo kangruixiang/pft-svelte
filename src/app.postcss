@@ -1,9 +1,12 @@
+/* Write your global styles here, in PostCSS syntax */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Flex:opsz,wdth,wght,GRAD,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,66.8,435,-133,87,804,-294,691,476,681;8..144,100,400,0,79,750,-203,738,514,712&display=swap");
+
+@tailwind base;
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @font-face {
   font-family: "Roboto", sans-serif;
@@ -18,7 +21,7 @@
 }
 @layer components {
   body {
-    @apply bg-zinc-900 
+    @apply bg-zinc-900;
   }
   h1 {
     @apply text-xl font-bold uppercase mb-4;
@@ -27,7 +30,7 @@
     @apply text-lg font-bold uppercase mb-2;
   }
   p {
-    @apply text-zinc-800 pb-4 ;
+    @apply text-zinc-800 pb-4;
   }
   ::selection {
     @apply bg-[#f5cb42];
@@ -57,3 +60,5 @@
     @apply rounded-sm border-2 border-solid w-4 h-4 focus:ring-0  text-zinc-800 border-zinc-800;
   }
 }
+@tailwind components;
+@tailwind utilities;

@@ -1,17 +1,4 @@
-interface Volume {
-  Perc: number;
-  Pre: number;
-  LLN: number;
-  ULN: number;
-  PostVol: number;
-  PostPerc: number;
-  Z: number;
-  ZPost: number;
-}
-
-interface Prompt {
-  [key: string]: string;
-}
+import type { Volume, Prompt } from "./global"
 
 export function resetPrompt(prompt: Prompt) {
   prompt.result = prompt.default
@@ -168,50 +155,3 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
 
   return checkSeverity(FEV1.Z, spirometry)
 }
-
-// export function checkConclusion(FEVFVC: Volume, FVC: Volume, TLC: Volume, conclusionPrompt: Prompt) {
-
-//   // No obstruction
-//   if (FEVFVC.Pre >= FEVFVC.LLN) {
-
-//     // no lung volume
-//     if (!TLC.Pre) {
-//       // decreased FVC, needs lung volume
-//       if (FVC.Pre < FVC.LLN) {
-//         return conclusionPrompt.restrictiveNeedLungVolume;
-//       }
-
-//       return conclusionPrompt.normalSpirometry
-//     }
-
-//     // restrictive disease with decreased lung volume
-//     if (TLC.Pre < TLC.LLN) {
-//       return conclusionPrompt.restrictive;
-//     }
-
-//     // Normal lung volumes, decreased FVC, non specific
-//     if (FVC.Pre < FVC.LLN) {
-//       return conclusionPrompt.nonspecific;
-//     }
-
-//     return conclusionPrompt.normal
-//   }
-
-//   // has obstruction
-//   // no lung volume
-//   if (!TLC.Pre) {
-//     // decreased FVC, needs lung volumes
-//     if (FVC.Pre < FVC.LLN) {
-//       return conclusionPrompt.obstructiveSpirometry + " " + conclusionPrompt.FVCLow
-//     }
-//     return conclusionPrompt.obstructiveSpirometry
-//   }
-
-//   // restrictive disease with obstructive disease
-//   if (TLC.Pre < TLC.LLN) {
-//     return conclusionPrompt.combined;
-//   }
-
-//   return conclusionPrompt.obstructive
-
-// }
