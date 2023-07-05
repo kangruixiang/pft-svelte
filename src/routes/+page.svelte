@@ -59,20 +59,20 @@
         (item) =>
           item.Variable === "FRC (Pleth)" || item.Variable === "FRC (N2)"
       ) || "";
-    TLC =
-      formattedData.find(
-        (item) =>
-          item.Variable === "TLC (Pleth)" || item.Variable === "TLC (N2)"
-      ) || "";
-    RV =
-      formattedData.find(
-        (item) => item.Variable === "RV (Pleth)" || item.Variable === "RV (N2)"
-      ) || "";
-    RVTLC =
-      formattedData.find(
-        (item) =>
-          item.Variable === "RV/TLC (Pleth)" || item.Variable === "RV/TLC (N2)"
-      ) || "";
+    TLC = formattedData.find(
+      (item) =>
+        item.Variable === "TLC (N2)" ?? item.Variable === "TLC (Pleth)" ?? ""
+    );
+    RV = formattedData.find(
+      (item) =>
+        item.Variable === "RV (N2)" ?? item.Variable === "RV (Pleth)" ?? ""
+    );
+    RVTLC = formattedData.find(
+      (item) =>
+        item.Variable === "TLC (N2)" ??
+        item.Variable === "RV/RV/TLC (Pleth)" ??
+        ""
+    );
     DLCOunc = formattedData.find((item) => item.Variable === "DLCOunc") || "";
     DLCOcor = formattedData.find((item) => item.Variable === "DLCOcor") || "";
     VA = formattedData.find((item) => item.Variable === "VA") || "";
@@ -155,6 +155,7 @@
       Z: parseFloat(DLVA["Z Score"]),
       Perc: parseFloat(DLVA["% Pred-Pre"]) || NaN,
     };
+    // console.log(TLC);
     checkData();
   }
 

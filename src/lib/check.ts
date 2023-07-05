@@ -22,7 +22,7 @@ function checkSeverity(checkVariable: number, prompt: Prompt) {
 
 export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt) {
 
-  const { hyper, large, normal, largeSum } = volume
+  const { hyper, large, normal, largeSum, hyperSum } = volume
 
   if (!TLC.Pre) {
     return
@@ -31,6 +31,7 @@ export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Pr
   // checks total lung volumes
   if (TLC.Pre >= TLC.ULN) {
     if (RVTLC.Perc >= RVTLC.ULN) {
+      volume.summary = hyperSum
       return hyper
     }
 
@@ -98,7 +99,7 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
   }
 
   if (VA.Pre >= VA.LLN) {
-    diffusing.summary = normal
+    checkSeverity(DLCO.Z, diffusing)
     return normalVA
   }
 

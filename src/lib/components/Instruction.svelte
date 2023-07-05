@@ -24,7 +24,11 @@
           The Effort and Flow Volume Loop are not being read. You have to use
           the drop down to select the right one.
         </li>
-        <li>FRC/RV is not calculateds</li>
+        <li>
+          FRC/TLC data is not available and does not help differentiate between
+          simple and complex restriction.
+        </li>
+        <li>There is no FVC data from Breeze.</li>
       </ul>
     </svelte:fragment>
   </InstructionItem>

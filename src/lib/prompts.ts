@@ -12,6 +12,7 @@ export const qualityPrompt = {
 export const flowPrompt = {
   default: "",
   normal: "Normal flow-volume loop.",
+  obstruction: "Flow-volume loop suggests obstruction.",
   restriction: "Flow-volume loop suggests restriction.",
   mixed: "Flow-volume loop suggests a mixed disorder.",
   intrathoracic:
@@ -75,6 +76,7 @@ export const volume = {
   complexRestrict: "Complex restriction is present (low TLC, FRC and elevated RV/TLC. RV normal/elevated).",
   mixed: "Mixed obstruction and restriction.",
   largeSum: "Large lung volumes.",
+  hyperSum: "Hyperinflation is present.",
   mildSum: "Mild restrictive defect.",
   moderateSum: "Moderate restrictive defect.",
   severeSum: "Severe restrictive defect.",
