@@ -110,9 +110,9 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
   return checkSeverity(DLCO.Z, diffusing)
 }
 
-export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt) {
+export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt, mixedSum: Prompt, possibleMixSum: Prompt) {
 
-  const { normal, restrictedMaybe, nonspecific, restricted, obstructionNonspecific, mixed, mildSum, moderateSum, severeSum, mixedSum } = spirometry
+  const { normal, restrictedMaybe, nonspecific, restricted, nonspecificSum } = spirometry
 
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
@@ -129,24 +129,32 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
       return restrictedMaybe;
     }
 
-    // Decreased FVC, low lung volume
+    // Decreased FVC, normal lung volume
     if (TLC.Pre >= TLC.LLN) {
-      spirometry.summary = normal
+      spirometry.summary = nonspecificSum
       return nonspecific;
     }
 
     return restricted
   }
 
-  // possible mixed obstruction/restriction
-  if (FVC.Perc < FVC.LLN) {
-    if (TLC.Perc < TLC.LLN) {
-      return obstructionNonspecific
-    }
-
-    spirometry.summary = mixedSum
-    return mixed
+  if (!TLC.Pre) {
+    return checkSeverity(FEV1.ZPost, possibleMixSum)
   }
+
+  // mixed obstruction/restriction
+  if (TLC.Pre < TLC.LLN) {
+    return checkSeverity(FEV1.ZPost, mixedSum)
+  }
+
+  // if (FVC.Pre < FVC.LLN) {
+  //   if (TLC.Perc < TLC.LLN) {
+  //     return obstructionNonspecific
+  //   }
+
+  //   spirometry.summary = mixedSum
+  //   return mixed
+  // }
 
 
   // obstructive disease

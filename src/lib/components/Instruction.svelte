@@ -29,6 +29,7 @@
           simple and complex restriction.
         </li>
         <li>There is no FVC data from Breeze.</li>
+        <li>This reader does not read methacholine challenge test.</li>
       </ul>
     </svelte:fragment>
   </InstructionItem>

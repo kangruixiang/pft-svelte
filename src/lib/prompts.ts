@@ -42,9 +42,30 @@ export const spirometry = {
   moderateSum: "Moderate obstructive defect.",
   severeSum: "Severe obstructive defect.",
   mixedSum: "Possible mixed obstruction and restriction is present. (Lung volumes needed to assess).",
+  nonspecificSum: "Non-specific pattern is seen.",
   result: "",
   summary: "",
 };
+export const possibleMixSum = {
+  mild: "Mild obstructive defect based on FEV1 (Z-score -2.5 or higher). Consider lung volume studies to rule out restrictive disease.",
+  moderate: "Moderate obstructive defect based on FEV1 (Z-score -2.5 to -4). Consider lung volume studies to rule out restrictive disease.",
+  severe: "Severe obstructive defect based on FEV1 (Z-score less than -4). Consider lung volume studies to rule out restrictive disease.",
+  mildSum: "Mild obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
+  moderateSum: "Moderate obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
+  severeSum: "Severe obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
+  result: "",
+  summary: "",
+}
+export const mixedSum = {
+  mild: "Mild obstructive defect based on FEV1 (Z-score -2.5 or higher).",
+  moderate: "Moderate obstructive defect based on FEV1 (Z-score -2.5 to -4).",
+  severe: "Severe obstructive defect based on FEV1 (Z-score less than -4).",
+  mildSum: "A mix of mild obstructive and restrictive defect is present.",
+  moderateSum: "A mix of moderate obstructive and restrictive defect is present.",
+  severeSum: "A mix of severe obstructive and restrictive defect is present.",
+  result: "",
+  summary: "",
+}
 export const bronch = {
   default: "",
   significant:

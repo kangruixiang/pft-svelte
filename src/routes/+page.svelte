@@ -17,6 +17,8 @@
     airTrapping,
     diffusing,
     diffusingCorrect,
+    mixedSum,
+    possibleMixSum,
   } from "$lib/prompts";
   import {
     checkVolume,
@@ -32,8 +34,11 @@
     FEVFVC: Volume,
     FRC: Volume,
     TLC: Volume,
+    TLC2: Volume,
     RV: Volume,
+    RV2: Volume,
     RVTLC: Volume,
+    RVTLC2: Volume,
     DLCOunc: Volume,
     DLCOcor: Volume,
     VA: Volume,
@@ -59,20 +64,14 @@
         (item) =>
           item.Variable === "FRC (Pleth)" || item.Variable === "FRC (N2)"
       ) || "";
-    TLC = formattedData.find(
-      (item) =>
-        item.Variable === "TLC (N2)" ?? item.Variable === "TLC (Pleth)" ?? ""
-    );
-    RV = formattedData.find(
-      (item) =>
-        item.Variable === "RV (N2)" ?? item.Variable === "RV (Pleth)" ?? ""
-    );
-    RVTLC = formattedData.find(
-      (item) =>
-        item.Variable === "TLC (N2)" ??
-        item.Variable === "RV/RV/TLC (Pleth)" ??
-        ""
-    );
+    TLC = formattedData.find((item) => item.Variable === "TLC (Pleth)") || "";
+    TLC2 = formattedData.find((item) => item.Variable === "TLC (N2)") || "";
+    RV = formattedData.find((item) => item.Variable === "RV (Pleth)") ?? "";
+    RV2 = formattedData.find((item) => item.Variable === "RV (N2)") ?? "";
+    RVTLC =
+      formattedData.find((item) => item.Variable === "RV/TLC (Pleth)") ?? "";
+    RVTLC2 =
+      formattedData.find((item) => item.Variable === "RV/TLC (N2)") ?? "";
     DLCOunc = formattedData.find((item) => item.Variable === "DLCOunc") || "";
     DLCOcor = formattedData.find((item) => item.Variable === "DLCOcor") || "";
     VA = formattedData.find((item) => item.Variable === "VA") || "";
@@ -111,25 +110,30 @@
       Perc: parseFloat(FRC["% Pred-Pre"]) || NaN,
     };
     TLC = {
-      Pre: parseFloat(TLC.Pre) || NaN,
-      LLN: parseFloat(TLC.LLN) || NaN,
-      ULN: parseFloat(TLC.ULN) || NaN,
-      Z: parseFloat(TLC["Z Score"]),
-      Perc: parseFloat(TLC["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(TLC.Pre) || parseFloat(TLC2.Pre) || NaN,
+      LLN: parseFloat(TLC.LLN) || parseFloat(TLC2.LLN) || NaN,
+      ULN: parseFloat(TLC.ULN) || parseFloat(TLC2.ULN) || NaN,
+      Z: parseFloat(TLC["Z Score"]) || parseFloat(TLC2["Z Score"]) || NaN,
+      Perc:
+        parseFloat(TLC["% Pred-Pre"]) || parseFloat(TLC2["% Pred-Pre"]) || NaN,
     };
     RV = {
-      Pre: parseFloat(RV.Pre) || NaN,
-      LLN: parseFloat(RV.LLN) || NaN,
-      ULN: parseFloat(RV.ULN) || NaN,
-      Z: parseFloat(RV["Z Score"]),
-      Perc: parseFloat(RV["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(RV.Pre) || parseFloat(RV2.Pre) || NaN,
+      LLN: parseFloat(RV.LLN) || parseFloat(RV2.LLN) || NaN,
+      ULN: parseFloat(RV.ULN) || parseFloat(RV2.ULN) || NaN,
+      Z: parseFloat(RV["Z Score"]) || parseFloat(RV2["Z Score"]) || NaN,
+      Perc:
+        parseFloat(RV["% Pred-Pre"]) || parseFloat(RV2["% Pred-Pre"]) || NaN,
     };
     RVTLC = {
-      Pre: parseFloat(RVTLC.Pre) || NaN,
-      LLN: parseFloat(RVTLC.LLN) || NaN,
-      ULN: parseFloat(RVTLC.ULN) || NaN,
-      Z: parseFloat(RVTLC["Z Score"]),
-      Perc: parseFloat(RVTLC["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(RVTLC.Pre) || parseFloat(RVTLC2.Pre) || NaN,
+      LLN: parseFloat(RVTLC.LLN) || parseFloat(RVTLC2.LLN) || NaN,
+      ULN: parseFloat(RVTLC.ULN) || parseFloat(RVTLC2.ULN) || NaN,
+      Z: parseFloat(RVTLC["Z Score"]) || parseFloat(RVTLC2["Z Score"]) || NaN,
+      Perc:
+        parseFloat(RVTLC["% Pred-Pre"]) ||
+        parseFloat(RVTLC2["% Pred-Pre"]) ||
+        NaN,
     };
     DLCOunc = {
       Pre: parseFloat(DLCOunc.Pre) || NaN,
@@ -180,9 +184,22 @@
       diffusing.result = checkDLCO(DLCOunc, VA, DLVA, diffusing);
     }
 
-    spirometry.result = checkSpirometry(FEVFVC, FEV1, FVC, TLC, spirometry);
+    spirometry.result = checkSpirometry(
+      FEVFVC,
+      FEV1,
+      FVC,
+      TLC,
+      spirometry,
+      mixedSum,
+      possibleMixSum
+    );
 
-    conclusion = `${spirometry.summary} ${volume.summary} ${airTrapping.summary} ${bronch.summary} ${diffusing.summary}`;
+    if (possibleMixSum.summary || mixedSum.summary) {
+      volume.summary = volume.default;
+      spirometry.summary = spirometry.default;
+    }
+
+    conclusion = `${spirometry.summary} ${possibleMixSum.summary} ${mixedSum.summary} ${volume.summary} ${airTrapping.summary} ${bronch.summary} ${diffusing.summary}`;
   }
 
   function clearData() {
@@ -191,6 +208,10 @@
     flow = flowPrompt.normal;
     spirometry.result = "";
     spirometry.summary = "";
+    possibleMixSum.result = "";
+    possibleMixSum.summary = "";
+    mixedSum.result = "";
+    mixedSum.summary = "";
     bronch.result = "";
     bronch.summary = "";
     volume.result = "";
