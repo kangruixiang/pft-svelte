@@ -75,7 +75,7 @@
     DLCOunc = formattedData.find((item) => item.Variable === "DLCOunc") || "";
     DLCOcor = formattedData.find((item) => item.Variable === "DLCOcor") || "";
     VA = formattedData.find((item) => item.Variable === "VA") || "";
-    DLVA = formattedData.find((item) => item.Variable === "DL/VA") || "";
+    DLVA = formattedData.find((item) => item.Variable === "Kco") || "";
 
     FEV1 = {
       Pre: parseFloat(FEV1.Pre),
@@ -138,12 +138,14 @@
     DLCOunc = {
       Pre: parseFloat(DLCOunc.Pre) || NaN,
       LLN: parseFloat(DLCOunc.LLN) || NaN,
+      ULN: parseFloat(DLCOunc.ULN) || NaN,
       Z: parseFloat(DLCOunc["Z Score"]),
       Perc: parseFloat(DLCOunc["% Pred-Pre"]) || NaN,
     };
     DLCOcor = {
       Pre: parseFloat(DLCOcor.Pre) || NaN,
       LLN: parseFloat(DLCOcor.LLN) || NaN,
+      ULN: parseFloat(DLCOcor.ULN) || NaN,
       Z: parseFloat(DLCOcor["Z Score"]),
       Perc: parseFloat(DLCOcor["% Pred-Pre"]) || NaN,
     };
@@ -156,6 +158,7 @@
     DLVA = {
       Pre: parseFloat(DLVA.Pre) || NaN,
       LLN: parseFloat(DLVA.LLN) || NaN,
+      ULN: parseFloat(DLVA.ULN) || NaN,
       Z: parseFloat(DLVA["Z Score"]),
       Perc: parseFloat(DLVA["% Pred-Pre"]) || NaN,
     };

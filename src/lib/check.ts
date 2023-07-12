@@ -86,7 +86,7 @@ export function checkBronchodilator(FEV1: Volume, FVC: Volume, bronch: Prompt) {
 
 export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Prompt) {
 
-  const { high, normal, normalVA, highSum, highKCO } = diffusing
+  const { high, normal, normalVA, highSum, highKCO, normalKCO } = diffusing
 
   if (DLCO.Pre > DLCO.ULN) {
     diffusing.summary = highSum
@@ -99,15 +99,15 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
   }
 
   if (VA.Pre >= VA.LLN) {
-    checkSeverity(DLCO.Z, diffusing)
-    return normalVA
+
+    return checkSeverity(DLCO.Z, diffusing) + " " + normalVA
   }
 
-  if (DLVA.Perc > DLVA.ULN) {
-    return highKCO
+  if (DLVA.Pre > DLVA.ULN) {
+    return checkSeverity(DLCO.Z, diffusing) + " " + highKCO
   }
 
-  return checkSeverity(DLCO.Z, diffusing)
+  return checkSeverity(DLCO.Z, diffusing) + " " + normalKCO
 }
 
 export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt, mixedSum: Prompt, possibleMixSum: Prompt) {
