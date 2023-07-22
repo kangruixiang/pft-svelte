@@ -37,9 +37,10 @@
     <svelte:fragment slot="body">
       <ul class="list-disc ml-4">
         <li>
-          7/22/2023: added simple and complex restriction. Abnormal effort and
-          flow loop now appear in conclusion. Clarified Z scores in the
-          statements.
+          7/22/2023: added simple and complex restriction. Spirometry now shows
+          mix of restriction and obstruction and quantifies restriction.
+          Abnormal effort and flow loop now appear in conclusion. Clarified Z
+          scores in the statements.
         </li>
       </ul>
     </svelte:fragment>

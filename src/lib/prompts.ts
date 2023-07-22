@@ -46,6 +46,14 @@ export const spirometry = {
   result: "",
   summary: "",
 };
+export const spirometryRestricted = {
+  mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher).",
+  moderate: "Moderate restrictive defect (FEV1 Z-score -2.5 to -4).",
+  severe: "Severe restrictive defect (FEV1 Z-score less than -4).",
+  mildSum: "Mild restrictive defect.",
+  moderateSum: "Moderate restrictive defect.",
+  severeSum: "Severe restrictive defect.",
+};
 export const possibleMixSum = {
   mild: "Mild obstructive defect (FEV1 Z-score -2.5 or higher). Consider lung volume studies to rule out restrictive disease.",
   moderate: "Moderate obstructive defect (FEV1 Z-score -2.5 to -4). Consider lung volume studies to rule out restrictive disease.",
@@ -57,9 +65,9 @@ export const possibleMixSum = {
   summary: "",
 }
 export const mixedSum = {
-  mild: "Mild obstructive defect (FEV1 Z-score -2.5 or higher).",
-  moderate: "Moderate obstructive defect (FEV1 Z-score -2.5 to -4).",
-  severe: "Severe obstructive defect (FEV1 Z-score less than -4).",
+  mild: "Mix of mild obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score -2.5 or higher).",
+  moderate: "Mix of moderate obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score -2.5 to -4).",
+  severe: "Mix of severe obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score less than -4).",
   mildSum: "A mix of mild obstructive and restrictive defect is present.",
   moderateSum: "A mix of moderate obstructive and restrictive defect is present.",
   severeSum: "A mix of severe obstructive and restrictive defect is present.",
@@ -104,7 +112,6 @@ export const volumeSimple = {
   mildSum: "Mild simple restrictive defect.",
   moderateSum: "Moderate simple restrictive defect.",
   severeSum: "Severe simple restrictive defect.",
-  mixedSum: "Mixed obstruction and restriction are present.",
 };
 export const volumeComplex = {
   mild: "Mild complex restrictive defect (low TLC and elevated RV/TLC, and FEV1 Z-score -2.5 or higher).",
@@ -114,7 +121,6 @@ export const volumeComplex = {
   mildSum: "Mild complex restrictive defect.",
   moderateSum: "Moderate complex restrictive defect.",
   severeSum: "Severe complex restrictive defect.",
-  mixedSum: "Mixed obstruction and restriction are present.",
 };
 export const airTrapping = {
   default: "",
@@ -147,21 +153,21 @@ export const diffusingCorrect = {
   result: "",
 };
 
-export const summaryPrompt = {
-  default: "",
-  normal: "Normal PFTs.",
-  normalSpirometry: "Normal spirometry.",
-  obstructive: "Obstructive defect is indicated on this PFT.",
-  obstructiveSpirometry: "Obstructive defect is indicated on this spirometry.",
-  restrictive: "Restrictive defect is indicated on this PFT.",
-  mixed:
-    "Mixed obstructive and restrictive defect is indicated on this PFT.",
-  nonspecific:
-    "No evidence of airflow obstruction or restrictive disease. Reduced FEV1 and FVC with normal lung volumes represent a non-specific pattern.",
-  restrictiveNeedLungVolume:
-    "Restrictive defect suggested by spirometry. Recommend lung volume studies to confirm this.",
-  FVCLow:
-    "Vital capacity decreased. Recommend lung volume studies to evaluate for restrictive disease.",
-  clinical: "Clinical correlation suggested.",
-  PRISM: "Preserved Ratio Impaired Spirometry (PRISM) is present (Reduced FEV1, FVC, and normal FEV1/FVC). Recommend lung volumes to assess."
-};
+// export const summaryPrompt = {
+//   default: "",
+//   normal: "Normal PFTs.",
+//   normalSpirometry: "Normal spirometry.",
+//   obstructive: "Obstructive defect is indicated on this PFT.",
+//   obstructiveSpirometry: "Obstructive defect is indicated on this spirometry.",
+//   restrictive: "Restrictive defect is indicated on this PFT.",
+//   mixed:
+//     "Mixed obstructive and restrictive defect is indicated on this PFT.",
+//   nonspecific:
+//     "No evidence of airflow obstruction or restrictive disease. Reduced FEV1 and FVC with normal lung volumes represent a non-specific pattern.",
+//   restrictiveNeedLungVolume:
+//     "Restrictive defect suggested by spirometry. Recommend lung volume studies to confirm this.",
+//   FVCLow:
+//     "Vital capacity decreased. Recommend lung volume studies to evaluate for restrictive disease.",
+//   clinical: "Clinical correlation suggested.",
+//   PRISM: "Preserved Ratio Impaired Spirometry (PRISM) is present (Reduced FEV1, FVC, and normal FEV1/FVC). Recommend lung volumes to assess."
+// };

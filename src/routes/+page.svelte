@@ -21,6 +21,7 @@
     diffusingCorrect,
     mixedSum,
     possibleMixSum,
+    spirometryRestricted,
   } from "$lib/prompts";
   import {
     checkVolume,
@@ -174,13 +175,27 @@
 
   function checkData() {
     // checks different parameters
+    spirometry.result = checkSpirometry(
+      FEVFVC,
+      FEV1,
+      FVC,
+      TLC,
+      RVTLC,
+      spirometry,
+      spirometryRestricted,
+      mixedSum,
+      possibleMixSum,
+      volumeSimple,
+      volumeComplex
+    );
     volume.result = checkVolume(
       TLC,
       FEV1,
       RVTLC,
       volume,
       volumeSimple,
-      volumeComplex
+      volumeComplex,
+      spirometry
     );
     airTrapping.result = checkTrapping(RVTLC, airTrapping);
     bronch.result = checkBronchodilator(FEV1, FVC, bronch);
@@ -192,16 +207,6 @@
       diffusingCorrect.result = diffusingCorrect.uncorrected;
       diffusing.result = checkDLCO(DLCOunc, VA, DLVA, diffusing);
     }
-
-    spirometry.result = checkSpirometry(
-      FEVFVC,
-      FEV1,
-      FVC,
-      TLC,
-      spirometry,
-      mixedSum,
-      possibleMixSum
-    );
 
     if (possibleMixSum.summary || mixedSum.summary) {
       volume.summary = volume.default;

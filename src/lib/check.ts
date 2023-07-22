@@ -6,7 +6,7 @@ export function resetPrompt(prompt: Prompt) {
 }
 
 function checkSeverity(checkVariable: number, prompt: Prompt, sumPrompt: Prompt) {
-  if (checkVariable < -4.1) {
+  if (checkVariable <= -4.1) {
     sumPrompt.summary = prompt.severeSum
     return prompt.severe
   }
@@ -20,7 +20,7 @@ function checkSeverity(checkVariable: number, prompt: Prompt, sumPrompt: Prompt)
   return prompt.mild
 }
 
-export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt, volumeSimple: Prompt, volumeComplex: Prompt) {
+export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt, volumeSimple: Prompt, volumeComplex: Prompt, spirometry: Prompt) {
 
   const { hyper, large, normal, largeSum, hyperSum } = volume
 
@@ -43,6 +43,8 @@ export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Pr
     volume.summary = volume.normal
     return normal;
   }
+
+  spirometry.summary = spirometry.default
 
   if (FEV1.ZPost) {
     if (RVTLC.Pre >= RVTLC.ULN) {
@@ -118,7 +120,7 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
   return checkSeverity(DLCO.Z, diffusing, diffusing) + " " + normalKCO
 }
 
-export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt, mixedSum: Prompt, possibleMixSum: Prompt) {
+export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, RVTLC: Volume, spirometry: Prompt, spirometryRestricted: Prompt, mixedSum: Prompt, possibleMixSum: Prompt, volumeSimple: Prompt, volumeComplex: Prompt) {
 
   const { normal, restrictedMaybe, nonspecific, restricted, nonspecificSum } = spirometry
 
@@ -143,7 +145,20 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
       return nonspecific;
     }
 
-    return restricted
+    if (FEV1.ZPost) {
+      if (RVTLC.Pre >= RVTLC.ULN) {
+        return checkSeverity(FEV1.ZPost, spirometryRestricted, spirometry)
+      }
+      return checkSeverity(FEV1.ZPost, spirometryRestricted, spirometry)
+    }
+
+    if (RVTLC.Pre >= RVTLC.ULN) {
+      return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
+    }
+
+    return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
+
+
   }
 
   if (!TLC.Pre) {
