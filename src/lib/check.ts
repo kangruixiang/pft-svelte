@@ -5,22 +5,22 @@ export function resetPrompt(prompt: Prompt) {
   prompt.summary = prompt.default
 }
 
-function checkSeverity(checkVariable: number, prompt: Prompt) {
+function checkSeverity(checkVariable: number, prompt: Prompt, sumPrompt: Prompt) {
   if (checkVariable < -4.1) {
-    prompt.summary = prompt.severeSum
+    sumPrompt.summary = prompt.severeSum
     return prompt.severe
   }
 
   if (checkVariable < -2.51) {
-    prompt.summary = prompt.moderateSum
+    sumPrompt.summary = prompt.moderateSum
     return prompt.moderate
   }
 
-  prompt.summary = prompt.mildSum
+  sumPrompt.summary = prompt.mildSum
   return prompt.mild
 }
 
-export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt) {
+export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt, volumeSimple: Prompt, volumeComplex: Prompt) {
 
   const { hyper, large, normal, largeSum, hyperSum } = volume
 
@@ -45,10 +45,18 @@ export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Pr
   }
 
   if (FEV1.ZPost) {
-    return checkSeverity(FEV1.ZPost, volume)
+    if (RVTLC.Pre >= RVTLC.ULN) {
+      return checkSeverity(FEV1.ZPost, volumeComplex, volume)
+    }
+    return checkSeverity(FEV1.ZPost, volumeSimple, volume)
   }
 
-  return checkSeverity(FEV1.Z, volume)
+  if (RVTLC.Pre >= RVTLC.ULN) {
+    return checkSeverity(FEV1.Z, volumeComplex, volume)
+  }
+
+  return checkSeverity(FEV1.Z, volumeSimple, volume)
+
 }
 
 export function checkTrapping(RVTLC: Volume, airTrapping: Prompt) {
@@ -100,14 +108,14 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
 
   if (VA.Pre >= VA.LLN) {
 
-    return checkSeverity(DLCO.Z, diffusing) + " " + normalVA
+    return checkSeverity(DLCO.Z, diffusing, diffusing) + " " + normalVA
   }
 
   if (DLVA.Pre > DLVA.ULN) {
-    return checkSeverity(DLCO.Z, diffusing) + " " + highKCO
+    return checkSeverity(DLCO.Z, diffusing, diffusing) + " " + highKCO
   }
 
-  return checkSeverity(DLCO.Z, diffusing) + " " + normalKCO
+  return checkSeverity(DLCO.Z, diffusing, diffusing) + " " + normalKCO
 }
 
 export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, spirometry: Prompt, mixedSum: Prompt, possibleMixSum: Prompt) {
@@ -139,12 +147,12 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
   }
 
   if (!TLC.Pre) {
-    return checkSeverity(FEV1.ZPost, possibleMixSum)
+    return checkSeverity(FEV1.ZPost, possibleMixSum, possibleMixSum)
   }
 
   // mixed obstruction/restriction
   if (TLC.Pre < TLC.LLN) {
-    return checkSeverity(FEV1.ZPost, mixedSum)
+    return checkSeverity(FEV1.ZPost, mixedSum, mixedSum)
   }
 
   // if (FVC.Pre < FVC.LLN) {
@@ -159,8 +167,8 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
 
   // obstructive disease
   if (FEV1.ZPost) {
-    return checkSeverity(FEV1.ZPost, spirometry)
+    return checkSeverity(FEV1.ZPost, spirometry, spirometry)
   }
 
-  return checkSeverity(FEV1.Z, spirometry)
+  return checkSeverity(FEV1.Z, spirometry, spirometry)
 }

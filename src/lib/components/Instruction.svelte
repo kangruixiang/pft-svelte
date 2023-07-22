@@ -25,11 +25,22 @@
           the drop down to select the right one.
         </li>
         <li>
-          FRC/TLC data is not available and does not help differentiate between
-          simple and complex restriction.
+          This reader does not read methacholine challenge test or supine and
+          upright spirometry.
         </li>
-        <li>There is no FVC data from Breeze.</li>
-        <li>This reader does not read methacholine challenge test.</li>
+      </ul>
+    </svelte:fragment>
+  </InstructionItem>
+
+  <InstructionItem>
+    <svelte:fragment slot="title">Updates</svelte:fragment>
+    <svelte:fragment slot="body">
+      <ul class="list-disc ml-4">
+        <li>
+          7/22/2023: added simple and complex restriction. Abnormal effort and
+          flow loop now appear in conclusion. Clarified Z scores in the
+          statements.
+        </li>
       </ul>
     </svelte:fragment>
   </InstructionItem>

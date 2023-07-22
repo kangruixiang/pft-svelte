@@ -14,6 +14,8 @@
     bronch,
     flowPrompt,
     volume,
+    volumeSimple,
+    volumeComplex,
     airTrapping,
     diffusing,
     diffusingCorrect,
@@ -171,11 +173,15 @@
   let signature = "";
 
   function checkData() {
-    effort = qualityPrompt.AE;
-    flow = flowPrompt.normal;
-
     // checks different parameters
-    volume.result = checkVolume(TLC, FEV1, RVTLC, volume);
+    volume.result = checkVolume(
+      TLC,
+      FEV1,
+      RVTLC,
+      volume,
+      volumeSimple,
+      volumeComplex
+    );
     airTrapping.result = checkTrapping(RVTLC, airTrapping);
     bronch.result = checkBronchodilator(FEV1, FVC, bronch);
 
@@ -201,8 +207,6 @@
       volume.summary = volume.default;
       spirometry.summary = spirometry.default;
     }
-
-    conclusion = `${spirometry.summary} ${possibleMixSum.summary} ${mixedSum.summary} ${volume.summary} ${airTrapping.summary} ${bronch.summary} ${diffusing.summary}`;
   }
 
   function clearData() {
@@ -228,6 +232,13 @@
   }
 
   let result;
+  $: conclusion = `${effort == qualityPrompt.AE ? "" : effort} ${
+    spirometry.summary
+  } ${possibleMixSum.summary} ${mixedSum.summary} ${volume.summary} ${
+    airTrapping.summary
+  } ${bronch.summary} ${flow == flowPrompt.normal ? "" : flow} ${
+    diffusing.summary
+  }`;
 </script>
 
 <div class="grid lg:grid-cols-2 gap-4">
@@ -262,10 +273,16 @@
   </div>
   <div class="lg:order-6 lg:col-span-2 order-6">
     <Selections>
-      <SelectionEntry prompt={qualityPrompt} bind:promptSelection={effort}
+      <SelectionEntry
+        prompt={qualityPrompt}
+        bind:promptSelection={effort}
+        on:change={checkData}
         ><svelte:fragment slot="name">Effort</svelte:fragment></SelectionEntry
       >
-      <SelectionEntry prompt={flowPrompt} bind:promptSelection={flow}
+      <SelectionEntry
+        prompt={flowPrompt}
+        bind:promptSelection={flow}
+        on:change={checkData}
         ><svelte:fragment slot="name">Flow Volume Loop</svelte:fragment
         ></SelectionEntry
       >
