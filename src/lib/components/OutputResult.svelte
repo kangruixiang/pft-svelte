@@ -1,17 +1,22 @@
 <script>
+  import { greatestIndex } from "d3";
+
   export let result,
     effort,
     spirometry,
     bronch,
     flow,
     TLC,
+    Grade,
     volume,
     airTrapping,
     DLCOunc,
     diffusing,
     diffusingCorrect,
     signature,
-    conclusion;
+    possibleMixSum,
+    mixedSum,
+    flowPrompt;
 </script>
 
 <div
@@ -20,6 +25,9 @@
 >
   <p>
     EFFORT: <br />
+    {#if Grade}
+      {Grade.Statement} <br />
+    {/if}
     {effort}
   </p>
   <p>
@@ -50,13 +58,35 @@
     {/if}
   {/if}
 
-  {#if conclusion}
-    <p>
-      CONCLUSION: <br />
-      {conclusion}
-    </p>
-  {/if}
   <p>
-    Initial review by {signature || ""}
+    CONCLUSION: <br />
+    {#if spirometry.summary}
+      {spirometry.summary}<br />
+    {/if}
+    {#if flow !== flowPrompt.normal}
+      {flow}<br />
+    {/if}
+    {#if possibleMixSum.summary}
+      {possibleMixSum.summary}<br />
+    {/if}
+    {#if mixedSum.summary}
+      {mixedSum.summary}<br />
+    {/if}
+    {#if volume.summary}
+      {volume.summary}<br />
+    {/if}
+    {#if airTrapping.summary}
+      {airTrapping.summary}<br />
+    {/if}
+    {#if bronch.summary}
+      {bronch.summary}<br />
+    {/if}
+    {#if diffusing.summary}
+      {diffusing.summary}<br />
+    {/if}
+  </p>
+
+  <p>
+    Initial review by {signature || ""}.
   </p>
 </div>

@@ -1,7 +1,6 @@
 
 export const qualityPrompt = {
   default: "",
-  AE: "Grade A-E.",
   U: "Grade-U (Usable, but not acceptable).",
   adequate: "Adequate effort, results reproducible.",
   inadequate: "Inadequate effort, results are not reproducible.",
@@ -14,7 +13,7 @@ export const flowPrompt = {
   normal: "Normal flow-volume loop.",
   obstruction: "Flow-volume loop suggests obstruction.",
   restriction: "Flow-volume loop suggests restriction.",
-  mixed: "Flow-volume loop suggests mixed restriction and obstruction.",
+  mixed: "Flow-volume loop suggests a mixed disorder.",
   intrathoracic:
     "Flow-volume loop suggests variable intrathoracic obstruction.",
   extrathoracic:
@@ -32,24 +31,26 @@ export const spirometry = {
   moderate: "Moderate obstructive defect (FEV1 Z-score -2.5 to -4).",
   severe: "Severe obstructive defect (FEV1 Z-score less than -4).",
   restrictedMaybe:
-    "Possible restriction or non-specific pattern is present (PRISM). Consider measurement of lung volumes.",
+    "Possible restriction or non-specific pattern is present (lung volumes needed to assess).",
   nonspecific: "Non-specific pattern is seen (FEV1 and FVC reduced. Normal FEV1/FVC ratio and TLC).",
   restricted:
-    "Restrictive lung defect suggested on spirometry based on lung volumes.",
-  mixed: "Possible mixed obstruction and restriction is present. (Lung volumes needed to assess).",
+    "Restrictive lung defect based on lung volumes.",
+  mixed: "Possible mixed obstruction and restriction is present (lung volumes needed to assess).",
   obstructionNonspecific: "Airflow obstruction with nonspecific reduction in vital capacity.",
-  mildSum: "Mild obstructive defect.",
-  moderateSum: "Moderate obstructive defect.",
-  severeSum: "Severe obstructive defect.",
-  mixedSum: "Possible mixed obstruction and restriction is present. (Lung volumes needed to assess).",
+  mildSum: "Mild obstructive ventilatory impairment.",
+  moderateSum: "Moderate obstructive ventilatory impairment.",
+  severeSum: "Severe obstructive ventilatory impairment.",
+  mixedSum: "Possible mixed obstructive and restrictive ventilatory impairment is present (lung volumes needed to assess).",
   nonspecificSum: "Non-specific pattern is seen.",
+  PRISM: "Preserved Ratio Impaired Spirometry (PRISM) (lung volumes not available).",
+  dysanapsis: "Dysanapsis (FEV1 normal, FVC normal/elevated, FEV1/FVC ratio reduced).",
   result: "",
-  summary: "",
+  summary: null,
 };
 export const spirometryRestricted = {
-  mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher).",
-  moderate: "Moderate restrictive defect (FEV1 Z-score -2.5 to -4).",
-  severe: "Severe restrictive defect (FEV1 Z-score less than -4).",
+  mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher) based on lung volumes.",
+  moderate: "Moderate restrictive defect (FEV1 Z-score -2.5 to -4) based on lung volumes.",
+  severe: "Severe restrictive defect (FEV1 Z-score less than -4) based on lung volumes.",
   mildSum: "Mild restrictive defect.",
   moderateSum: "Moderate restrictive defect.",
   severeSum: "Severe restrictive defect.",
@@ -62,7 +63,7 @@ export const possibleMixSum = {
   moderateSum: "Moderate obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
   severeSum: "Severe obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
   result: "",
-  summary: "",
+  summary: null,
 }
 export const mixedSum = {
   mild: "Mix of mild obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score -2.5 or higher).",
@@ -72,7 +73,7 @@ export const mixedSum = {
   moderateSum: "A mix of moderate obstructive and restrictive defect is present.",
   severeSum: "A mix of severe obstructive and restrictive defect is present.",
   result: "",
-  summary: "",
+  summary: null,
 }
 export const bronch = {
   default: "",
@@ -89,19 +90,22 @@ export const bronch = {
   borderlineSum:
     "There is borderline bronchodilator response.",
   result: "",
-  summary: "",
+  summary: null,
 };
 
 export const volume = {
   default: "",
   result: "",
-  summary: "",
+  summary: null,
   normal: "Normal lung volumes.",
   highTLC: "Increased TLC indicates hyperinflation.",
   large: "Large lungs (elevated TLC, FRC, RV and normal FRC/TLC, RV/TLC).",
   hyper: "Hyperinflation is present (elevated TLC or FRC/TLC).",
   largeSum: "Large lung volumes.",
   hyperSum: "Hyperinflation is present.",
+  simpleRestrict: "Simple restriction. (Reduced TLC, FRC, RV and Normal FRC/TLC, RV/TLC).",
+  complexRestrict: "Complex restriction. (Reduced TLC, FRC and Elevated RV/TLC. RV normal/elevated).",
+  mixed: "Mixed obstruction and restriction."
 }
 
 export const volumeSimple = {
@@ -124,10 +128,10 @@ export const volumeComplex = {
 };
 export const airTrapping = {
   default: "",
-  trapping: "Air trapping is present (RV/TLC elevated).",
-  trappingSum: "Air trapping is present.",
+  trapping: "Gas trapping is present (RV/TLC elevated).",
+  trappingSum: "Gas trapping is present.",
   result: "",
-  summary: "",
+  summary: null,
 };
 export const diffusing = {
   default: "",
@@ -144,7 +148,7 @@ export const diffusing = {
   severeSum: "Severe reduction in diffusing capacity.",
   highSum: "Abnormally high diffusing capacity.",
   result: "",
-  summary: "",
+  summary: null,
 };
 export const diffusingCorrect = {
   default: "",

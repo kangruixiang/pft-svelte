@@ -32,21 +32,26 @@
   } from "$lib/check";
   import type { Volume, Prompt } from "$lib/global";
 
+  interface Grade {
+    Pre: string | null;
+    Post: string | null;
+    Statement: string | null;
+  }
+
   let FEV1: Volume,
     FVC: Volume,
     FEVFVC: Volume,
     FRC: Volume,
     TLC: Volume,
-    TLC2: Volume,
     RV: Volume,
-    RV2: Volume,
     RVTLC: Volume,
-    RVTLC2: Volume,
     DLCOunc: Volume,
     DLCOcor: Volume,
     VA: Volume,
     DLVA: Volume,
     conclusion: string;
+
+  let Grade: Grade;
 
   import type DSVRowArray from "d3";
 
@@ -59,117 +64,145 @@
     }
     const replaceInput = inputText.replace(/^\s*\n/gm, "");
     formattedData = tsvParse(replaceInput);
-    FEV1 = formattedData.find((item) => item.Variable === "FEV1");
-    FVC = formattedData.find((item) => item.Variable === "FVC");
-    FEVFVC = formattedData.find((item) => item.Variable === "FEV1/FVC");
-    FRC =
+    const FEV1Raw = formattedData.find((item) => item.Variable === "FEV1");
+    const FVCRaw = formattedData.find((item) => item.Variable === "FVC");
+    const FEVFVCRaw = formattedData.find(
+      (item) => item.Variable === "FEV1/FVC"
+    );
+    const FRCRaw =
       formattedData.find(
         (item) =>
           item.Variable === "FRC (Pleth)" || item.Variable === "FRC (N2)"
       ) || "";
-    TLC = formattedData.find((item) => item.Variable === "TLC (Pleth)") || "";
-    TLC2 = formattedData.find((item) => item.Variable === "TLC (N2)") || "";
-    RV = formattedData.find((item) => item.Variable === "RV (Pleth)") ?? "";
-    RV2 = formattedData.find((item) => item.Variable === "RV (N2)") ?? "";
-    RVTLC =
+    const TLCRaw =
+      formattedData.find((item) => item.Variable === "TLC (Pleth)") || "";
+    const TLC2Raw =
+      formattedData.find((item) => item.Variable === "TLC (N2)") || "";
+    const RVRaw =
+      formattedData.find((item) => item.Variable === "RV (Pleth)") ?? "";
+    const RV2Raw =
+      formattedData.find((item) => item.Variable === "RV (N2)") ?? "";
+    const RVTLCRaw =
       formattedData.find((item) => item.Variable === "RV/TLC (Pleth)") ?? "";
-    RVTLC2 =
+    const RVTLC2Raw =
       formattedData.find((item) => item.Variable === "RV/TLC (N2)") ?? "";
-    DLCOunc = formattedData.find((item) => item.Variable === "DLCOunc") || "";
-    DLCOcor = formattedData.find((item) => item.Variable === "DLCOcor") || "";
-    VA = formattedData.find((item) => item.Variable === "VA") || "";
-    DLVA = formattedData.find((item) => item.Variable === "Kco") || "";
+    const DLCOuncRaw =
+      formattedData.find((item) => item.Variable === "DLCOunc") || "";
+    const DLCOcorRaw =
+      formattedData.find((item) => item.Variable === "DLCOcor") || "";
+    const VARaw = formattedData.find((item) => item.Variable === "VA") || "";
+    const DLVARaw = formattedData.find((item) => item.Variable === "Kco") || "";
+    const GradeRaw = formattedData.find(
+      (item) => item.Variable === "Test Grade (ATS - FVC, FEV1)"
+    );
+
+    Grade = {
+      Pre: GradeRaw["Pre"] || null,
+      Post: GradeRaw["Post"] || null,
+      Statement:
+        GradeRaw.Post == null || GradeRaw["Pre"] == GradeRaw["Post"]
+          ? `Grade ${GradeRaw["Pre"]} study.`
+          : `Grade ${GradeRaw["Pre"]} prebronchodilation and grade ${GradeRaw["Post"]} postbronchodilation.`,
+    };
 
     FEV1 = {
-      Pre: parseFloat(FEV1.Pre),
-      LLN: parseFloat(FEV1.LLN),
-      Z: parseFloat(FEV1["Z Score"]),
-      Perc: parseFloat(FEV1["% Pred-Pre"]) || NaN,
-      PostVol: parseFloat(FEV1["Vol-Change-Post"]) || NaN,
-      PostPerc: parseFloat(FEV1["% Change-Post"]) || NaN,
-      ZPost: parseFloat(FEV1["Z Score-Post"]) || NaN,
+      Pre: parseFloat(FEV1Raw.Pre) || null,
+      LLN: parseFloat(FEV1Raw.LLN) || null,
+      Z: parseFloat(FEV1Raw["Z Score"]) || null,
+      Perc: parseFloat(FEV1Raw["% Pred-Pre"]) || null,
+      PostVol: parseFloat(FEV1Raw["Vol-Change-Post"]) || null,
+      PostPerc: parseFloat(FEV1Raw["% Change-Post"]) || null,
+      ZPost: parseFloat(FEV1Raw["Z Score-Post"]) || null,
     };
+
     FVC = {
-      Pre: parseFloat(FVC.Pre),
-      LLN: parseFloat(FVC.LLN),
-      Z: parseFloat(FVC["Z Score"]),
-      Perc: parseFloat(FVC["% Pred-Pre"]) || NaN,
-      PostVol: parseFloat(FVC["Vol-Change-Post"]) || NaN,
-      PostPerc: parseFloat(FVC["% Change-Post"]) || NaN,
-      ZPost: parseFloat(FVC["Z Score-Post"]) || NaN,
+      Pre: parseFloat(FVCRaw.Pre),
+      LLN: parseFloat(FVCRaw.LLN),
+      Z: parseFloat(FVCRaw["Z Score"]),
+      Perc: parseFloat(FVCRaw["% Pred-Pre"]) || null,
+      PostVol: parseFloat(FVCRaw["Vol-Change-Post"]) || null,
+      PostPerc: parseFloat(FVCRaw["% Change-Post"]) || null,
+      ZPost: parseFloat(FVCRaw["Z Score-Post"]) || null,
     };
     FEVFVC = {
-      Pre: parseFloat(FEVFVC.Pre),
-      LLN: parseFloat(FEVFVC.LLN),
-      Z: parseFloat(FEVFVC["Z Score"]),
-      Perc: parseFloat(FEVFVC["% Pred-Pre"]) || NaN,
-      ZPost: parseFloat(FEVFVC["Z Score-Post"]) || NaN,
+      Pre: parseFloat(FEVFVCRaw.Pre),
+      LLN: parseFloat(FEVFVCRaw.LLN),
+      Z: parseFloat(FEVFVCRaw["Z Score"]),
+      Perc: parseFloat(FEVFVCRaw["% Pred-Pre"]) || null,
+      ZPost: parseFloat(FEVFVCRaw["Z Score-Post"]) || null,
     };
     FRC = {
-      Pre: parseFloat(FRC.Pre) || NaN,
-      LLN: parseFloat(FRC.LLN) || NaN,
-      ULN: parseFloat(FRC.ULN) || NaN,
-      Z: parseFloat(FRC["Z Score"]),
-      Perc: parseFloat(FRC["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(FRCRaw.Pre) || null,
+      LLN: parseFloat(FRCRaw.LLN) || null,
+      ULN: parseFloat(FRCRaw.ULN) || null,
+      Z: parseFloat(FRCRaw["Z Score"]),
+      Perc: parseFloat(FRCRaw["% Pred-Pre"]) || null,
     };
     TLC = {
-      Pre: parseFloat(TLC.Pre) || parseFloat(TLC2.Pre) || NaN,
-      LLN: parseFloat(TLC.LLN) || parseFloat(TLC2.LLN) || NaN,
-      ULN: parseFloat(TLC.ULN) || parseFloat(TLC2.ULN) || NaN,
-      Z: parseFloat(TLC["Z Score"]) || parseFloat(TLC2["Z Score"]) || NaN,
+      Pre: parseFloat(TLCRaw.Pre) || parseFloat(TLC2Raw.Pre) || null,
+      LLN: parseFloat(TLCRaw.LLN) || parseFloat(TLC2Raw.LLN) || null,
+      ULN: parseFloat(TLCRaw.ULN) || parseFloat(TLC2Raw.ULN) || null,
+      Z:
+        parseFloat(TLCRaw["Z Score"]) || parseFloat(TLC2Raw["Z Score"]) || null,
       Perc:
-        parseFloat(TLC["% Pred-Pre"]) || parseFloat(TLC2["% Pred-Pre"]) || NaN,
+        parseFloat(TLCRaw["% Pred-Pre"]) ||
+        parseFloat(TLC2Raw["% Pred-Pre"]) ||
+        null,
     };
     RV = {
-      Pre: parseFloat(RV.Pre) || parseFloat(RV2.Pre) || NaN,
-      LLN: parseFloat(RV.LLN) || parseFloat(RV2.LLN) || NaN,
-      ULN: parseFloat(RV.ULN) || parseFloat(RV2.ULN) || NaN,
-      Z: parseFloat(RV["Z Score"]) || parseFloat(RV2["Z Score"]) || NaN,
+      Pre: parseFloat(RVRaw.Pre) || parseFloat(RV2Raw.Pre) || null,
+      LLN: parseFloat(RVRaw.LLN) || parseFloat(RV2Raw.LLN) || null,
+      ULN: parseFloat(RVRaw.ULN) || parseFloat(RV2Raw.ULN) || null,
+      Z: parseFloat(RVRaw["Z Score"]) || parseFloat(RV2Raw["Z Score"]) || null,
       Perc:
-        parseFloat(RV["% Pred-Pre"]) || parseFloat(RV2["% Pred-Pre"]) || NaN,
+        parseFloat(RVRaw["% Pred-Pre"]) ||
+        parseFloat(RV2Raw["% Pred-Pre"]) ||
+        null,
     };
     RVTLC = {
-      Pre: parseFloat(RVTLC.Pre) || parseFloat(RVTLC2.Pre) || NaN,
-      LLN: parseFloat(RVTLC.LLN) || parseFloat(RVTLC2.LLN) || NaN,
-      ULN: parseFloat(RVTLC.ULN) || parseFloat(RVTLC2.ULN) || NaN,
-      Z: parseFloat(RVTLC["Z Score"]) || parseFloat(RVTLC2["Z Score"]) || NaN,
+      Pre: parseFloat(RVTLCRaw.Pre) || parseFloat(RVTLC2Raw.Pre) || null,
+      LLN: parseFloat(RVTLCRaw.LLN) || parseFloat(RVTLC2Raw.LLN) || null,
+      ULN: parseFloat(RVTLCRaw.ULN) || parseFloat(RVTLC2Raw.ULN) || null,
+      Z:
+        parseFloat(RVTLCRaw["Z Score"]) ||
+        parseFloat(RVTLC2Raw["Z Score"]) ||
+        null,
       Perc:
-        parseFloat(RVTLC["% Pred-Pre"]) ||
-        parseFloat(RVTLC2["% Pred-Pre"]) ||
-        NaN,
+        parseFloat(RVTLCRaw["% Pred-Pre"]) ||
+        parseFloat(RVTLC2Raw["% Pred-Pre"]) ||
+        null,
     };
     DLCOunc = {
-      Pre: parseFloat(DLCOunc.Pre) || NaN,
-      LLN: parseFloat(DLCOunc.LLN) || NaN,
-      ULN: parseFloat(DLCOunc.ULN) || NaN,
-      Z: parseFloat(DLCOunc["Z Score"]),
-      Perc: parseFloat(DLCOunc["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(DLCOuncRaw.Pre) || null,
+      LLN: parseFloat(DLCOuncRaw.LLN) || null,
+      ULN: parseFloat(DLCOuncRaw.ULN) || null,
+      Z: parseFloat(DLCOuncRaw["Z Score"]),
+      Perc: parseFloat(DLCOuncRaw["% Pred-Pre"]) || null,
     };
     DLCOcor = {
-      Pre: parseFloat(DLCOcor.Pre) || NaN,
-      LLN: parseFloat(DLCOcor.LLN) || NaN,
-      ULN: parseFloat(DLCOcor.ULN) || NaN,
-      Z: parseFloat(DLCOcor["Z Score"]),
-      Perc: parseFloat(DLCOcor["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(DLCOcorRaw.Pre) || null,
+      LLN: parseFloat(DLCOcorRaw.LLN) || null,
+      ULN: parseFloat(DLCOcorRaw.ULN) || null,
+      Z: parseFloat(DLCOcorRaw["Z Score"]),
+      Perc: parseFloat(DLCOcorRaw["% Pred-Pre"]) || null,
     };
     VA = {
-      Pre: parseFloat(VA.Pre) || NaN,
-      LLN: parseFloat(VA.LLN) || NaN,
-      Z: parseFloat(VA["Z Score"]),
-      Perc: parseFloat(VA["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(VARaw.Pre) || null,
+      LLN: parseFloat(VARaw.LLN) || null,
+      Z: parseFloat(VARaw["Z Score"]),
+      Perc: parseFloat(VARaw["% Pred-Pre"]) || null,
     };
     DLVA = {
-      Pre: parseFloat(DLVA.Pre) || NaN,
-      LLN: parseFloat(DLVA.LLN) || NaN,
-      ULN: parseFloat(DLVA.ULN) || NaN,
-      Z: parseFloat(DLVA["Z Score"]),
-      Perc: parseFloat(DLVA["% Pred-Pre"]) || NaN,
+      Pre: parseFloat(DLVARaw.Pre) || null,
+      LLN: parseFloat(DLVARaw.LLN) || null,
+      ULN: parseFloat(DLVARaw.ULN) || null,
+      Z: parseFloat(DLVARaw["Z Score"]),
+      Perc: parseFloat(DLVARaw["% Pred-Pre"]) || null,
     };
-    // console.log(TLC);
     checkData();
   }
 
-  let effort = qualityPrompt.AE;
+  let effort = qualityPrompt.default;
   let flow = flowPrompt.normal;
   let signature = "";
 
@@ -191,6 +224,7 @@
     volume.result = checkVolume(
       TLC,
       FEV1,
+      FVC,
       RVTLC,
       volume,
       volumeSimple,
@@ -208,42 +242,34 @@
       diffusing.result = checkDLCO(DLCOunc, VA, DLVA, diffusing);
     }
 
-    if (possibleMixSum.summary || mixedSum.summary) {
-      volume.summary = volume.default;
-      spirometry.summary = spirometry.default;
-    }
+    // if (possibleMixSum.summary || mixedSum.summary) {
+    //   volume.summary = volume.default;
+    //   spirometry.summary = spirometry.default;
+    // }
   }
 
   function clearData() {
     inputText = "";
-    effort = qualityPrompt.AE;
+    effort = qualityPrompt.default;
     flow = flowPrompt.normal;
     spirometry.result = "";
-    spirometry.summary = "";
+    spirometry.summary = null;
     possibleMixSum.result = "";
-    possibleMixSum.summary = "";
+    possibleMixSum.summary = null;
     mixedSum.result = "";
-    mixedSum.summary = "";
+    mixedSum.summary = null;
     bronch.result = "";
-    bronch.summary = "";
+    bronch.summary = null;
     volume.result = "";
-    volume.summary = "";
+    volume.summary = null;
     diffusing.result = "";
-    diffusing.summary = "";
+    diffusing.summary = null;
     diffusingCorrect.result = "";
     airTrapping.result = "";
-    airTrapping.summary = "";
-    conclusion = "";
+    airTrapping.summary = null;
   }
 
   let result;
-  $: conclusion = `${effort == qualityPrompt.AE ? "" : effort} ${
-    spirometry.summary
-  } ${possibleMixSum.summary} ${mixedSum.summary} ${volume.summary} ${
-    airTrapping.summary
-  } ${bronch.summary} ${flow == flowPrompt.normal ? "" : flow} ${
-    diffusing.summary
-  }`;
 </script>
 
 <div class="grid lg:grid-cols-2 gap-4">
@@ -270,10 +296,13 @@
       {volume}
       {airTrapping}
       {DLCOunc}
+      {possibleMixSum}
+      {mixedSum}
+      {flowPrompt}
+      {Grade}
       {diffusing}
       {diffusingCorrect}
       {signature}
-      {conclusion}
     />
   </div>
   <div class="lg:order-6 lg:col-span-2 order-6">

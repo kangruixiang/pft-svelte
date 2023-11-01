@@ -20,9 +20,9 @@ function checkSeverity(checkVariable: number, prompt: Prompt, sumPrompt: Prompt)
   return prompt.mild
 }
 
-export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Prompt, volumeSimple: Prompt, volumeComplex: Prompt, spirometry: Prompt) {
+export function checkVolume(TLC: Volume, FEV1: Volume, FVC: Volume, RVTLC: Volume, volume: Prompt, volumeSimple: Prompt, volumeComplex: Prompt, spirometry: Prompt) {
 
-  const { hyper, large, normal, largeSum, hyperSum } = volume
+  const { hyper, large, normal, largeSum, hyperSum, simpleRestrict, complexRestrict } = volume
 
   if (!TLC.Pre) {
     return
@@ -44,21 +44,29 @@ export function checkVolume(TLC: Volume, FEV1: Volume, RVTLC: Volume, volume: Pr
     return normal;
   }
 
-  spirometry.summary = spirometry.default
+  if (FVC.Pre >= FVC.LLN) {
+    volume.summary = volume.normal
+    return normal;
+  }
+
+  // spirometry.summary = spirometry.default
 
   if (FEV1.ZPost) {
     if (RVTLC.Pre >= RVTLC.ULN) {
-      return checkSeverity(FEV1.ZPost, volumeComplex, volume)
+      checkSeverity(FEV1.ZPost, volumeComplex, volume)
+      return complexRestrict
     }
-    return checkSeverity(FEV1.ZPost, volumeSimple, volume)
+    volume.summary = simpleRestrict
+    return simpleRestrict
   }
 
   if (RVTLC.Pre >= RVTLC.ULN) {
-    return checkSeverity(FEV1.Z, volumeComplex, volume)
+    checkSeverity(FEV1.Z, volumeComplex, volume)
+    return complexRestrict
   }
 
-  return checkSeverity(FEV1.Z, volumeSimple, volume)
-
+  volume.summary = simpleRestrict
+  return simpleRestrict
 }
 
 export function checkTrapping(RVTLC: Volume, airTrapping: Prompt) {
@@ -104,7 +112,7 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
   }
 
   if (DLCO.Pre >= DLCO.LLN) {
-    diffusing.summary = diffusing.default
+    diffusing.summary = normal
     return normal
   }
 
@@ -122,7 +130,7 @@ export function checkDLCO(DLCO: Volume, VA: Volume, DLVA: Volume, diffusing: Pro
 
 export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: Volume, RVTLC: Volume, spirometry: Prompt, spirometryRestricted: Prompt, mixedSum: Prompt, possibleMixSum: Prompt, volumeSimple: Prompt, volumeComplex: Prompt) {
 
-  const { normal, restrictedMaybe, nonspecific, restricted, nonspecificSum } = spirometry
+  const { normal, restrictedMaybe, nonspecific, restricted, nonspecificSum, PRISM, dysanapsis } = spirometry
 
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
@@ -135,7 +143,7 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
 
     // Decreased FVC, needs lung volume
     if (!TLC.Pre) {
-      spirometry.summary = restrictedMaybe
+      spirometry.summary = PRISM
       return restrictedMaybe;
     }
 
@@ -144,6 +152,7 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
       spirometry.summary = nonspecificSum
       return nonspecific;
     }
+
 
     if (FEV1.ZPost) {
       if (RVTLC.Pre >= RVTLC.ULN) {
@@ -158,10 +167,19 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
 
     return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
 
+  }
+  // obstructive disease
 
+  if (FEV1.Pre >= FEV1.LLN && FVC.Pre >= FVC.LLN) {
+    spirometry.summary = dysanapsis
+    return dysanapsis
   }
 
+
   if (!TLC.Pre) {
+    if (FVC.Pre >= FVC.LLN) {
+      return checkSeverity(FEV1.ZPost, spirometry, spirometry)
+    }
     return checkSeverity(FEV1.ZPost, possibleMixSum, possibleMixSum)
   }
 
@@ -180,7 +198,6 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
   // }
 
 
-  // obstructive disease
   if (FEV1.ZPost) {
     return checkSeverity(FEV1.ZPost, spirometry, spirometry)
   }
