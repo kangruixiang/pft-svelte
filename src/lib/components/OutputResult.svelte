@@ -78,7 +78,7 @@
       {flow}<br />
     {/if}
     {#if volume.summary}
-      {volume.summary}{#if airTrapping.summary}
+      {volume.summary} {#if airTrapping.summary}
       {airTrapping.summary}
     {/if}<br />
     {/if}
