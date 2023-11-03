@@ -64,10 +64,9 @@
       {Grade.Statement} <br />
     {/if}
     {#if spirometry.summary}
-      {spirometry.summary}<br />
-    {/if}
-    {#if flow !== flowPrompt.normal}
-      {flow}<br />
+      {spirometry.summary} {#if bronch.summary}
+      {bronch.summary}
+    {/if}<br />
     {/if}
     {#if possibleMixSum.summary}
       {possibleMixSum.summary}<br />
@@ -75,14 +74,13 @@
     {#if mixedSum.summary}
       {mixedSum.summary}<br />
     {/if}
+{#if flow !== flowPrompt.normal}
+      {flow}<br />
+    {/if}
     {#if volume.summary}
-      {volume.summary}<br />
-    {/if}
-    {#if airTrapping.summary}
-      {airTrapping.summary}<br />
-    {/if}
-    {#if bronch.summary}
-      {bronch.summary}<br />
+      {volume.summary}{#if airTrapping.summary}
+      {airTrapping.summary}
+    {/if}<br />
     {/if}
     {#if diffusing.summary}
       {diffusing.summary}<br />
