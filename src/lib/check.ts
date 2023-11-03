@@ -44,10 +44,10 @@ export function checkVolume(TLC: Volume, FEV1: Volume, FVC: Volume, RVTLC: Volum
     return normal;
   }
 
-  if (FVC.Pre >= FVC.LLN) {
-    volume.summary = volume.normal
-    return normal;
-  }
+  //if (FVC.Pre >= FVC.LLN) {
+    //volume.summary = volume.normal
+    //return normal;
+  //}
 
   spirometry.summary = null
 
