@@ -49,14 +49,14 @@ export function checkVolume(TLC: Volume, FEV1: Volume, FVC: Volume, RVTLC: Volum
     return normal;
   }
 
-  // spirometry.summary = spirometry.default
+  spirometry.summary = null
 
   if (FEV1.ZPost) {
     if (RVTLC.Pre >= RVTLC.ULN) {
       checkSeverity(FEV1.ZPost, volumeComplex, volume)
       return complexRestrict
     }
-    volume.summary = simpleRestrict
+    checkSeverity(FEV1.ZPost, volumeSimple, volume)
     return simpleRestrict
   }
 
@@ -65,7 +65,7 @@ export function checkVolume(TLC: Volume, FEV1: Volume, FVC: Volume, RVTLC: Volum
     return complexRestrict
   }
 
-  volume.summary = simpleRestrict
+  checkSeverity(FEV1.Z, volumeSimple, volume)
   return simpleRestrict
 }
 

@@ -242,10 +242,10 @@
       diffusing.result = checkDLCO(DLCOunc, VA, DLVA, diffusing);
     }
 
-    // if (possibleMixSum.summary || mixedSum.summary) {
-    //   volume.summary = volume.default;
-    //   spirometry.summary = spirometry.default;
-    // }
+    if (possibleMixSum.summary || mixedSum.summary) {
+      volume.summary = null;
+      spirometry.summary = null;
+    }
   }
 
   function clearData() {

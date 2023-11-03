@@ -32,7 +32,7 @@ export const spirometry = {
   severe: "Severe obstructive defect (FEV1 Z-score less than -4).",
   restrictedMaybe:
     "Possible restriction or non-specific pattern is present (lung volumes needed to assess).",
-  nonspecific: "Non-specific pattern is seen (FEV1 and FVC reduced. Normal FEV1/FVC ratio and TLC).",
+  nonspecific: "Non-specific pattern is seen (FEV1, FVC reduced; normal FEV1/FVC ratio and TLC).",
   restricted:
     "Restrictive lung defect based on lung volumes.",
   mixed: "Possible mixed obstruction and restriction is present (lung volumes needed to assess).",
@@ -43,7 +43,7 @@ export const spirometry = {
   mixedSum: "Possible mixed obstructive and restrictive ventilatory impairment is present (lung volumes needed to assess).",
   nonspecificSum: "Non-specific pattern is seen.",
   PRISM: "Preserved Ratio Impaired Spirometry (PRISM) (lung volumes not available).",
-  dysanapsis: "Dysanapsis (FEV1 normal, FVC normal/elevated, FEV1/FVC ratio reduced).",
+  dysanapsis: "Dysanapsis (normal FEV1; normal or elevated FVC; reduced FEV1/FVC ratio).",
   result: "",
   summary: null,
 };
@@ -51,34 +51,34 @@ export const spirometryRestricted = {
   mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher) based on lung volumes.",
   moderate: "Moderate restrictive defect (FEV1 Z-score -2.5 to -4) based on lung volumes.",
   severe: "Severe restrictive defect (FEV1 Z-score less than -4) based on lung volumes.",
-  mildSum: "Mild restrictive defect.",
-  moderateSum: "Moderate restrictive defect.",
-  severeSum: "Severe restrictive defect.",
+  mildSum: "Mild restrictive ventilatory impairment.",
+  moderateSum: "Moderate restrictive ventilatory impairment.",
+  severeSum: "Severe restrictive ventilatory impairment.",
 };
 export const possibleMixSum = {
   mild: "Mild obstructive defect (FEV1 Z-score -2.5 or higher). Consider lung volume studies to rule out restrictive disease.",
   moderate: "Moderate obstructive defect (FEV1 Z-score -2.5 to -4). Consider lung volume studies to rule out restrictive disease.",
   severe: "Severe obstructive defect (FEV1 Z-score less than -4). Consider lung volume studies to rule out restrictive disease.",
-  mildSum: "Mild obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
-  moderateSum: "Moderate obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
-  severeSum: "Severe obstructive defect is present. Consider lung volume studies to rule out restrictive disease.",
+  mildSum: "Mild obstructive ventilatory impairment is present. Consider lung volume studies to rule out restrictive disease.",
+  moderateSum: "Moderate obstructive ventilatory impairment is present. Consider lung volume studies to rule out restrictive disease.",
+  severeSum: "Severe obstructive ventilatory impairment is present. Consider lung volume studies to rule out restrictive disease.",
   result: "",
   summary: null,
 }
 export const mixedSum = {
-  mild: "Mix of mild obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score -2.5 or higher).",
-  moderate: "Mix of moderate obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score -2.5 to -4).",
-  severe: "Mix of severe obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio, FEV1 Z-score less than -4).",
-  mildSum: "A mix of mild obstructive and restrictive defect is present.",
-  moderateSum: "A mix of moderate obstructive and restrictive defect is present.",
-  severeSum: "A mix of severe obstructive and restrictive defect is present.",
+  mild: "Mix of mild obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio; FEV1 Z-score -2.5 or higher).",
+  moderate: "Mix of moderate obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio; FEV1 Z-score -2.5 to -4).",
+  severe: "Mix of severe obstructive and restrictive defect (reduced TLC and FEV1/FVC ratio; FEV1 Z-score less than -4).",
+  mildSum: "A mix of mild obstructive and restrictive ventilatory impairment is present.",
+  moderateSum: "A mix of moderate obstructive and restrictive ventilatory impairment is present.",
+  severeSum: "A mix of severe obstructive and restrictive ventilatory impairment is present.",
   result: "",
   summary: null,
 }
 export const bronch = {
   default: "",
   significant:
-    "There is a significant response to bronchodilator inhalation (More than 10% increase in percent predicted FEV1 or FVC).",
+    "There is a significant response to bronchodilator inhalation (more than 10% increase in percent predicted FEV1 or FVC).",
   nonSignificant:
     "There is no significant response to bronchodilator inhalation; however, this does not preclude benefit from use of a bronchodilator.",
   borderline:
@@ -99,32 +99,34 @@ export const volume = {
   summary: null,
   normal: "Normal lung volumes.",
   highTLC: "Increased TLC indicates hyperinflation.",
-  large: "Large lungs (elevated TLC, FRC, RV and normal FRC/TLC, RV/TLC).",
+  large: "Large lungs (elevated TLC, FRC, and RV; normal FRC/TLC and RV/TLC).",
   hyper: "Hyperinflation is present (elevated TLC or FRC/TLC).",
   largeSum: "Large lung volumes.",
   hyperSum: "Hyperinflation is present.",
-  simpleRestrict: "Simple restriction. (Reduced TLC, FRC, RV and Normal FRC/TLC, RV/TLC).",
-  complexRestrict: "Complex restriction. (Reduced TLC, FRC and Elevated RV/TLC. RV normal/elevated).",
+  simpleRestrict: "Simple restriction (reduced TLC, FRC, and RV; normal FRC/TLC and RV/TLC).",
+  complexRestrict: "Complex restriction (reduced TLC and FRC; elevated RV/TLC; normal or elevated RV).",
+  simpleRestrictSum: "Simple restrictive ventilatory defect.",
+  complexRestrictSum: "Complex restrictive ventilatory defect.",
   mixed: "Mixed obstruction and restriction."
 }
 
 export const volumeSimple = {
-  mild: "Mild simple restrictive defect (low TLC and normal RV/TLC, and FEV1 Z-score -2.5 or higher).",
-  moderate: "Moderate simple restrictive defect (low TLC and normal RV/TLC, and FEV1 Z-score -2.5 to -4).",
-  severe: "Severe simple restrictive defect (low TLC and normal RV/TLC, and FEV1 Z-score less than -4).",
+  mild: "Mild simple restrictive defect (reduced TLC and normal RV/TLC; FEV1 Z-score -2.5 or higher).",
+  moderate: "Moderate simple restrictive defect (reduced TLC and normal RV/TLC; FEV1 Z-score -2.5 to -4).",
+  severe: "Severe simple restrictive defect (reduced TLC and normal RV/TLC; FEV1 Z-score less than -4).",
   mixed: "Mixed obstruction and restriction.",
-  mildSum: "Mild simple restrictive defect.",
-  moderateSum: "Moderate simple restrictive defect.",
-  severeSum: "Severe simple restrictive defect.",
+  mildSum: "Mild simple restrictive impairment.",
+  moderateSum: "Moderate simple restrictive impairment.",
+  severeSum: "Severe simple restrictive impairment.",
 };
 export const volumeComplex = {
-  mild: "Mild complex restrictive defect (low TLC and elevated RV/TLC, and FEV1 Z-score -2.5 or higher).",
-  moderate: "Moderate complex restrictive defect (low TLC and elevated RV/TLC, and FEV1 Z-score -2.5 to -4).",
-  severe: "Severe complex restrictive defect (low TLC and elevated RV/TLC, and FEV1 Z-score less than -4).",
+  mild: "Mild complex restrictive defect (reduced TLC and elevated RV/TLC; FEV1 Z-score -2.5 or higher).",
+  moderate: "Moderate complex restrictive defect (reduced TLC and elevated RV/TLC; FEV1 Z-score -2.5 to -4).",
+  severe: "Severe complex restrictive defect (reduced TLC and elevated RV/TLC; FEV1 Z-score less than -4).",
   mixed: "Mixed obstruction and restriction.",
-  mildSum: "Mild complex restrictive defect.",
-  moderateSum: "Moderate complex restrictive defect.",
-  severeSum: "Severe complex restrictive defect.",
+  mildSum: "Mild complex restrictive impairment.",
+  moderateSum: "Moderate complex restrictive impairment.",
+  severeSum: "Severe complex restrictive impairment.",
 };
 export const airTrapping = {
   default: "",
@@ -143,9 +145,9 @@ export const diffusing = {
   normalVA: "Reduced DLCO with normal VA. May be seen with pulmonary hypertension, pulmonary embolism, vasculitis, emphysema with preserved lung volumes, or anemia.",
   normalKCO: "Reduced DLCO, reduced VA, with low/normal DLCO/VA (KCO). May be seen with interstitial lung disease or emphysema.",
   highKCO: "Reduced DLCO, reduced VA, with high DLCO/VA (KCO). May be seen with submaximal effort, neuromuscular dysfunction, or after pneumonectomy.",
-  mildSum: "Mild reduction in diffusing capacity.",
-  moderateSum: "Moderate reduction in diffusing capacity.",
-  severeSum: "Severe reduction in diffusing capacity.",
+  mildSum: "A mild gas transfer impairment is present.",
+  moderateSum: "A moderate gas transfer impairment is present.",
+  severeSum: "A severe gas transfer impairment is present.",
   highSum: "Abnormally high diffusing capacity.",
   result: "",
   summary: null,

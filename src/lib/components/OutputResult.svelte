@@ -60,6 +60,9 @@
 
   <p>
     CONCLUSION: <br />
+    {#if Grade}
+      {Grade.Statement} <br />
+    {/if}
     {#if spirometry.summary}
       {spirometry.summary}<br />
     {/if}
