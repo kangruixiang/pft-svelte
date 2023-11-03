@@ -135,7 +135,15 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
   // no obstruction
   if (FEVFVC.Pre >= FEVFVC.LLN) {
 
-    // normal FVC and normal spirometry
+    // normal FVC and low lung volumes 
+    if (FVC.Pre >= FVC.LLN && TLC.Pre < TLC.LLN) {
+      if (FEV1.ZPost) {
+      return checkSeverity(FEV1.ZPost, spirometryRestricted, spirometry)
+    }
+    return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
+  
+    }
+    
     if (FVC.Pre > FVC.LLN) {
       spirometry.summary = normal
       return normal;
