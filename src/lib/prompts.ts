@@ -43,7 +43,7 @@ export const spirometry = {
   mixedSum: "Possible mixed obstructive and restrictive ventilatory impairment is present (lung volumes needed to assess).",
   nonspecificSum: "Non-specific pattern is seen.",
   PRISM: "Preserved Ratio Impaired Spirometry (PRISM) (lung volumes not available).",
-  dysanapsis: "Dysanapsis (normal FEV1; normal or elevated FVC; reduced FEV1/FVC ratio).",
+  dysanapsis: "Dysanapsis (normal FEV1; normal or elevated FVC; reduced FEV1/FVC ratio).", // remove second part for lung volumes
   result: "",
   summary: null,
 };
@@ -55,7 +55,7 @@ export const spirometryRestricted = {
   moderateSum: "Moderate restrictive ventilatory impairment.",
   severeSum: "Severe restrictive ventilatory impairment.",
 };
-export const possibleMixSum = {
+export const possibleMixSum = { // maybe not add consider lung volumes part
   mild: "Mild obstructive defect (FEV1 Z-score -2.5 or higher). Consider lung volume studies to rule out restrictive disease.",
   moderate: "Moderate obstructive defect (FEV1 Z-score -2.5 to -4). Consider lung volume studies to rule out restrictive disease.",
   severe: "Severe obstructive defect (FEV1 Z-score less than -4). Consider lung volume studies to rule out restrictive disease.",

@@ -6,7 +6,7 @@ export function resetPrompt(prompt: Prompt) {
 }
 
 function checkSeverity(checkVariable: number, prompt: Prompt, sumPrompt: Prompt) {
-  if (checkVariable <= -4.1) {
+  if (checkVariable <= -4.1) { // make less than 4
     sumPrompt.summary = prompt.severeSum
     return prompt.severe
   }
@@ -45,8 +45,8 @@ export function checkVolume(TLC: Volume, FEV1: Volume, FVC: Volume, RVTLC: Volum
   }
 
   //if (FVC.Pre >= FVC.LLN) {
-    //volume.summary = volume.normal
-    //return normal;
+  //volume.summary = volume.normal
+  //return normal;
   //}
 
   spirometry.summary = null
@@ -138,12 +138,12 @@ export function checkSpirometry(FEVFVC: Volume, FEV1: Volume, FVC: Volume, TLC: 
     // normal FVC and low lung volumes 
     if (FVC.Pre >= FVC.LLN && TLC.Pre < TLC.LLN) {
       if (FEV1.ZPost) {
-      return checkSeverity(FEV1.ZPost, spirometryRestricted, spirometry)
+        return checkSeverity(FEV1.ZPost, spirometryRestricted, spirometry)
+      }
+      return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
+
     }
-    return checkSeverity(FEV1.Z, spirometryRestricted, spirometry)
-  
-    }
-    
+
     if (FVC.Pre > FVC.LLN) {
       spirometry.summary = normal
       return normal;
