@@ -1,22 +1,24 @@
 <script>
-  import { greatestIndex } from "d3";
-
-  export let result,
-    effort,
-    spirometry,
-    bronch,
-    flow,
-    TLC,
-    Grade,
-    volume,
-    airTrapping,
-    DLCOunc,
-    diffusing,
-    diffusingCorrect,
-    signature,
-    possibleMixSum,
-    mixedSum,
-    flowPrompt;
+  import { data } from "$lib/check.svelte";
+  let { result = $bindable(), signature, flow, effort } = $props();
+  // let {
+  //   result,
+  //   effort,
+  //   spirometry,
+  //   bronch,
+  //   flow,
+  //   TLC,
+  //   Grade,
+  //   volume,
+  //   airTrapping,
+  //   DLCOunc,
+  //   diffusing,
+  //   diffusingCorrect,
+  //   signature,
+  //   possibleMixSum,
+  //   mixedSum,
+  //   flowPrompt,
+  // } = $props();
 </script>
 
 <div
@@ -25,66 +27,60 @@
 >
   <p>
     EFFORT: <br />
-    {#if Grade}
-      {Grade.Statement} <br />
+    {#if data.spirometryResult}
+      {data.Grade.Statement} <br />
     {/if}
     {effort}
   </p>
+
   <p>
     SPIROMETRY: <br />
-    {spirometry.result} <br />
-    {bronch.result}
+    {data.spirometryResult} <br />
+    {data.bronchResult}
   </p>
   <p>
     FLOW VOLUME LOOPS: <br />
     {flow}
   </p>
-  {#if TLC}
-    {#if TLC.Pre}
-      <p>
-        LUNG VOLUMES: <br />
-        {volume.result} <br />
-        {airTrapping.result}
-      </p>
-    {/if}
+  {#if data.volumeResult}
+    <p>
+      LUNG VOLUMES: <br />
+      {data.volumeResult} <br />
+      {data.airTrappingResult}
+    </p>
   {/if}
-  {#if DLCOunc}
-    {#if DLCOunc.Pre}
-      <p>
-        DIFFUSING CAPACITY: <br />
-        {diffusingCorrect.result}<br />
-        {diffusing.result}
-      </p>
-    {/if}
+
+  {#if data.diffusingResult}
+    <p>
+      DIFFUSING CAPACITY: <br />
+      {data.diffusingCorrectResult}<br />
+      {data.diffusingResult}
+    </p>
   {/if}
 
   <p>
     CONCLUSION: <br />
-    {#if Grade}
-      {Grade.Statement} <br />
+    {#if data.spirometryResult}
+      {data.Grade.Statement} <br />
     {/if}
-    {#if spirometry.summary}
-      {spirometry.summary} {#if bronch.summary}
-      {bronch.summary}
+    {#if data.spirometrySum}
+      {data.spirometrySum}
+    {/if}
+    {#if data.volumeSum}
+      {data.volumeSum}
+    {/if}
+    {#if data.diffusingSum}
+      {data.diffusingSum}<br />
+    {/if}
+    {#if data.bronchSum}
+      {data.bronchSum}
     {/if}<br />
-    {/if}
-    {#if possibleMixSum.summary}
+    <!-- {#if possibleMixSum.summary}
       {possibleMixSum.summary}<br />
     {/if}
     {#if mixedSum.summary}
       {mixedSum.summary}<br />
-    {/if}
-{#if flow !== flowPrompt.normal}
-      {flow}<br />
-    {/if}
-    {#if volume.summary}
-      {volume.summary} {#if airTrapping.summary}
-      {airTrapping.summary}
-    {/if}<br />
-    {/if}
-    {#if diffusing.summary}
-      {diffusing.summary}<br />
-    {/if}
+    {/if} -->
   </p>
 
   <p>

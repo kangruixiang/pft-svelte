@@ -15,3 +15,13 @@ export interface Prompt {
   [key: string]: string;
 }
 
+export type DataType = {
+  formattedData: DSVRowArray.DSVRowArray
+}
+
+
+export type Grade = {
+  Pre: string | null;
+  Post: string | null;
+  Statement: string | null;
+}

@@ -1,5 +1,5 @@
 <script>
-  export let signature;
+  let { signature = $bindable() } = $props();
 </script>
 
 <div>
