@@ -1,24 +1,6 @@
 <script>
   import { data } from "$lib/check.svelte";
   let { result = $bindable(), signature, flow, effort } = $props();
-  // let {
-  //   result,
-  //   effort,
-  //   spirometry,
-  //   bronch,
-  //   flow,
-  //   TLC,
-  //   Grade,
-  //   volume,
-  //   airTrapping,
-  //   DLCOunc,
-  //   diffusing,
-  //   diffusingCorrect,
-  //   signature,
-  //   possibleMixSum,
-  //   mixedSum,
-  //   flowPrompt,
-  // } = $props();
 </script>
 
 <div
@@ -70,17 +52,14 @@
       {data.volumeSum}
     {/if}
     {#if data.diffusingSum}
-      {data.diffusingSum}<br />
+      {data.diffusingSum}
+    {:else}
+      .
     {/if}
+    <br />
     {#if data.bronchSum}
       {data.bronchSum}
-    {/if}<br />
-    <!-- {#if possibleMixSum.summary}
-      {possibleMixSum.summary}<br />
     {/if}
-    {#if mixedSum.summary}
-      {mixedSum.summary}<br />
-    {/if} -->
   </p>
 
   <p>

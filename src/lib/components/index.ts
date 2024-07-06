@@ -1,4 +1,3 @@
-export { default as CopyClear } from './CopyClear.svelte'
 export { default as InitialBox } from './InitialBox.svelte'
 export { default as InputData } from './InputData.svelte'
 export { default as OutputResult } from './OutputResult.svelte'

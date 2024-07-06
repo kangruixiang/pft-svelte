@@ -206,7 +206,7 @@ class Data {
 
   checkSeverity(checkVariable: number, prompt: Prompt) {
 
-    if (checkVariable <= -4.1) {
+    if (checkVariable <= -4.0) {
       return { severity: prompt.severe, summary: prompt.severeSum }
     }
 
@@ -263,20 +263,20 @@ class Data {
           return;
         }
 
-        // low lung volume, nonspecific
+        // low FVC, nonspecific
         this.spirometryResult = nonspecific
         this.spirometrySum = nonspecificSum
         return;
       }
 
-      // low lung volume, normal FVC 
-      if (this.FVC.Pre >= this.FVC.LLN && this.TLC.Pre < this.TLC.LLN) {
-        // restriction
-        const result = this.checkSeverity(this.FEV1.Z, spirometryRestricted)
-        this.spirometryResult = result.severity
-        this.spirometrySum = result.summary
-        return
-      }
+      // low lung volume, normal FVC: only restriction. Does not distinguish simple vs complex
+      // if (this.FVC.Pre >= this.FVC.LLN && this.TLC.Pre < this.TLC.LLN) {
+      //   // restriction
+      //   const result = this.checkSeverity(this.FEV1.Z, spirometryRestricted)
+      //   this.spirometryResult = result.severity
+      //   this.spirometrySum = result.summary
+      //   return
+      // }
 
       // low lung volume, low FVC
       // complex restriction
@@ -296,32 +296,23 @@ class Data {
 
     // obstructive disease
 
-    // low ratio, no lung volume, normal FEV = dysanapsis
-    if (this.FEV1.Pre >= this.FEV1.LLN) {
-      this.spirometryResult = dysanapsis
-      this.spirometrySum = dysanapsisSum
-      return
-    }
+    // low ratio, no lung volume or normal lung volumes 
+    if (!this.TLC.Pre || this.TLC.Pre > this.TLC.LLN!) {
+      // normal FEV = dysanapsis
+      if (this.FEV1.Pre >= this.FEV1.LLN) {
+        this.spirometryResult = dysanapsis
+        this.spirometrySum = dysanapsisSum
+        return
+      }
 
-    // low ratio, no lung volume, low FEV
-    if (!this.TLC.Pre) {
-      // obstructive
+      // low FEV = obstructive
       const result = this.checkSeverity(this.FEV1.Z, spirometry)
       this.spirometryResult = result.severity
       this.spirometrySum = result.summary
       return
     }
 
-    // low ratio, normal volume 
-    if (this.TLC.Pre > this.TLC.LLN!) {
-      // just obstruction
-      const result = this.checkSeverity(this.FEV1.Z, spirometry)
-      this.spirometryResult = result.severity
-      this.spirometrySum = result.summary
-      return
-    }
-
-    // low ratio, low volume, low FEV = mixed obstruction/restriction
+    // low ratio, low volume = mixed obstruction/restriction
     const result = this.checkSeverity(this.FEV1.Z, mixedSum)
     this.spirometryResult = result.severity
     this.spirometrySum = result.summary
@@ -343,6 +334,8 @@ class Data {
 
     // check to make sure variables exist
     if (!this.TLC.Pre || !this.TLC.ULN || !this.RVTLC.Perc || !this.RVTLC.ULN || !this.TLC.LLN) {
+      this.volumeResult = ""
+      this.volumeSum = ""
       return
     }
 
@@ -390,17 +383,21 @@ class Data {
 
   checkTrapping() {
 
+    // no RVTLC variable
     if (!this.RVTLC.Pre || !this.RVTLC.ULN) {
+      this.airTrappingResult = ""
+      this.airTrappingSum = ""
       return
     }
 
+    // air trapping is present
     if (this.RVTLC.Pre > this.RVTLC.ULN) {
       this.airTrappingResult = airTrapping.trapping
       this.airTrappingSum = airTrapping.trappingSum
       return
     }
 
-    this.airTrappingResult = airTrapping.default
+    this.airTrappingResult = ""
     return
   }
 
@@ -408,23 +405,28 @@ class Data {
 
     const { significant, borderline, nonSignificant, significantSum, nonSignificantSum, borderlineSum } = bronch
 
+    // no post bronchodilator volume
     if (!this.FEV1.PostVol) {
-      this.bronchResult = bronch.default
+      this.bronchResult = ""
+      this.bronchSum = ""
       return
     }
 
+    // significant bronchodilator response
     if (this.FEV1.PostPerc! >= 10 || this.FVC.PostPerc! >= 10) {
       this.bronchResult = significant
       this.bronchSum = significantSum
       return
     }
 
+    // borderline bronchodilator response
     if (this.FEV1.PostVol > 9 || this.FVC.PostPerc! > 9) {
       this.bronchResult = borderline
       this.bronchSum = borderlineSum
       return
     }
 
+    // nonsignificant bronchodilator response
     this.bronchResult = nonSignificant
     this.bronchSum = nonSignificantSum
     return
@@ -434,22 +436,28 @@ class Data {
 
     const { high, normal, normalVA, highSum, highKCO, normalKCO, normalSum } = diffusing
 
+    // no DLCO
     if (!DLCO.Pre || !DLCO.ULN) {
+      this.diffusingResult = ""
+      this.diffusingSum = ""
       return
     }
 
+    // elevated DLCO
     if (DLCO.Pre > DLCO.ULN) {
       this.diffusingResult = high
       this.diffusingSum = highSum
       return
     }
 
+    // normal DLCO
     if (DLCO.Pre >= DLCO.LLN) {
       this.diffusingResult = normal
       this.diffusingSum = normalSum
       return
     }
 
+    // low DLCO, normal VA
     if (this.VA.Pre >= this.VA.LLN) {
 
       const result = this.checkSeverity(DLCO.Z, diffusing)
@@ -458,15 +466,16 @@ class Data {
       return
     }
 
+    // low DLCO, elevated DLVA
     if (this.DLVA.Pre > this.DLVA.ULN) {
       const result = this.checkSeverity(DLCO.Z, diffusing)
-      this.diffusingResult = result.severity + " " + normalVA
+      this.diffusingResult = result.severity + " " + highKCO
       this.diffusingSum = result.summary
       return
     }
 
     const result = this.checkSeverity(DLCO.Z, diffusing)
-    this.diffusingResult = result.severity + " " + normalVA
+    this.diffusingResult = result.severity + " " + normalKCO
     this.diffusingSum = result.summary
     return
   }
@@ -505,9 +514,6 @@ class Data {
   }
 
   clearData() {
-    // inputText = "";
-    // effort = qualityPrompt.default;
-    // flow = flowPrompt.normal;
     this.spirometryResult = "";
     this.spirometrySum = "";
     // possibleMixSum.result = "";
@@ -530,11 +536,6 @@ class Data {
 export const data = new Data()
 
 
-
-function resetPrompt(prompt: Prompt) {
-  prompt.result = prompt.default
-  prompt.summary = prompt.default
-}
 
 
 
