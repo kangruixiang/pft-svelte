@@ -22,10 +22,8 @@
     await navigator.clipboard.writeText(
       result.innerText
         .replace(/\n\n\n/g, "\n\n")
-        .replace(/\n\n/g, "\n")
         .replace(/\n/g, "\r\n")
         .replace(/ ,/g, ",")
-        .replace(/ ./g, ".")
     );
   }
 
