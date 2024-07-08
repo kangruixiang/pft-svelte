@@ -128,9 +128,9 @@ export const diffusing = {
   normalKCO: "Reduced DLCO, reduced VA, with low/normal DLCO/VA (KCO). May be seen with interstitial lung disease or emphysema.",
   highKCO: "Reduced DLCO, reduced VA, with high DLCO/VA (KCO). May be seen with submaximal effort, neuromuscular dysfunction, or after pneumonectomy.",
   normalSum: " with normal diffusing capacity.",
-  mildSum: " with a mild gas transfer impairment is present.",
-  moderateSum: " with a moderate gas transfer impairment is present.",
-  severeSum: " with a severe gas transfer impairment is present.",
+  mildSum: " with a mild gas transfer impairment.",
+  moderateSum: " with a moderate gas transfer impairment.",
+  severeSum: " with a severe gas transfer impairment.",
   highSum: " with abnormally high diffusing capacity.",
 };
 export const diffusingCorrect = {
