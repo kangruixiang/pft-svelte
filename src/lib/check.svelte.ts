@@ -344,17 +344,20 @@ class Data {
 
       // elevated RV/TLC = hyperinflation
       if (this.RVTLC.Perc >= this.RVTLC.ULN) {
+        this.volumeResult = hyper
         this.volumeSum = hyperSum
         return hyper
       }
 
       // normal RV/TLC = large lungs
+      this.volumeResult = large
       this.volumeSum = largeSum
       return large
     }
 
     // normal lung volumes
     if (this.TLC.Pre >= this.TLC.LLN) {
+      this.volumeResult = normal
       this.volumeSum = normalSum
       return normal;
     }
