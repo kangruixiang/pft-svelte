@@ -89,8 +89,8 @@ export const volume = {
   highTLC: "Increased TLC indicates hyperinflation.",
   large: "Large lungs (elevated TLC, FRC, and RV; normal FRC/TLC and RV/TLC).",
   hyper: "Hyperinflation is present (elevated TLC or FRC/TLC).",
-  largeSum: "Large lung volumes.",
-  hyperSum: "Hyperinflation is present.",
+  largeSum: ", large lung volumes, and",
+  hyperSum: ", hyperinflation, and",
   simpleRestrict: "Simple restriction (reduced TLC, FRC, and RV; normal FRC/TLC and RV/TLC).",
   complexRestrict: "Complex restriction (reduced TLC and FRC; elevated RV/TLC; normal or elevated RV).",
   mixed: "Mixed obstruction and restriction."
