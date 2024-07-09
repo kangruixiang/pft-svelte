@@ -68,6 +68,7 @@ class Data {
       this.FEV1.Z = this.FEV1.ZPost
     }
 
+
     this.FVCRaw = this.formattedData.find((item) => item.Variable === "FVC");
     this.FVC = {
       Pre: parseFloat(this.FVCRaw.Pre),
@@ -362,11 +363,27 @@ class Data {
       return normal;
     }
 
-    //if (FVC.Pre >= FVC.LLN) {
-    //volume.summary = volume.normal
-    //return normal;
-    //}
+    if (!this.FEVFVC || !this.FEVFVC.LLN) {
+      return
+    }
 
+    // if also having obstruction
+    if (this.FEVFVC.Pre < this.FEVFVC.LLN) {
+
+      // low volume, if RV/TLC elevated, then complex restriction but keep the spirometry sum
+      if (this.RVTLC.Pre! >= this.RVTLC.ULN) {
+        const result = this.checkSeverity(this.FEV1.Z, volumeComplex)
+        this.volumeResult = result.severity
+        return
+      }
+
+      // low volue, otherwise simple restriction but keep the spirometry sum
+      const result = this.checkSeverity(this.FEV1.Z, volumeSimple)
+      this.volumeResult = result.severity
+      return
+    }
+
+    // clear spirometry sum
     this.spirometrySum = ''
 
     // low volume, if RV/TLC elevated, then complex restriction
@@ -408,8 +425,9 @@ class Data {
 
     const { significant, borderline, nonSignificant, significantSum, nonSignificantSum, borderlineSum } = bronch
 
+    console.log(this.FEV1.PostVol)
     // no post bronchodilator volume
-    if (!this.FEV1.PostVol) {
+    if (!this.FEV1.PostPerc) {
       this.bronchResult = ""
       this.bronchSum = ""
       return

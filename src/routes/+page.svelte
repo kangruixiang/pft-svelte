@@ -24,6 +24,7 @@
         .replace(/\n\n\n/g, "\n\n")
         .replace(/\n/g, "\r\n")
         .replace(/ ,/g, ",")
+        .replace(/\s\./g, ".")
     );
   }
 
