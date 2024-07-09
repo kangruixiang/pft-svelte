@@ -6,6 +6,7 @@
   import Selection from "$lib/components/Selection.svelte";
   import { data } from "$lib/check.svelte";
   import { qualityPrompt, flowPrompt } from "$lib/prompts";
+  import { getAuthContext } from "$lib/pocketbase/auth.svelte";
 
   let inputText = $state("");
   let signature = $state("");
@@ -35,9 +36,31 @@
     effort = "Adequate effort, results reproducible.";
     flow = "Normal flow-volume loop.";
   }
+
+  const auth = getAuthContext();
+
+  async function signin() {
+    await auth.signin();
+    console.log("signed in");
+  }
+
+  async function signinPassword() {
+    await auth.signinPassword();
+    console.log("signed in user", auth.user);
+  }
+
+  async function signout() {
+    auth.signout();
+    console.log("signed out");
+  }
 </script>
 
 <div class="grid lg:grid-cols-2 gap-4">
+  {#if auth.user}
+    <pre>{JSON.stringify(auth.user, null, 2)}</pre>
+    <h1>Welcome {auth.user.username}</h1>
+  {/if}
+
   <InputData bind:inputText />
   <Button onclick={() => checkData(inputText)}>Check</Button>
   <div class="lg:order-5 order-2">
@@ -67,4 +90,8 @@
       >
     </div>
   </div>
+
+  <Button onclick={signin}>Sign In</Button>
+  <Button onclick={signinPassword}>Sign In User</Button>
+  <Button onclick={signout}>Sign Out</Button>
 </div>

@@ -1,6 +1,10 @@
 <script>
   import { Instruction } from "$lib/components/index";
   import "../app.postcss";
+  import { setAuthContext } from "$lib/pocketbase/auth.svelte";
+
+  const { children } = $props();
+  const auth = setAuthContext();
 </script>
 
 <main class="flex items-center min-h-screen justify-center">
@@ -9,6 +13,12 @@
   >
     <h1>PFT Reader - Algorithmic Approach to Pulmonary Function Test</h1>
     <Instruction />
-    <slot />
+    {#if auth.isSynced}
+    {@render children()}
+    {:else}
+    <div>
+    Loading...
+    </div>
+    {/if}
   </div>
 </main>
