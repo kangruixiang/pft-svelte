@@ -240,14 +240,14 @@ class Data {
       // no lung volume
       if (!this.TLC.Pre || !this.TLC.LLN) {
 
-        // normal FVC = normal spirometry
-        if (this.FVC.Pre > this.FVC.LLN) {
+        // normal FVC and FEV1 = normal spirometry
+        if (this.FVC.Pre > this.FVC.LLN && this.FEV1.Pre > this.FEV1.LLN) {
           this.spirometryResult = normal
           this.spirometrySum = normalSum
           return;
         }
 
-        // low FVC, no lung volume = PRISM
+        // low FVC or FEV1, no lung volume = PRISM
         this.spirometryResult = restrictedMaybe
         this.spirometrySum = PRISM
         return;
