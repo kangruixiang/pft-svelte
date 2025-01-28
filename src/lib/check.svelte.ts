@@ -13,6 +13,7 @@ import {
   mixedSum,
   possibleMixSum,
   spirometryRestricted,
+  prismPrompt
 } from "$lib/prompts";
 
 class Data {
@@ -232,7 +233,7 @@ class Data {
     }
 
     // obtain prompts
-    const { normal, normalSum, restrictedMaybe, nonspecific, restricted, nonspecificSum, PRISM, dysanapsis, dysanapsisSum } = spirometry
+    const { normal, normalSum, nonspecific, nonspecificSum, dysanapsis, dysanapsisSum } = spirometry
 
     // no obstruction
     if (this.FEVFVC.Pre >= this.FEVFVC.LLN) {
@@ -248,9 +249,10 @@ class Data {
         }
 
         // low FVC or FEV1, no lung volume = PRISM
-        this.spirometryResult = restrictedMaybe
-        this.spirometrySum = PRISM
-        return;
+        const result = this.checkSeverity(this.FEV1.Z, prismPrompt)
+        this.spirometryResult = result.severity
+        this.spirometrySum = result.summary
+        return
       }
 
 

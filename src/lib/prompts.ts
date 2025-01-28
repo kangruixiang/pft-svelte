@@ -31,8 +31,7 @@ export const spirometry = {
   restrictedMaybe:
     "Possible restriction or non-specific pattern is present (lung volumes needed to assess).",
   nonspecific: "Non-specific pattern is seen (FEV1, FVC reduced; normal FEV1/FVC ratio and TLC).",
-  restricted:
-    "Restrictive lung defect based on lung volumes.",
+  // restricted: "Restrictive lung defect based on lung volumes.",
   mixed: "Possible mixed obstruction and restriction is present (lung volumes needed to assess).",
   obstructionNonspecific: "Airflow obstruction with nonspecific reduction in vital capacity.",
   mildSum: "Mild obstructive ventilatory impairment",
@@ -40,10 +39,18 @@ export const spirometry = {
   severeSum: "Severe obstructive ventilatory impairment",
   mixedSum: "Possible mixed obstructive and restrictive ventilatory impairment is present (lung volumes needed to assess)",
   nonspecificSum: "Non-specific pattern is seen",
-  PRISM: "Preserved Ratio Impaired Spirometry (PRISM)",
+  // PRISM: "Preserved Ratio Impaired Spirometry (PRISM)",
   dysanapsis: "Mild obstructive defect vs dysanapsis (normal FEV1; normal or elevated FVC; reduced FEV1/FVC ratio).",
   dysanapsisSum: "Mild obstructive defect vs dysanapsis",
 };
+export const prismPrompt = {
+  mild: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or mild restrictive defect (reduced TLC; FEV1 Z-score -2.5 or higher).",
+  moderate: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or moderate restrictive defect (reduced TLC; FEV1 Z-score -2.5 to -4).",
+  severe: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or severe restrictive defect (reduced TLC; FEV1 Z-score less than -4).",
+  mildSum: "Either nonspecific finding or mild restrictive ventilatory impairment is present. Lung volume is needed to assess",
+  moderateSum: "Either nonspecific finding or moderate restrictive ventilatory impairment is present. Lung volume is needed to assess",
+  severeSum: "Either nonspecific finding or severe restrictive ventilatory impairment is present. Lung volume is needed to assess",
+}
 export const spirometryRestricted = {
   mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher) based on lung volumes.",
   moderate: "Moderate restrictive defect (FEV1 Z-score -2.5 to -4) based on lung volumes.",
