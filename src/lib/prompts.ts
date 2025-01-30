@@ -47,9 +47,9 @@ export const prismPrompt = {
   mild: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or mild restrictive defect (no lung volumes; FEV1 Z-score -2.5 or higher).",
   moderate: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or moderate restrictive defect (no lung volumes; FEV1 Z-score -2.5 to -4).",
   severe: "Preserved Ratio Impaired Spirometry (PRISM). Either nonspecific finding or severe restrictive defect (no lung volumes; FEV1 Z-score less than -4).",
-  mildSum: "Either nonspecific finding or mild restrictive ventilatory impairment is present. Lung volume is needed to assess",
-  moderateSum: "Either nonspecific finding or moderate restrictive ventilatory impairment is present. Lung volume is needed to assess",
-  severeSum: "Either nonspecific finding or severe restrictive ventilatory impairment is present. Lung volume is needed to assess",
+  mildSum: "Either nonspecific finding or mild restrictive ventilatory impairment is present",
+  moderateSum: "Either nonspecific finding or moderate restrictive ventilatory impairment is present",
+  severeSum: "Either nonspecific finding or severe restrictive ventilatory impairment is present",
 }
 export const spirometryRestricted = {
   mild: "Mild restrictive defect (FEV1 Z-score -2.5 or higher) based on lung volumes.",
