@@ -443,7 +443,7 @@ class Data {
     }
 
     // borderline bronchodilator response
-    if (this.FEV1.PostVol > 9 || this.FVC.PostPerc! > 9) {
+    if (this.FEV1.PostPerc! > 9 || this.FVC.PostPerc! > 9) {
       this.bronchResult = borderline
       this.bronchSum = borderlineSum
       return
